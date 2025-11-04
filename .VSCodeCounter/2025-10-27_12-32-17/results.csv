@@ -1,0 +1,79 @@
+"filename", "language", "JSON", "JavaScript", "Markdown", "PostCSS", "JavaScript JSX", "HTML", "XML", "comment", "blank", "total"
+"c:\Users\HENRRY\Desktop\vocacional-frontend\README.md", "Markdown", 0, 0, 7, 0, 0, 0, 0, 0, 6, 13
+"c:\Users\HENRRY\Desktop\vocacional-frontend\eslint.config.js", "JavaScript", 0, 28, 0, 0, 0, 0, 0, 0, 2, 30
+"c:\Users\HENRRY\Desktop\vocacional-frontend\index.html", "HTML", 0, 0, 0, 0, 0, 13, 0, 0, 1, 14
+"c:\Users\HENRRY\Desktop\vocacional-frontend\package-lock.json", "JSON", 5681, 0, 0, 0, 0, 0, 0, 0, 1, 5682
+"c:\Users\HENRRY\Desktop\vocacional-frontend\package.json", "JSON", 44, 0, 0, 0, 0, 0, 0, 0, 1, 45
+"c:\Users\HENRRY\Desktop\vocacional-frontend\postcss.config.js", "JavaScript", 0, 6, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\HENRRY\Desktop\vocacional-frontend\public\logo.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\public\vite.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\App.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\App.jsx", "JavaScript JSX", 0, 0, 0, 0, 151, 0, 0, 2, 13, 166
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_courses.jsx", "JavaScript JSX", 0, 0, 0, 0, 24, 0, 0, 0, 8, 32
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_estudent_test.jsx", "JavaScript JSX", 0, 0, 0, 0, 24, 0, 0, 26, 8, 58
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_grades.jsx", "JavaScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 9, 32
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_homeMarcelo.jsx", "JavaScript JSX", 0, 0, 0, 0, 19, 0, 0, 0, 5, 24
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_login.jsx", "JavaScript JSX", 0, 0, 0, 0, 8, 0, 0, 1, 3, 12
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_majors.jsx", "JavaScript JSX", 0, 0, 0, 0, 11, 0, 0, 10, 5, 26
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_section.jsx", "JavaScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 7, 30
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_student.jsx", "JavaScript JSX", 0, 0, 0, 0, 24, 0, 0, 0, 8, 32
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_teacher.jsx", "JavaScript JSX", 0, 0, 0, 0, 24, 0, 0, 0, 8, 32
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_tests.jsx", "JavaScript JSX", 0, 0, 0, 0, 221, 0, 0, 15, 19, 255
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_user.jsx", "JavaScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 7, 30
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_verify.jsx", "JavaScript JSX", 0, 0, 0, 0, 20, 0, 0, 0, 3, 23
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\header.jsx", "JavaScript JSX", 0, 0, 0, 0, 14, 0, 0, 2, 1, 17
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\login\login.jsx", "JavaScript JSX", 0, 0, 0, 0, 236, 0, 0, 5, 21, 262
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\modal.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\UI\button.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 1, 0, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\UI\input.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_admin.jsx", "JavaScript JSX", 0, 0, 0, 0, 265, 0, 0, 5, 16, 286
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_courses.jsx", "JavaScript JSX", 0, 0, 0, 0, 374, 0, 0, 12, 20, 406
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_teachers.jsx", "JavaScript JSX", 0, 0, 0, 0, 243, 0, 0, 5, 16, 264
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\admin.jsx", "JavaScript JSX", 0, 0, 0, 0, 145, 0, 0, 5, 15, 165
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\default.jsx", "JavaScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 2, 25
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\general_report.jsx", "JavaScript JSX", 0, 0, 0, 0, 582, 0, 0, 25, 61, 668
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\career_information.jsx", "JavaScript JSX", 0, 0, 0, 0, 70, 0, 0, 5, 11, 86
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\home.jsx", "JavaScript JSX", 0, 0, 0, 0, 278, 0, 0, 15, 43, 336
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\info.jsx", "JavaScript JSX", 0, 0, 0, 0, 234, 0, 0, 6, 17, 257
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\material.jsx", "JavaScript JSX", 0, 0, 0, 0, 92, 0, 0, 3, 13, 108
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\progress.js", "JavaScript", 0, 52, 0, 0, 0, 0, 0, 2, 5, 59
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\settings.jsx", "JavaScript JSX", 0, 0, 0, 0, 322, 0, 0, 14, 27, 363
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\studentId.js", "JavaScript", 0, 11, 0, 0, 0, 0, 0, 0, 3, 14
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_anapol.jsx", "JavaScript JSX", 0, 0, 0, 0, 398, 0, 0, 16, 32, 446
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\abstract_reasoning.jsx", "JavaScript JSX", 0, 0, 0, 0, 213, 0, 0, 15, 19, 247
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\mechanical_reasoning.jsx", "JavaScript JSX", 0, 0, 0, 0, 225, 0, 0, 13, 18, 256
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\numeric_reasoning.jsx", "JavaScript JSX", 0, 0, 0, 0, 181, 0, 0, 6, 18, 205
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\orthography.jsx", "JavaScript JSX", 0, 0, 0, 0, 206, 0, 0, 13, 20, 239
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\perceptive_speed_1.jsx", "JavaScript JSX", 0, 0, 0, 0, 264, 0, 0, 2, 21, 287
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\perceptive_speed_2.jsx", "JavaScript JSX", 0, 0, 0, 0, 262, 0, 0, 6, 25, 293
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\spatial_relations.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\test_aptidutes.jsx", "JavaScript JSX", 0, 0, 0, 0, 59, 0, 0, 0, 4, 63
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\verbal_reasoning.jsx", "JavaScript JSX", 0, 0, 0, 0, 264, 0, 0, 8, 19, 291
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_chaside.jsx", "JavaScript JSX", 0, 0, 0, 0, 235, 0, 0, 11, 21, 267
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_colmil.jsx", "JavaScript JSX", 0, 0, 0, 0, 367, 0, 0, 15, 28, 410
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_personalidad.jsx", "JavaScript JSX", 0, 0, 0, 0, 228, 0, 0, 10, 17, 255
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\verify.js", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 0, 4, 24
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\career_exploration_quest.jsx", "JavaScript JSX", 0, 0, 0, 0, 433, 0, 0, 6, 44, 483
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\future_career_simulator.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\interest_inventory_same.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\personality_profiler_challenge.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\skill_match_adventure.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_report.jsx", "JavaScript JSX", 0, 0, 0, 0, 520, 0, 0, 34, 64, 618
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\questions\questions.js", "JavaScript", 0, 3536, 0, 0, 0, 0, 0, 1, 22, 3559
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\general_reports.jsx", "JavaScript JSX", 0, 0, 0, 0, 377, 0, 0, 11, 42, 430
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\info.jsx", "JavaScript JSX", 0, 0, 0, 0, 164, 0, 0, 4, 12, 180
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\observations.jsx", "JavaScript JSX", 0, 0, 0, 0, 222, 0, 0, 2, 15, 239
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_grades.jsx", "JavaScript JSX", 0, 0, 0, 0, 127, 0, 0, 2, 13, 142
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_grades_manager.jsx", "JavaScript JSX", 0, 0, 0, 0, 263, 0, 0, 10, 30, 303
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_students.jsx", "JavaScript JSX", 0, 0, 0, 0, 450, 0, 0, 11, 38, 499
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\testHeader.jsx", "JavaScript JSX", 0, 0, 0, 0, 36, 0, 0, 0, 6, 42
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\themeSwitcher.jsx", "JavaScript JSX", 0, 0, 0, 0, 21, 0, 0, 0, 4, 25
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\contexts\ThemeContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 2, 0, 0, 0, 2, 4
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\contexts\ThemeProvider.jsx", "JavaScript JSX", 0, 0, 0, 0, 30, 0, 0, 0, 6, 36
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\hooks\useTheme.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 0, 2, 9
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\index.css", "PostCSS", 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\main.jsx", "JavaScript JSX", 0, 0, 0, 0, 9, 0, 0, 0, 2, 11
+"c:\Users\HENRRY\Desktop\vocacional-frontend\src\verify_token\verify.jsx", "JavaScript JSX", 0, 0, 0, 0, 17, 0, 0, 0, 8, 25
+"c:\Users\HENRRY\Desktop\vocacional-frontend\tailwind.config.js", "JavaScript", 0, 8, 0, 0, 0, 0, 0, 1, 2, 11
+"c:\Users\HENRRY\Desktop\vocacional-frontend\vite.config.js", "JavaScript", 0, 5, 0, 0, 0, 0, 0, 1, 2, 8
+"Total", "-", 5725, 3673, 7, 3, 9046, 13, 2, 357, 954, 19780

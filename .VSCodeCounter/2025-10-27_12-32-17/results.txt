@@ -1,0 +1,127 @@
+Date : 2025-10-27 12:32:17
+Directory : c:\Users\HENRRY\Desktop\vocacional-frontend
+Total : 77 files,  18469 codes, 357 comments, 954 blanks, all 19780 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         60 |      9,046 |        352 |        901 |     10,299 |
+| JSON           |          2 |      5,725 |          0 |          2 |      5,727 |
+| JavaScript     |          9 |      3,673 |          5 |         43 |      3,721 |
+| HTML           |          1 |         13 |          0 |          1 |         14 |
+| Markdown       |          1 |          7 |          0 |          6 |         13 |
+| PostCSS        |          2 |          3 |          0 |          1 |          4 |
+| XML            |          2 |          2 |          0 |          0 |          2 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                             |         77 |     18,469 |        357 |        954 |     19,780 |
+| . (Files)                                                                                                                     |          8 |      5,792 |          2 |         16 |      5,810 |
+| public                                                                                                                        |          2 |          2 |          0 |          0 |          2 |
+| src                                                                                                                           |         67 |     12,675 |        355 |        938 |     13,968 |
+| src (Files)                                                                                                                   |          4 |        163 |          2 |         16 |        181 |
+| src\api                                                                                                                       |         12 |        444 |         52 |         90 |        586 |
+| src\components                                                                                                                |         47 |     12,012 |        301 |        814 |     13,127 |
+| src\components (Files)                                                                                                        |          4 |         71 |          2 |         12 |         85 |
+| src\components\login                                                                                                          |          1 |        236 |          5 |         21 |        262 |
+| src\components\pages                                                                                                          |         42 |     11,705 |        294 |        781 |     12,780 |
+| src\components\pages\UI                                                                                                       |          2 |          0 |          1 |          1 |          2 |
+| src\components\pages\admin                                                                                                    |          6 |      1,632 |         52 |        130 |      1,814 |
+| src\components\pages\estudent                                                                                                 |         27 |      4,934 |        200 |        478 |      5,612 |
+| src\components\pages\estudent (Files)                                                                                         |         13 |      2,827 |        131 |        285 |      3,243 |
+| src\components\pages\estudent\test_aptitudes                                                                                  |          9 |      1,674 |         63 |        145 |      1,882 |
+| src\components\pages\estudent\vocational_games                                                                                |          5 |        433 |          6 |         48 |        487 |
+| src\components\pages\questions                                                                                                |          1 |      3,536 |          1 |         22 |      3,559 |
+| src\components\pages\teacher                                                                                                  |          6 |      1,603 |         40 |        150 |      1,793 |
+| src\contexts                                                                                                                  |          2 |         32 |          0 |          8 |         40 |
+| src\hooks                                                                                                                     |          1 |          7 |          0 |          2 |          9 |
+| src\verify_token                                                                                                              |          1 |         17 |          0 |          8 |         25 |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                      | language       | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\HENRRY\Desktop\vocacional-frontend\README.md                                                                         | Markdown       |          7 |          0 |          6 |         13 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\eslint.config.js                                                                  | JavaScript     |         28 |          0 |          2 |         30 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\index.html                                                                        | HTML           |         13 |          0 |          1 |         14 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\package-lock.json                                                                 | JSON           |      5,681 |          0 |          1 |      5,682 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\package.json                                                                      | JSON           |         44 |          0 |          1 |         45 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\postcss.config.js                                                                 | JavaScript     |          6 |          0 |          1 |          7 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\public\logo.svg                                                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\public\vite.svg                                                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\App.css                                                                       | PostCSS        |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\App.jsx                                                                       | JavaScript JSX |        151 |          2 |         13 |        166 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_courses.jsx                                                           | JavaScript JSX |         24 |          0 |          8 |         32 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_estudent_test.jsx                                                     | JavaScript JSX |         24 |         26 |          8 |         58 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_grades.jsx                                                            | JavaScript JSX |         23 |          0 |          9 |         32 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_homeMarcelo.jsx                                                       | JavaScript JSX |         19 |          0 |          5 |         24 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_login.jsx                                                             | JavaScript JSX |          8 |          1 |          3 |         12 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_majors.jsx                                                            | JavaScript JSX |         11 |         10 |          5 |         26 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_section.jsx                                                           | JavaScript JSX |         23 |          0 |          7 |         30 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_student.jsx                                                           | JavaScript JSX |         24 |          0 |          8 |         32 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_teacher.jsx                                                           | JavaScript JSX |         24 |          0 |          8 |         32 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_tests.jsx                                                             | JavaScript JSX |        221 |         15 |         19 |        255 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_user.jsx                                                              | JavaScript JSX |         23 |          0 |          7 |         30 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\api\api_verify.jsx                                                            | JavaScript JSX |         20 |          0 |          3 |         23 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\header.jsx                                                         | JavaScript JSX |         14 |          2 |          1 |         17 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\login\login.jsx                                                    | JavaScript JSX |        236 |          5 |         21 |        262 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\modal.jsx                                                          | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\UI\button.jsx                                                | JavaScript JSX |          0 |          1 |          0 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\UI\input.jsx                                                 | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_admin.jsx                                          | JavaScript JSX |        265 |          5 |         16 |        286 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_courses.jsx                                        | JavaScript JSX |        374 |         12 |         20 |        406 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\add_teachers.jsx                                       | JavaScript JSX |        243 |          5 |         16 |        264 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\admin.jsx                                              | JavaScript JSX |        145 |          5 |         15 |        165 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\default.jsx                                            | JavaScript JSX |         23 |          0 |          2 |         25 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\admin\general_report.jsx                                     | JavaScript JSX |        582 |         25 |         61 |        668 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\career_information.jsx                              | JavaScript JSX |         70 |          5 |         11 |         86 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\home.jsx                                            | JavaScript JSX |        278 |         15 |         43 |        336 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\info.jsx                                            | JavaScript JSX |        234 |          6 |         17 |        257 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\material.jsx                                        | JavaScript JSX |         92 |          3 |         13 |        108 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\progress.js                                         | JavaScript     |         52 |          2 |          5 |         59 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\settings.jsx                                        | JavaScript JSX |        322 |         14 |         27 |        363 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\studentId.js                                        | JavaScript     |         11 |          0 |          3 |         14 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_anapol.jsx                                     | JavaScript JSX |        398 |         16 |         32 |        446 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\abstract_reasoning.jsx               | JavaScript JSX |        213 |         15 |         19 |        247 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\mechanical_reasoning.jsx             | JavaScript JSX |        225 |         13 |         18 |        256 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\numeric_reasoning.jsx                | JavaScript JSX |        181 |          6 |         18 |        205 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\orthography.jsx                      | JavaScript JSX |        206 |         13 |         20 |        239 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\perceptive_speed_1.jsx               | JavaScript JSX |        264 |          2 |         21 |        287 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\perceptive_speed_2.jsx               | JavaScript JSX |        262 |          6 |         25 |        293 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\spatial_relations.jsx                | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\test_aptidutes.jsx                   | JavaScript JSX |         59 |          0 |          4 |         63 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_aptitudes\verbal_reasoning.jsx                 | JavaScript JSX |        264 |          8 |         19 |        291 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_chaside.jsx                                    | JavaScript JSX |        235 |         11 |         21 |        267 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_colmil.jsx                                     | JavaScript JSX |        367 |         15 |         28 |        410 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\test_personalidad.jsx                               | JavaScript JSX |        228 |         10 |         17 |        255 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\verify.js                                           | JavaScript     |         20 |          0 |          4 |         24 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\career_exploration_quest.jsx       | JavaScript JSX |        433 |          6 |         44 |        483 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\future_career_simulator.jsx        | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\interest_inventory_same.jsx        | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\personality_profiler_challenge.jsx | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_games\skill_match_adventure.jsx          | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\estudent\vocational_report.jsx                               | JavaScript JSX |        520 |         34 |         64 |        618 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\questions\questions.js                                       | JavaScript     |      3,536 |          1 |         22 |      3,559 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\general_reports.jsx                                  | JavaScript JSX |        377 |         11 |         42 |        430 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\info.jsx                                             | JavaScript JSX |        164 |          4 |         12 |        180 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\observations.jsx                                     | JavaScript JSX |        222 |          2 |         15 |        239 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_grades.jsx                                    | JavaScript JSX |        127 |          2 |         13 |        142 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_grades_manager.jsx                            | JavaScript JSX |        263 |         10 |         30 |        303 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\pages\teacher\upload_students.jsx                                  | JavaScript JSX |        450 |         11 |         38 |        499 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\testHeader.jsx                                                     | JavaScript JSX |         36 |          0 |          6 |         42 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\components\themeSwitcher.jsx                                                  | JavaScript JSX |         21 |          0 |          4 |         25 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\contexts\ThemeContext.jsx                                                     | JavaScript JSX |          2 |          0 |          2 |          4 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\contexts\ThemeProvider.jsx                                                    | JavaScript JSX |         30 |          0 |          6 |         36 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\hooks\useTheme.js                                                             | JavaScript     |          7 |          0 |          2 |          9 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\index.css                                                                     | PostCSS        |          3 |          0 |          0 |          3 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\main.jsx                                                                      | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\src\verify_token\verify.jsx                                                       | JavaScript JSX |         17 |          0 |          8 |         25 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\tailwind.config.js                                                                | JavaScript     |          8 |          1 |          2 |         11 |
+| c:\Users\HENRRY\Desktop\vocacional-frontend\vite.config.js                                                                    | JavaScript     |          5 |          1 |          2 |          8 |
+| Total                                                                                                                         |                |     18,469 |        357 |        954 |     19,780 |
++-------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
