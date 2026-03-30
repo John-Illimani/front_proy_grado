@@ -139,12 +139,12 @@ export const CourseCRUD = () => {
         <h1 className="flex items-center justify-center gap-3 text-3xl md:text-5xl font-bold dark:text-teal-400 drop-shadow-lg">
           {mode === "materia" ? (
             <>
-              <BookOpen className="text-teal-300 w-8 h-8 md:w-10 md:h-10" />
+              <BookOpen className="dark:text-teal-300 w-8 h-8 md:w-10 md:h-10" />
               Gestión de Materias
             </>
           ) : (
             <>
-              <Layers className="text-teal-300 w-8 h-8 md:w-10 md:h-10" />
+              <Layers className="dark:text-teal-300 w-8 h-8 md:w-10 md:h-10" />
               Gestión de Paralelos
             </>
           )}
@@ -158,7 +158,7 @@ export const CourseCRUD = () => {
         {/* 🔁 Botón para cambiar modo */}
         <button
           onClick={() => setMode(mode === "materia" ? "paralelo" : "materia")}
-          className="mt-5 px-5 py-2 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-500 shadow-lg transition"
+          className="mt-5 px-5 py-2 dark:bg-teal-600 dark:text-white bg-lime-400  rounded-xl font-bold dark:hover:bg-teal-500 hover:bg-lime-500 shadow-lg transition"
         >
           Cambiar a {mode === "materia" ? "Paralelos" : "Materias"}
         </button>
@@ -229,7 +229,7 @@ export const CourseCRUD = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 rounded-xl bg-teal-500 text-white font-semibold hover:bg-teal-400 shadow-lg transition"
+                  className="px-5 py-2 rounded-xl dark:bg-teal-500 dark:text-white font-semibold dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500 shadow-lg transition"
                 >
                   {editingCourse || editingSection
                     ? isSubmitting
@@ -261,32 +261,32 @@ export const CourseCRUD = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h3 className="text-xl md:text-2xl font-bold mb-4 text-teal-400">
+        <h3 className="text-xl md:text-2xl font-bold mb-4 dark:text-teal-400 ">
           {mode === "materia"
             ? `Lista de Materias (${courses.length})`
             : `Lista de Paralelos (${sections.length})`}
         </h3>
 
         <table className="min-w-full divide-y divide-teal-400/20 text-sm md:text-base">
-          <thead className="bg-teal-500/10 dark:text-white bg-gray-800">
-            <tr>
-              <th className="px-4 py-2 text-left text-teal-400 uppercase">
+          <thead className="dark:bg-teal-500/10 dark:text-white bg-orange-200">
+            <tr className="dark:bg-gray-600 ">
+              <th className="px-4 py-2 text-left dark:text-teal-400 uppercase  ">
                 Nombre
               </th>
               {mode === "materia" && (
                 <>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase ">
                     Descripción
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Código
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Profesor
                   </th>
                 </>
               )}
-              <th className="px-4 py-2 text-right text-teal-400 uppercase">
+              <th className="px-4 py-2 text-center dark:text-teal-400 uppercase">
                 Acciones
               </th>
             </tr>
@@ -329,7 +329,7 @@ export const CourseCRUD = () => {
                     className="hover:bg-teal-400/10 dark:hover:bg-gray-800/50 transition"
                   >
                     <td className="px-4 py-2">{sec.nombre}</td>
-                    <td className="px-4 py-2 text-right flex justify-end gap-2">
+                    <td className="px-4 py-2 text-right flex justify-center gap-2">
                       <button
                         onClick={() => setEditingSection(sec)}
                         className="flex items-center gap-1 px-3 py-1 bg-teal-500 text-white rounded-xl hover:bg-teal-400 transition"

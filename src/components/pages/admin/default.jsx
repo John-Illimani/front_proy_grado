@@ -5,7 +5,7 @@ export const AdminWelcome = () => {
   return (
     <div className="flex items-center justify-center   h-[95vh] font-sans">
       <motion.div
-        className="bg-blue-200/80 dark:bg-gray-950/60 backdrop-blur-lg p-12 rounded-2xl shadow-2xl border border-cyan-700 w-full max-w-xl text-center"
+        className="bg-lime-200 dark:bg-gray-950/60 backdrop-blur-lg p-12 rounded-2xl shadow-2xl border  dark:border-cyan-700  w-full max-w-xl text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >

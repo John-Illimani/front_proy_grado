@@ -23,7 +23,7 @@ export const WelcomInfo = () => {
     <div className=" relative flex-1 p-10 h-screen  overflow-hidden">
       {/* Fondo animado */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-orange-100 "
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -37,12 +37,12 @@ export const WelcomInfo = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className=" text-4xl md:text-5xl font-bold text-teal-400 mb-4 drop-shadow-lg">
+          <h1 className=" text-4xl md:text-5xl font-bold dark:text-teal-400 mb-4 drop-shadow-lg text-black ">
             Bienvenido al Sistema de Orientación Vocacional
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto mb-6">
+          <p className="text-lg md:text-xl dark:text-white/90 max-w-4xl mx-auto mb-6 text-black">
             Una herramienta innovadora con tecnología de{" "}
-            <b className="text-teal-300">Inteligencia Artificial</b> para
+            <b className="dark:text-teal-300 ">Inteligencia Artificial</b> para
             ayudarte a descubrir tu camino profesional ideal.
           </p>
 

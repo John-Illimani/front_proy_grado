@@ -57,6 +57,34 @@ export const ReporteGeneralEstudiantes = () => {
   const [selectedSection, setSelectedSection] = useState(null);
   const [studentTests, setStudentTests] = useState([]);
   const [aptitudes, setAptitudes] = useState([]);
+  const [isDark, setIsDark] = useState(false);
+
+  // Detectar modo dark dinámicamente
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+
+    checkDark();
+
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // 🎨 Colores dinámicos
+  const colors = {
+    grid: isDark ? "#334155" : "#E2E8F0",
+    text: isDark ? "#CBD5F5" : "#334155",
+    tooltipBg: isDark ? "#1E293B" : "#FFFFFF",
+    tooltipText: isDark ? "#F1F5F9" : "#0F172A",
+    bar: isDark ? "#2DD4BF" : "#14B8A6",
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -333,7 +361,7 @@ const generarPDF = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10"
       >
-        <h1 className="text-4xl font-bold text-teal-400 flex justify-center items-center gap-2">
+        <h1 className="text-4xl font-bold dark:text-teal-400 flex justify-center items-center gap-2">
           <BarChart3 /> Reporte General de Estudiantes
         </h1>
         <p className=" text-lg mt-2">
@@ -344,9 +372,9 @@ const generarPDF = () => {
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
   {/* Filtro solo por paralelo */}
   <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-    <label className="text-teal-300 mb-2 md:mb-0 font-semibold">Paralelo</label>
+    <label className="dark:text-teal-300 mb-2 md:mb-0 font-semibold">Paralelo</label>
     <select
-      className="px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white w-full md:w-auto"
+      className="px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white w-full md:w-auto"
       onChange={(e) =>
         setSelectedSection(sections.find((s) => s.id === parseInt(e.target.value)))
       }
@@ -380,8 +408,8 @@ const generarPDF = () => {
         transition={{ delay: 0.2 }}
       >
         <div className="bg-gradient-to-br dark:from-teal-900/30 dark:to-black/50 from-white/70 to-teal-900/10 p-6 rounded-2xl border border-teal-400/30 shadow-xl">
-          <h2 className="text-xl font-bold text-teal-300 flex items-center gap-2">
-            <User className="text-teal-300" /> Total de Estudiantes
+          <h2 className="text-xl font-bold dark:text-teal-300 flex items-center gap-2">
+            <User className="dark:text-teal-300 text-black" /> Total de Estudiantes
           </h2>
           <p className="text-3xl font-bold mt-3">{filteredData.length}</p>
         </div>
@@ -413,13 +441,13 @@ const generarPDF = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-bold text-teal-300 mb-4 text-center">
+        <h2 className="text-2xl font-bold dark:text-teal-300 mb-4 text-center">
           Detalle de Rendimiento por Estudiante
         </h2>
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="text-gray-800 dark:text-gray-300 border-b border-gray-700">
+            <thead className="text-black dark:text-gray-300 border-b border-gray-700 bg-orange-200 text-lg dark:bg-gray-600" >
               <tr>
                 <th className="px-4 py-2">#</th>
                 <th className="px-4 py-2">Nombre del Estudiante</th>
@@ -437,13 +465,13 @@ const generarPDF = () => {
                   className="border-b border-gray-800 hover:bg-teal-900/20 transition"
                 >
                   <td className="px-4 py-2">{i + 1}</td>
-                  <td className="px-4 py-2 flex items-center gap-2 whitespace-nowrap">
-                    <User className="text-teal-400" size={16} /> {item.nombre}
+                  <td className="px-4 py-2 flex items-center gap-2 whitespace-nowrap text-lg">
+                    <User className="dark:text-teal-400" size={16} /> {item.nombre}
                   </td>
-                  <td className="px-4 py-2 text-center font-semibold text-teal-300">
+                  <td className="px-4 py-2 text-center font-semibold dark:text-teal-300 text-lg">
                     {item.promedio}%
                   </td>
-                  <td className="px-4 py-2 text-center">{item.cantidadTests}</td>
+                  <td className="px-4 py-2 text-center dark:text-teal-300 text-black font-bold">{item.cantidadTests}</td>
                 </motion.tr>
               ))}
             </tbody>
@@ -451,34 +479,58 @@ const generarPDF = () => {
         </div>
       </motion.div>
 
-      {/* Gráfico */}
+      
       <motion.div
         className="mt-12 bg-gradient-to-br dark:from-gray-800/30 dark:to-black/50 from-white/50 to-white/80 p-6 rounded-2xl border border-teal-500/20 shadow-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        <h2 className="text-2xl font-bold text-teal-300 mb-6 text-center flex items-center justify-center gap-2">
+        <h2 className="text-2xl font-bold dark:text-teal-300 mb-6 text-center flex items-center justify-center gap-2">
           <Star /> Promedios Generales
         </h2>
         <ResponsiveContainer width="100%" height={400}>
-          <BarChart
-            data={filteredData}
-            margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-            <XAxis dataKey="nombre" tick={{ fill: "#ccc" }} />
-            <YAxis tick={{ fill: "#ccc" }} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#1e293b",
-                borderRadius: "10px",
-                color: "#f0f0f0",
-              }}
-            />
-            <Bar dataKey="promedio" fill="#14b8a6" radius={[10, 10, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
+        <BarChart
+          data={filteredData}
+          margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
+        >
+          {/* Grid */}
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={colors.grid}
+          />
+
+          {/* Ejes */}
+          <XAxis
+            dataKey="nombre"
+            tick={{ fill: colors.text }}
+            strokeWidth={3}
+          />
+
+          <YAxis
+            tick={{ fill: colors.text }}
+            strokeWidth={3}
+          />
+
+          {/* Tooltip */}
+          <Tooltip
+            contentStyle={{
+              backgroundColor: colors.tooltipBg,
+              borderRadius: "10px",
+              color: colors.tooltipText,
+              border: "none",
+            }}
+            labelStyle={{ color: colors.tooltipText }}
+          />
+
+          {/* Barras */}
+          <Bar
+            dataKey="promedio"
+            fill={colors.bar}
+            radius={[10, 10, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
       </motion.div>
     </div>
   );

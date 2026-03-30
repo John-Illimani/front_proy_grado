@@ -77,7 +77,7 @@ export const AdminPanel = () => {
 
   return (
     <div className="relative min-h-screen h-screen flex font-sans bg-gray-100 dark:bg-black/90 overflow-hidden">
-      {/* Sidebar */}
+      
       <motion.aside
         className={`absolute md:relative z-20 bg-gradient-to-b flex flex-col shadow-2xl h-screen
           dark:from-gray-900 dark:to-black from-slate-200 to-slate-100 dark:text-gray-300 text-gray-700
@@ -93,7 +93,7 @@ export const AdminPanel = () => {
             alt="Logo"
             className="min-w-10 w-36 rounded-xl shadow-lg mb-2 m-2"
           />
-          <h2 className={`text-center text-teal-400 font-semibold text-lg ${!isSidebarOpen ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}> 
+          <h2 className={`text-center dark:text-teal-400 text-black font-semibold text-lg ${!isSidebarOpen ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}> 
             Panel de Administración
           </h2>
         </div>
@@ -111,10 +111,10 @@ export const AdminPanel = () => {
               key={item.id}
               to={item.link}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 w-full rounded-lg transition-all
+                `flex items-center gap-2 px-3 py-2 w-full rounded-lg transition-all text-black dark:text-white hover:bg-red-500 font-bold
                 ${isActive
-                  ? "dark:text-teal-400 text-gray-100 bg-teal-400/10 bg-teal-700"
-                  : "hover:text-teal-400 hover:bg-white/5"}
+                  ? "dark:text-teal-400 text-white bg-red-700 "
+                  : "hover:text-white "}
                 `
               }
             >
@@ -133,13 +133,13 @@ export const AdminPanel = () => {
         <div className="flex mt-auto border-t border-gray-700 pt-4">
           <button
             onClick={logOut}
-            className="w-full flex justify-center items-center gap-2 px-3 py-2 rounded-lg dark:text-gray-300 text-gray-700 hover:text-red-400 hover:bg-red-400/20 transition-all"
+            className="w-full flex justify-center items-center gap-2 px-3 py-2 rounded-lg  hover:text-red-400 hover:bg-red-300 dark:hover:bg-orange-900 transition-all"
           >
             <FiLogOut className="min-w-5 size-5" /> 
             <p
               className={`${
-                !isSidebarOpen ? "opacity-0 hidden" : "opacity-100"
-              } transition-opacity duration-300`}
+                !isSidebarOpen ? "opacity-0 hidden  " : "opacity-100 " 
+              } transition-opacity duration-400 dark:text-white  text-black font-bold `}
             >
               Cerrar Sesión
             </p>            
@@ -147,8 +147,8 @@ export const AdminPanel = () => {
         </div>
       </motion.aside>
 
-      {/* Main */}
-      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black from-gray-200 to-gray-100 sm:p-4 md:px-6">
+      
+      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black  from-orange-100 sm:p-4 md:px-6">
         <motion.div
           className="pl-10 md:pl-0 pt-3 sm:pt-4 md:pt-2"
           initial={{ opacity: 0, y: 20 }}

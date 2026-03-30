@@ -96,7 +96,7 @@ export const ObservationsManager = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10"
       >
-        <h1 className="text-4xl font-bold text-teal-400 flex justify-center items-center gap-2">
+        <h1 className="text-4xl font-bold dark:text-teal-400 flex justify-center items-center gap-2">
           <Brain /> Aptitudes Reales de los Estudiantes
         </h1>
         <p className="text-lg mt-2">
@@ -111,27 +111,27 @@ export const ObservationsManager = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-6 bg-gradient-to-br from-gray-800/50 to-black/60 rounded-2xl border border-teal-400/20 shadow-lg hover:shadow-teal-500/30 transition-all"
+            className="p-6 bg-gradient-to-br dark:from-gray-800/50 dark:to-black/60  from-yellow-200 rounded-2xl border border-teal-400/20 shadow-lg hover:shadow-teal-500/30 transition-all"
           >
-            <h2 className="text-xl font-bold text-teal-300 mb-2 flex items-center gap-2">
+            <h2 className="text-xl font-bold dark:text-teal-300 mb-2 flex items-center gap-2">
               <GraduationCap /> {est.nombre}
             </h2>
-            <p className="text-sm text-gray-400 mb-2">
+            <p className="text-sm dark:text-gray-400 mb-2">
               Paralelo: {est.paralelo}
             </p>
 
             {est.aptitudes.length > 0 ? (
               <>
-                <h3 className="text-lg font-semibold text-amber-400 flex items-center gap-2">
+                <h3 className="text-lg  dark:text-amber-400 text-blue-500 font-bold flex items-center gap-2">
                   <Star /> Aptitud Dominante:
-                  <span className="text-white">
+                  <span className="dark:text-white text-black">
                     {" "}
                     {est.aptitudDominante?.aptitud || "No definida"}
                   </span>
                 </h3>
-                <p className="text-sm text-gray-400 mb-3">
+                <p className="text-sm dark:text-gray-400 mb-3">
                   Nivel:{" "}
-                  <span className="text-teal-300 font-semibold">
+                  <span className="dark:text-teal-300 font-semibold">
                     {est.aptitudDominante?.porcentaje || "0%"}
                   </span>
                 </p>
@@ -141,15 +141,15 @@ export const ObservationsManager = () => {
                     const valor = parseFloat(apt.porcentaje.replace("%", "")) || 0;
                     const barWidth = Math.max(0, Math.min(valor, 100));
                     const barColor =
-                      valor < 0 ? "bg-red-500" : "bg-yellow-400";
+                      valor < 0 ? "bg-red-500" : "dark:bg-yellow-400 bg-yellow-800";
 
                     return (
                       <div key={idx}>
-                        <div className="flex justify-between text-xs text-gray-300 mb-1">
+                        <div className="flex justify-between text-xs dark:text-gray-300 mb-1">
                           <span>{apt.aptitud}</span>
                           <span>{apt.porcentaje}</span>
                         </div>
-                        <div className="w-full bg-gray-600 h-2 rounded-full overflow-hidden">
+                        <div className="w-full dark:bg-gray-600 bg-orange-300 h-2 rounded-full overflow-hidden">
                           <motion.div
                             className={`h-2 rounded-full ${barColor}`}
                             initial={{ width: 0 }}
@@ -163,7 +163,7 @@ export const ObservationsManager = () => {
                 </div>
               </>
             ) : (
-              <p className="text-gray-400 mt-2">
+              <p className="dark:text-gray-400 mt-2">
                 No se encontraron aptitudes registradas para este estudiante.
               </p>
             )}

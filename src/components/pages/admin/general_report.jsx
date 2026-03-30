@@ -63,6 +63,33 @@ export const ReporteGeneralVocacional = () => {
   const [aptitudes, setAptitudes] = useState([]);
 
   const reportRef = useRef(null);
+  const [isDark, setIsDark] = useState(false);
+
+  // Detectar modo dark dinámicamente
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+
+    checkDark();
+
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // 🎨 Colores dinámicos
+  const colors = {
+    grid: isDark ? "#334155" : "#E2E8F0",
+    axis: isDark ? "#CBD5F5" : "#334155",
+    tooltipBg: isDark ? "#1E293B" : "#FFFFFF",
+    tooltipText: isDark ? "#F1F5F9" : "#0F172A",
+    bar: isDark ? "#2DD4BF" : "#14B8A6",
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -483,7 +510,7 @@ const generarPDF = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 "
         >
-          <h1 className="text-4xl font-bold text-teal-400 flex justify-center items-center gap-2">
+          <h1 className="text-4xl font-bold dark:text-teal-400 flex justify-center items-center gap-2">
             <BarChart3 /> Reporte General Vocacional
           </h1>
           <p className="text-gray-700 dark:text-gray-300 text-lg mt-2">
@@ -498,7 +525,7 @@ const generarPDF = () => {
               Paralelo
             </label>
             <select
-              className="px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white w-full md:w-auto"
+              className="px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white w-full md:w-auto"
               onChange={(e) =>
                 setSelectedSection(
                   sections.find((s) => s.id === parseInt(e.target.value))
@@ -526,7 +553,7 @@ const generarPDF = () => {
                 placeholder="Buscar estudiante..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full rounded-xl border border-gray-500 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="pl-10 pr-4 py-2 w-full rounded-xl border border-gray-500 dark:bg-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
               />
             </div>
           )}
@@ -581,12 +608,12 @@ const generarPDF = () => {
               <Users /> Lista de Docentes
             </h2>
             <table className="w-full border border-gray-600 rounded-xl overflow-hidden text-sm">
-              <thead className="bg-teal-600 text-white">
+              <thead className="dark:bg-teal-600 dark:text-white bg-orange-200">
                 <tr>
                   <th className="py-2 px-4 text-left">#</th>
                   <th className="py-2 px-4 text-left">Nombre</th>
                   <th className="py-2 px-4 text-left">Usuario</th>
-                  <th className="py-2 px-4 text-left">Rol</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -598,7 +625,7 @@ const generarPDF = () => {
                     <td className="py-2 px-4">{i + 1}</td>
                     <td className="py-2 px-4">{`${doc.first_name} ${doc.last_name}`}</td>
                     <td className="py-2 px-4">{doc.username}</td>
-                    <td className="py-2 px-4">{doc.rol}</td>
+                    
                   </tr>
                 ))}
               </tbody>
@@ -726,31 +753,59 @@ const generarPDF = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <h2 className="text-2xl font-bold text-teal-300 mb-6 text-center flex items-center justify-center gap-2">
+              <h2 className="text-2xl font-bold dark:text-teal-300 mb-6 text-center flex items-center justify-center gap-2">
                 <Star /> Promedios Generales
               </h2>
               <ResponsiveContainer width="100%" height={400}>
-                <BarChart
-                  data={chartData}
-                  margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                  <XAxis dataKey="nombre" tick={{ fill: "#ccc" }} />
-                  <YAxis tick={{ fill: "#ccc" }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#1e293b",
-                      borderRadius: "10px",
-                      color: "#fff",
-                    }}
-                  />
-                  <Bar
-                    dataKey="promedio"
-                    fill="#14b8a6"
-                    radius={[10, 10, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+        <BarChart
+          data={chartData}
+          margin={{ top: 20, right: 20, bottom: 40, left: 10 }}
+        >
+          {/* Grid */}
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={colors.grid}
+            strokeWidth={1.5}
+          />
+
+          {/* Eje X */}
+          <XAxis
+            dataKey="nombre"
+            tick={{ fill: colors.axis, fontSize: 12 }}
+            stroke={colors.axis}
+            strokeWidth={3}
+            angle={-20}
+            textAnchor="end"
+            interval={0}
+          />
+
+          {/* Eje Y */}
+          <YAxis
+            tick={{ fill: colors.axis }}
+            stroke={colors.axis}
+            strokeWidth={3}
+          />
+
+          {/* Tooltip */}
+          <Tooltip
+            contentStyle={{
+              backgroundColor: colors.tooltipBg,
+              borderRadius: "10px",
+              color: colors.tooltipText,
+              border: "none",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            }}
+            labelStyle={{ color: colors.tooltipText }}
+          />
+
+          {/* Barras */}
+          <Bar
+            dataKey="promedio"
+            fill={colors.bar}
+            radius={[10, 10, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
             </motion.div>
           </>
         )}

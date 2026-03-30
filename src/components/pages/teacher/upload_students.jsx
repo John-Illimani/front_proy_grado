@@ -244,7 +244,7 @@ export const StudentCRUD = () => {
   };
 
   return (
-    <div className="relative z-10 flex-1 overflow-y-auto  text-gray-700 dark:text-white  scrollbar-hide h-[90vh]">
+    <div className="relative z-10 flex-1 overflow-y-auto  text-gray-700 dark:text-white  scrollbar-hide h-[90vh] px-1">
       {/* Header */}
       <motion.div
         className="mb-8 text-center"
@@ -252,7 +252,7 @@ export const StudentCRUD = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-3xl md:text-5xl font-bold text-teal-400 drop-shadow-lg">
+        <h1 className="text-3xl md:text-5xl font-bold dark:text-teal-400 drop-shadow-lg">
           Gestión de Estudiantes
         </h1>
         <p className="text-sm md:text-lg max-w-2xl mx-auto mt-2">
@@ -269,7 +269,7 @@ export const StudentCRUD = () => {
           <select
             value={selectedSectionId}
             onChange={handleSectionChange}
-            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white focus:ring-2 focus:ring-teal-400 focus:outline-none text-sm md:text-lg"
+            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-teal-400 focus:outline-none text-sm md:text-lg"
           >
             <option value="">Seleccione un paralelo</option>
             {sections.map((section) => (
@@ -280,7 +280,7 @@ export const StudentCRUD = () => {
           </select>
         </div>
 
-        <label className="flex items-center gap-2 px-4 py-3 bg-teal-500 rounded-xl cursor-pointer hover:bg-teal-400 text-white font-semibold transition">
+        <label className="flex items-center gap-2 px-4 py-3 dark:bg-teal-500 rounded-xl cursor-pointer dark:hover:bg-teal-400 text-white bg-green-800 hover:bg-green-500 font-bold transition">
           <FilePlus size={20} /> Cargar Excel
           <input
             type="file"
@@ -339,7 +339,7 @@ export const StudentCRUD = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-5 py-2 rounded-xl bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
+                    className="px-5 py-2 rounded-xl dark:bg-teal-500 dark:text-white bg-lime-400 dark:hover:bg-teal-400  hover:bg-lime-500 font-bold transition"
                   >
                     {editingStudent
                       ? isSubmitting
@@ -378,29 +378,29 @@ export const StudentCRUD = () => {
           </h3>
           <div className="py-2 overflow-x-auto">
             <table className="min-w-full divide-y divide-teal-400/20 text-sm md:text-base">
-              <thead className="dark:bg-gray-900/50 bg-gray-300">
-                <tr>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+              <thead className="dark:bg-gray-900/50 dark:bg-gray-300">
+                <tr className="dark:bg-gray-600 bg-orange-200 ">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase font-bold">
                     Username
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Nombre
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Apellido
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Paralelo
                   </th>
-                  <th className="px-4 py-2 text-left text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Email
                   </th>
-                  <th className="px-4 py-2 text-right text-teal-400 uppercase">
+                  <th className="px-4 py-2 text-center dark:text-teal-400 uppercase">
                     Acciones
                   </th>
                 </tr>
               </thead>
-              <tbody className="dark:bg-gray-900/60 bg-gray-200 dark:text-white text-gray-700 divide-y divide-teal-400/20">
+              <tbody className="dark:bg-gray-900/60  dark:text-white text-black divide-y divide-teal-400/20">
                 {filteredStudents.map((student) => (
                   <tr
                     key={student.id}
@@ -421,7 +421,7 @@ export const StudentCRUD = () => {
                     <td className="px-4 py-2 whitespace-nowrap">
                       {student.email}
                     </td>
-                    <td className="px-4 py-2 whitespace-nowrap text-right flex gap-2 justify-end">
+                    <td className="px-4 py-2 whitespace-nowrap text-right flex gap-2 justify-center">
                       <button
                         onClick={() => setEditingStudent(student)}
                         className="flex items-center gap-1 px-3 py-1 bg-teal-500 text-white rounded-xl hover:bg-teal-400 transition"

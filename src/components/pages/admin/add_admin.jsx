@@ -83,10 +83,10 @@ export const AdminCRUD = () => {
   };
 
   return (
-    <div className="relative z-10 flex-1 overflow-y-auto h-full">
+    <div className="relative z-10 flex-1 overflow-y-auto h-full scrollbar-hide bg-inherit dark:bg-inherit ">
       {/* Header */}
       <motion.div
-        className="mb-10 text-center"
+        className="mb-10 text-center "
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -144,7 +144,7 @@ export const AdminCRUD = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 rounded-lg bg-teal-500 text-gray-700 dark:text-white font-semibold hover:bg-teal-400 transition"
+                  className="px-5 py-2 rounded-lg dark:bg-teal-500 bg-lime-400 darck:text-gray-700 text-black font-bold dark:text-white  hover:bg-teal-400 transition"
                 >
                   {editingAdmin
                     ? isSubmitting
@@ -224,26 +224,26 @@ export const AdminCRUD = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <table className="min-w-full divide-y divide-teal-400/20">
-          <thead className="dark:bg-gray-900/50 bg-gray-300">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+          <thead className="dark:bg-gray-900/50 bg-orange-200 ">
+            <tr className="dark:bg-gray-600 ">
+              <th className="px-6 py-3 text-left text-xs  text-black dark:text-teal-400 uppercase font-bold">
                 Username
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Nombre
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Apellido
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Contraseña
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-center text-xs font-bold text-black dark:text-teal-400 uppercase ">
                 Acciones
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900/60 bg-gray-200 dark:text-white text-gray-700 divide-y divide-teal-400/20">
+          <tbody className="dark:bg-gray-900/60  dark:text-white text-black divide-y divide-teal-400/20">
             {admins.map((admin) => (
               <tr
                 key={admin.id}
@@ -259,7 +259,7 @@ export const AdminCRUD = () => {
                   {admin.last_name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">********</td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-end">
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-center">
                   <button
                     onClick={() => setEditingAdmin(admin)}
                     className="flex items-center gap-1 px-3 py-1 bg-teal-500 text-white rounded hover:bg-teal-400 transition"

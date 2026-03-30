@@ -130,17 +130,29 @@ if (studentAptitudes && studentAptitudes.aptitudes) {
   };
 
  const promedioTotal = () => {
-  if (studentTests.length === 0) return 0;
-  let total = 0;
+  if (!testsInfo.length) return 0;
+
+  // total de preguntas del sistema
+  const totalPreguntasSistema = testsInfo.reduce(
+    (acc, test) => acc + test.total_preguntas,
+    0
+  );
+
+  // total respondido por el estudiante
+  let respondidas = 0;
+
   studentTests.forEach((t) => {
     const info = testsInfo.find((x) => x.id === t.testvocational);
     if (info) {
-      const pct = (t.completo / info.total_preguntas) * 100;
-      total += Math.min(pct, 100); 
+      respondidas += Math.min(t.completo, info.total_preguntas);
     }
   });
-  return Math.min(total / studentTests.length, 100).toFixed(1);
+
+  const porcentaje = (respondidas / totalPreguntasSistema) * 100;
+
+  return Math.min(porcentaje, 100).toFixed(1);
 };
+
 
 
   const promedio = parseFloat(promedioTotal());

@@ -158,7 +158,7 @@ export const TeacherGradesManager = () => {
   return (
     <div className="dark:text-gray-300 text-gray-700 overflow-y-auto scrollbar-hide h-[90vh]">
       <motion.h1
-        className="text-3xl md:text-5xl text-center font-bold text-teal-400 drop-shadow-lg mb-6"
+        className="text-3xl md:text-5xl text-center font-bold dark:text-teal-400 drop-shadow-lg mb-6"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -168,9 +168,9 @@ export const TeacherGradesManager = () => {
       {/* Selección de paralelo, materia y trimestre */}
       <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
         <div className="flex-1">
-          <label className="block mb-2 text-teal-400 font-semibold">Paralelo</label>
+          <label className="block mb-2 dark:text-teal-400 font-semibold">Paralelo</label>
           <select
-            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white focus:ring-2 focus:ring-teal-400"
+            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-teal-400"
             onChange={(e) =>
               setSelectedSection(sections.find((s) => s.id === parseInt(e.target.value)))
             }
@@ -185,9 +185,9 @@ export const TeacherGradesManager = () => {
         </div>
 
         <div className="flex-1">
-          <label className="block mb-2 text-teal-400 font-semibold">Materia</label>
+          <label className="block mb-2 dark:text-teal-400 font-semibold">Materia</label>
           <select
-            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white focus:ring-2 focus:ring-teal-400"
+            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-teal-400"
             onChange={(e) =>
               setSelectedCourse(courses.find((c) => c.id === parseInt(e.target.value)))
             }
@@ -202,9 +202,9 @@ export const TeacherGradesManager = () => {
         </div>
 
         <div className="flex-1">
-          <label className="block mb-2 text-teal-400 font-semibold">Trimestre</label>
+          <label className="block mb-2 dark:text-teal-400 font-semibold">Trimestre</label>
           <select
-            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 bg-gray-900 text-white focus:ring-2 focus:ring-teal-400"
+            className="w-full md:w-auto px-4 py-3 rounded-xl border border-teal-400/50 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-teal-400"
             value={trimestre}
             onChange={(e) => setTrimestre(e.target.value)}
           >
@@ -214,7 +214,7 @@ export const TeacherGradesManager = () => {
           </select>
         </div>
 
-        <label className="flex items-center gap-2 px-4 py-3 bg-teal-500 rounded-xl cursor-pointer hover:bg-teal-400 transition">
+        <label className="flex items-center gap-2 px-4 py-3 dark:bg-teal-500 rounded-xl cursor-pointer dark:hover:bg-teal-400 transition text-white  bg-green-800 hover:bg-green-500 font-bold">
           <FilePlus size={20} /> Cargar Excel
           <input
             type="file"
@@ -234,23 +234,23 @@ export const TeacherGradesManager = () => {
       {/* Tabla de notas */}
       {selectedCourse && selectedSection && students.length > 0 && (
         <motion.div
-          className="bg-gray-800/50 rounded-2xl p-4 shadow-xl backdrop-blur-sm border border-teal-400/20 overflow-x-auto"
+          className="dark:from-gray-800/30 dark:to-black/50 rounded-2xl p-4 shadow-xl backdrop-blur-sm border border-teal-400/20 overflow-x-auto bg-gradient-to-br from-white/50 to-white/80 "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
           <table className="min-w-full divide-y divide-teal-400/20 text-sm md:text-base">
-            <thead className="bg-gray-900/50">
-              <tr>
-                <th className="px-4 py-2 text-left text-teal-400 uppercase">ID</th>
-                <th className="px-4 py-2 text-left text-teal-400 uppercase">Estudiante</th>
-                <th className="px-4 py-2 text-left text-teal-400 uppercase">Nota</th>
-                <th className="px-4 py-2 text-center text-teal-400 uppercase">Estado</th>
+            <thead className="dark:bg-gray-600 bg-orange-200">
+              <tr className="">
+               
+                <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">Estudiante</th>
+                <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">Nota</th>
+                <th className="px-4 py-2 text-center dark:text-teal-400 uppercase">Estado</th>
               </tr>
             </thead>
-            <tbody className="bg-gray-900/60 divide-y divide-teal-400/20">
+            <tbody className="dark:bg-gray-900/60 divide-y divide-teal-400/20">
               {students.map((st) => (
-                <tr key={st.id} className="hover:bg-gray-800/50 transition">
-                  <td className="px-4 py-2">{st.id}</td>
+                <tr key={st.id} className="dark:hover:bg-gray-800/50 hover:bg-gray-200/50 dark:text-white text-black  transition">
+                  
                   <td className="px-4 py-2">{getNombreEstudiante(st.usuario)}</td>
                   <td className="px-4 py-2">
                     <Formik
@@ -270,10 +270,10 @@ export const TeacherGradesManager = () => {
                           <motion.button
                             type="submit"
                             whileTap={{ scale: 0.9 }}
-                            className={`px-3 py-1 rounded-xl transition text-white ${
+                            className={`px-3 py-1 rounded-xl transition dark:text-white font-bold ${
                               savingId === st.id
                                 ? "bg-green-500"
-                                : "bg-teal-500 hover:bg-teal-400"
+                                : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 "
                             }`}
                           >
                             {savingId === st.id ? <CheckCircle2 size={18} /> : "Guardar"}

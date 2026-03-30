@@ -135,7 +135,7 @@ export const TeacherCRUD = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
+                  className="px-5 py-2 rounded-lg dark:bg-teal-500 dark:text-white  hover:bg-teal-400 transition bg-lime-400 text-black font-bold "
                 >
                   {editingTeacher
                     ? isSubmitting
@@ -213,33 +213,33 @@ export const TeacherCRUD = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <table className="min-w-full divide-y divide-teal-400/20">
-          <thead className="dark:bg-gray-900/50 bg-gray-300">
+          <thead className="dark:bg-gray-600   bg-orange-200">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Username
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Nombre
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Apellido
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Contraseña
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-black dark:text-teal-400 uppercase">
+              <th className="px-6 py-3 text-center text-xs font-bold text-black dark:text-teal-400 uppercase">
                 Acciones
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900/60 bg-gray-200 dark:text-white text-gray-700 divide-y divide-teal-400/20">
+          <tbody className="dark:bg-gray-900/60  dark:text-white text-black divide-y divide-teal-400/20">
             {teachers.map((teacher) => (
-              <tr key={teacher.id} className="dark:hover:bg-gray-800/50 hover:bg-white/50 transition">
+              <tr key={teacher.id} className="dark:hover:bg-gray-800/50 hover:bg-white/50 transition ">
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.username}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.first_name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.last_name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">********</td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-end">
+                <td className="px-6 py-4 whitespace-nowrap">**********</td>
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-center">
                   <button
                     onClick={() => setEditingTeacher(teacher)}
                     className="flex items-center gap-1 px-3 py-1 bg-teal-500 text-white rounded hover:bg-teal-400 transition"
