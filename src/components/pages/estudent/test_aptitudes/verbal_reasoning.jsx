@@ -66,15 +66,15 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center relative overflow-hidden h-full">
+    <div className="min-h-screen flex justify-center relative overflow-hidden h-full ">
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center  bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
       <div className="absolute inset-0 "></div>
 
-      <div className="relative z-10 w-full max-w-6xl px-6 py-5">
+      <div className="relative z-10 w-full max-w-6xl px-5 py-5  ">
         <TestHeader
           title={"TEST DE RAZONAMIENTO VERBAL"}
           description={"ULA-UNET Aprende Matemática-Física-Química-Lógica…"}
@@ -85,7 +85,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
             <Form>
               {/* Contenedor fijo de sección y temporizador arriba */}
               <motion.div
-                className="sticky top-5 z-20 bg-black/40 backdrop-blur-md rounded-3xl p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-teal-400/50"
+                className="  sticky top-5 z-20 dark:from-black/40 dark:to-black/40 backdrop-blur-md rounded-3xl p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-teal-400/50  bg-gradient-to-r from-white to-white"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -93,16 +93,12 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                 <div className="flex gap-4">
                   <motion.button
                     type="button"
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#14B8A6",
-                      color: "#000",
-                    }}
+                    
                     whileTap={{ scale: 0.95 }}
-                    className={`px-3 py-1.5 md:px-6 md:py-3 rounded-full border font-medium shadow-md transition-all duration-300 ${
+                    className={`px-3 py-1.5 md:px-6 md:py-3  font-bold rounded-full border    shadow-md  duration-500 dark:hover:bg-gray-600  ${
                       currentSection === "A"
-                        ? "bg-teal-400 text-black border-teal-400"
-                        : "bg-transparent text-white border-teal-400"
+                        ? " dark:bg-teal-400 text-black dark:border-teal-400 border-2 border-red-950 "
+                        : "bg-transparent text-whiteborder-teal-400 dark:text-white text-black "
                     }`}
                     onClick={() => setCurrentSection("A")}
                   >
@@ -110,16 +106,12 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                   </motion.button>
                   <motion.button
                     type="button"
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#14B8A6",
-                      color: "#000",
-                    }}
+                    
                     whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-3 rounded-full border font-medium shadow-md transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-full border font-bold shadow-md  duration-500  dark:hover:bg-gray-600  ${
                       currentSection === "B"
-                        ? "bg-teal-400 text-black border-teal-400"
-                        : "bg-transparent text-white border-teal-400"
+                        ? "dark:bg-teal-400 text-black dark:border-teal-400 border-2 border-red-950 "
+                        : "bg-transparent dark:text-white dark:border-teal-400 text-black "
                     }`}
                     onClick={() => setCurrentSection("B")}
                   >
@@ -127,7 +119,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                   </motion.button>
                 </div>
 
-                <div className="text-white text-lg md:text-xl font-bold px-6 py-3 rounded-full border border-teal-400/50">
+                <div className="dark:text-white  text-black text-lg md:text-xl font-bold px-6 py-3 rounded-full border-2 dark:border-teal-400/50 border-red-800 ">
                   Tiempo:{" "}
                   {currentSection === "A"
                     ? formatTime(timeLeftA)
@@ -136,10 +128,10 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
               </motion.div>
 
               {/* Contenedor preguntas */}
-              <div className="max-h-[65vh] overflow-y-auto pr-2 scrollbar-default">
+              <div className="max-h-[65vh] overflow-y-auto  scrollbar-default px-6 ">
                 {/* Introducción */}
                 <motion.div
-                  className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                  className="mb-8 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 text-black leading-relaxed"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
@@ -174,35 +166,32 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                   return (
                     <motion.div
                       key={fieldName}
-                      className="mb-6 p-6 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                      className="mb-6 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white  rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                       whileHover={{ scale: 1.01 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <p className="text-white font-semibold text-base md:text-lg mb-4">
+                      <p className="dark:text-white text-black font-semibold text-base md:text-lg mb-4">
                         {pregunta.id}.- {pregunta.texto}
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {pregunta.opciones.map((opcion, index) => (
                           <motion.label
                             key={index}
-                            className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all ${
+                            className={`flex items-center p-4 rounded-2xl cursor-pointer duration-300 transition-all hover:bg-[color:yellow] dark:hover:bg-gray-600 ${
                               values[fieldName] === opcion
-                                ? "bg-teal-400/20 border-2 border-teal-400"
-                                : "bg-gray-800/50 border border-gray-600"
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 "
+                                : "dark:bg-gray-800/50 border-[5px] dark:border-gray-600  "
                             }`}
-                            whileHover={{
-                              scale: 1.02,
-                              backgroundColor: "rgba(20, 184, 166, 0.2)",
-                            }}
-                            whileTap={{ scale: 0.98 }}
+                            
+                            
                           >
                             <Field
                               type="radio"
                               name={fieldName}
                               value={opcion}
-                              className="mr-3 h-5 w-5 text-teal-400"
+                              className="mr-3 h-5 w-5 dark:text-teal-400 text-black"
                             />
-                            <span className="text-white">
+                            <span className="dark:text-white text-black font-bold">
                               {String.fromCharCode(97 + index)}) {opcion}
                             </span>
                           </motion.label>
@@ -222,14 +211,10 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#14B8A6",
-                      color: "#000",
-                    }}
+                    
                     onClick={() => Cambios()}
                     whileTap={{ scale: 0.95 }}
-                    className="py-2 px-4 md:px-8 md:py-4 rounded-full bg-teal-400 text-black font-bold text-base md:text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50"
+                    className="hover:shadow-2xl py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  transition-all duration-300 disabled:opacity-50 "
                   >
                     {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                   </motion.button>

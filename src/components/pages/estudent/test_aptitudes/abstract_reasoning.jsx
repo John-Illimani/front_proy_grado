@@ -68,7 +68,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
     <div className="h-screen flex justify-center relative overflow-hidden">
       {/* Fondo */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -86,7 +86,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
             <Form>
               {/* Introducción */}
               <motion.div
-                className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                className="mb-8 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 leading-relaxed text-black from-white to-white"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
@@ -99,7 +99,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                   Para cada ejercicio, analiza cuidadosamente los patrones
                   visuales presentados y selecciona la alternativa correcta.
                 </p>
-                <p className="text-teal-300 font-semibold">
+                <p className="dark:text-teal-300 font-semibold">
                   💡 Consejo: Busca patrones de rotación, simetría, secuencias y
                   transformaciones.
                 </p>
@@ -111,30 +111,30 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <div className="text-white text-2xl font-bold bg-black/40 px-8 py-4 rounded-full border border-teal-400/50">
+                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[700px] overflow-y-auto pr-2 scrollbar-hide"
+                className="max-h-[700px] overflow-y-auto px-6 scrollbar-hide"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
                 {preguntas.map((pregunta) => (
                   <motion.div
                     key={pregunta.id}
-                    className="mb-8 p-6 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                    className="mb-8 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30 from-white to-white"
                     whileHover={{ scale: 1.01 }}
                   >
-                    <p className="text-white font-semibold text-lg mb-3">
+                    <p className="dark:text-white text-black font-semibold text-lg mb-3">
                       {pregunta.id}. {pregunta.texto}
                     </p>
 
                     {/* Imagen */}
                     {pregunta.imagen && (
-                      <div className="flex justify-center mb-4 p-4 bg-gray-800/30 rounded-2xl">
+                      <div className="flex justify-center mb-4 p-4 dark:bg-gray-800/30  bg-[#99CDD8] rounded-2xl">
                         <img
                           src={pregunta.imagen}
                           alt={`Patrón ${pregunta.id}`}
@@ -148,12 +148,12 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                       {pregunta.opciones.map((opcion, idx) => (
                         <motion.label
                           key={idx}
-                          className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-32 ${
+                          className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-32  ${
                             values[pregunta.id] === opcion
-                              ? "bg-teal-400/20 border-teal-400"
-                              : "bg-gray-800/50 border-gray-600 hover:border-teal-400/50"
+                              ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white "
+                              : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px] "
                           }`}
-                          whileHover={{ scale: 1.05 }}
+                          
                           whileTap={{ scale: 0.95 }}
                           onClick={() => setFieldValue(pregunta.id, opcion)}
                         >
@@ -164,7 +164,11 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                             checked={values[pregunta.id] === opcion}
                             className="hidden"
                           />
-                          <span className="text-white text-sm font-medium">
+                          <span className={` font-bold  ${
+                            values[pregunta.id] === opcion
+                              ? " text-white "
+                              : "text-black"
+                          }`}>
                             {String.fromCharCode(97 + idx)}) {opcion}
                           </span>
                         </motion.label>
@@ -221,17 +225,13 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#14B8A6",
-                    color: "#000",
-                  }}
+                 
                   onClick={() => Cambios()}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg border-2 ${
+                  className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg border-2  text-white ${
                     isSubmitting
                       ? "bg-gray-500 text-gray-200 border-gray-500 cursor-not-allowed"
-                      : "bg-teal-400 text-black border-teal-400"
+                      : "dark:bg-teal-400 dark:text-black border-teal-400 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] hover:shadow-2xl transition-all duration-300"
                   }`}
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}

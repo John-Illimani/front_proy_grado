@@ -56,7 +56,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
     <div className="h-full flex justify-center relative overflow-hidden">
       {/* Fondo */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center  bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -73,7 +73,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
             <Form>
               {/* Descripción */}
               <motion.div
-                className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                className="mb-8 bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 text-black leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -88,7 +88,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                   Para cada ejercicio, analiza la situación mecánica presentada
                   y selecciona la respuesta correcta entre las opciones.
                 </p>
-                <p className="text-teal-300 font-semibold">
+                <p className="dark:text-teal-300 font-semibold text-black">
                   ⚙️ Consejo: Recuerda principios como acción-reacción, torque,
                   equilibrio de fuerzas y transmisión de movimiento.
                 </p>
@@ -101,14 +101,14 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="text-white text-2xl font-bold bg-black/40 px-8 py-4 rounded-full border border-teal-400/50">
+                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[700px] overflow-y-auto pr-2 scrollbar-hide"
+                className="max-h-[700px] overflow-y-auto px-6 scrollbar-hide"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -118,26 +118,26 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                   return (
                     <motion.div
                       key={pregunta.id}
-                      className="mb-8 p-6 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                      className="mb-8 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                       whileHover={{ scale: 1.01 }}
                       transition={{ duration: 0.3 }}
                     >
                       <div className="mb-4">
-                        <p className="text-white font-semibold text-lg mb-3">
+                        <p className="dark:text-white text-black font-semibold text-lg mb-3">
                           {pregunta.id}. {pregunta.texto}
                         </p>
 
                         {pregunta.imagen && (
-                          <div className="flex justify-center mb-4 p-4 bg-gray-800/30 rounded-2xl">
+                          <div className="flex justify-center mb-4 md:p-4 dark:bg-gray-800/30 bg-[#99CDD8] rounded-2xl">
                             <div className="text-center">
-                              <div className="bg-white/10 p-4 rounded-xl inline-block">
+                              <div className=" p-4 rounded-xl inline-block ">
                                 <img
                                   src={pregunta.imagen}
                                   alt={`Ejercicio mecánico ${pregunta.id}`}
-                                  className="max-w-full h-[25rem] mx-auto"
+                                  className="max-w-full  h-[25rem] mx-auto"
                                 />
                               </div>
-                              <p className="text-gray-400 text-sm mt-2">
+                              <p className="dark:text-gray-400 text-black font-bold text-lg mt-2">
                                 Observa la situación mecánica
                               </p>
                             </div>
@@ -146,16 +146,16 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                       </div>
 
                       {/* Opciones */}
-                      <div className="flex flex-wrap items-center justify-center gap-x-8">
+                      <div className="flex flex-wrap items-center justify-center gap-x-8 ">
                         {pregunta.opciones.map((opcion, index) => {
                           const isSelected = values[fieldName] === opcion;
                           return (
                             <motion.label
                               key={index}
-                              className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-40 text-center ${
+                              className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-40 text-center  min-w-6 ${
                                 isSelected
-                                  ? "bg-teal-400/20 border-teal-400"
-                                  : "bg-gray-800/50 border-gray-600 hover:border-teal-400/50"
+                                  ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white"
+                                  : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px]  md:h-24 "
                               }`}
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
@@ -168,7 +168,11 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                                 checked={isSelected}
                                 className="hidden"
                               />
-                              <span className="text-white text-sm font-medium">
+                              <span className={` font-bold mt-auto mb-auto  ${
+                            values[pregunta.id] === opcion
+                              ? " text-white "
+                              : "text-black"
+                          }`}>
                                 {opcion}
                               </span>
                             </motion.label>
@@ -234,14 +238,10 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#14B8A6",
-                    color: "#000",
-                  }}
+                  
                   onClick={() => Cambios()}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full bg-teal-400 text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-8 py-4 rounded-full bg-teal-400 dark:text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] text-white hover:shadow-2xl transition-all duration-300"
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                 </motion.button>

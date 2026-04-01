@@ -23,7 +23,7 @@ export const WelcomInfo = () => {
     <div className=" relative flex-1 p-10 h-screen  overflow-hidden">
       {/* Fondo animado */}
       <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-orange-100 "
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -55,30 +55,30 @@ export const WelcomInfo = () => {
 
         {/* Mensaje de bienvenida extenso */}
         <motion.div
-          className="mb-10 bg-black/40 rounded-2xl p-8 shadow-lg border border-teal-500/20"
+          className="mb-10 bg-gradient-to-r dark:from-black/40 dark:to-black/20 from-white to-white rounded-2xl p-8 shadow-lg border border-teal-500/20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold text-teal-400 mb-6 text-center flex items-center justify-center gap-2">
-            <Target className="text-teal-400" size={24} />
+          <h2 className="text-2xl font-semibold dark:text-teal-400 text-black mb-6 text-center flex items-center justify-center gap-2">
+            <Target className="dark:text-teal-400 text-black" size={24} />
             Un momento decisivo en tu vida
           </h2>
 
-          <div className="space-y-4 text-white/90 leading-relaxed text-lg">
+          <div className="space-y-4 dark:text-white/90 text-black leading-relaxed text-lg">
             <p>
               Estás a punto de vivir uno de los momentos más importantes: la
               elección de tu carrera universitaria. Esta decisión no solo
               marcará tus próximos años de estudio, sino que influirá en tu
               desarrollo personal y profesional. Sabemos que puede generar
               expectativa, incertidumbre e incluso algo de ansiedad, pero
-              <b className="text-teal-300"> no estás solo/a en este proceso</b>.
+              <b className="dark:text-teal-300"> no estás solo/a en este proceso</b>.
             </p>
 
-            <div className="bg-teal-900/30 p-4 rounded-xl my-6 border-l-4 border-teal-400">
+            <div className="dark:from-teal-900/30  dark:to-teal-900/30 bg-gradient-to-br from-[#053F5C] to-[#1081b9]  p-4 rounded-xl my-6  text-white">
               <h3 className="text-xl font-bold text-teal-300 mb-3 flex items-center gap-2">
                 <Brain className="text-teal-300" size={22} />
-                ¿Por qué nuestro sistema es diferente?
+                ¿Por qué el sistema es diferente?
               </h3>
               <p>
                 Nuestra plataforma utiliza un algoritmo avanzado de{" "}
@@ -107,7 +107,7 @@ export const WelcomInfo = () => {
                   transition={{ duration: 0.5 }}
                   className="pt-4 space-y-4"
                 >
-                  <h4 className="text-teal-300 font-semibold flex items-center gap-2">
+                  <h4 className="dark:text-teal-300 font-semibold flex items-center gap-2">
                     <BarChart3 size={20} />
                     Para nuestra comunidad Marcelo Quiroga Santa Cruz
                   </h4>
@@ -118,7 +118,7 @@ export const WelcomInfo = () => {
                     decisión informada y consciente.
                   </p>
 
-                  <div className="bg-gray-800/40 p-4 rounded-xl mt-4">
+                  <div className="dark:from-gray-800/40 dark:to-gray-800/40 p-4 rounded-xl mt-4 bg-gradient-to-br from-[#053F5C] to-[#1081b9] text-white">
                     <h4 className="font-bold mb-2 text-teal-300 flex items-center gap-2">
                       <Heart size={20} />
                       Recuerda:
@@ -137,7 +137,7 @@ export const WelcomInfo = () => {
 
             <button
               onClick={() => setShowMoreInfo(!showMoreInfo)}
-              className="mt-4 flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium"
+              className="mt-4 flex items-center gap-2 tdark:ext-teal-400 dark:hover:text-teal-300 font-medium hover:border-b-2 hover:border-black"
             >
               {showMoreInfo ? "Ver menos" : "Leer información completa"}
               <ChevronDown
@@ -157,32 +157,32 @@ export const WelcomInfo = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-2xl font-semibold text-teal-400 mb-6 text-center">
+          <h2 className="text-2xl font-semibold dark:text-teal-400 mb-6 text-black text-center">
             ¿Cómo funciona el proceso?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               {
-                icon: <ClipboardList size={32} className="text-teal-400" />,
+                icon: <ClipboardList size={32} className="dark:text-teal-400 text-black" />,
                 title: "Evaluación integral",
                 description:
                   "Realizarás tests y cuestionarios cuidadosamente diseñados",
               },
               {
-                icon: <Brain size={32} className="text-teal-400" />,
+                icon: <Brain size={32} className="dark:text-teal-400 text-black" />,
                 title: "Análisis inteligente",
                 description:
                   "Nuestro sistema procesará tus respuestas con el algoritmo Random Forest",
               },
               {
-                icon: <FileText size={32} className="text-teal-400" />,
+                icon: <FileText size={32} className="dark:text-teal-400 text-black" />,
                 title: "Resultados personalizados",
                 description:
                   "Obtendrás un perfil detallado con carreras compatibles contigo",
               },
               {
-                icon: <GraduationCap size={32} className="text-teal-400" />,
+                icon: <GraduationCap size={32} className="dark:text-teal-400 text-black" />,
                 title: "Exploración de opciones",
                 description:
                   "Conocerás detalles sobre cada carrera recomendada",
@@ -190,16 +190,16 @@ export const WelcomInfo = () => {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="bg-gradient-to-b from-teal-900/30 to-black/50 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-teal-400/20 flex flex-col items-center text-center"
+                className="bg-gradient-to-b dark:from-teal-900/30 dark:to-black/50 from-sky-500 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-teal-400/20 flex flex-col items-center text-center"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="mb-4 p-3 bg-teal-400/10 rounded-full">
+                <div className="mb-4 p-3 dark:bg-teal-400/10 bg-amber- rounded-full">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-bold text-teal-300 mb-2">
+                <h3 className="text-lg font-bold dark:text-teal-300 text-black mb-2">
                   {item.title}
                 </h3>
-                <p className="text-white/80 text-sm">{item.description}</p>
+                <p className="text-black dark:text-white/80 text-sm">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -212,12 +212,12 @@ export const WelcomInfo = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="bg-gradient-to-br from-purple-900/30 to-black/50 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-purple-400/20">
+          <div className="bg-gradient-to-br dark:from-purple-900/30 dark:to-black/50 from-sky-800 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-purple-400/20">
             <h3 className="text-xl font-bold text-purple-300 mb-3 flex items-center gap-2">
               <Users size={22} />
               Para nuestra comunidad
             </h3>
-            <p className="text-white/80">
+            <p className="dark:text-white/80 text-black font-bold">
               Este sistema ha sido desarrollado específicamente para los
               estudiantes de sexto de secundaria de la Unidad Educativa Marcelo
               Quiroga Santa Cruz, considerando nuestro contexto educativo y las
@@ -225,12 +225,12 @@ export const WelcomInfo = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-amber-900/30 to-black/50 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-amber-400/20">
+          <div className="bg-gradient-to-br dark:from-amber-900/30 dark:to-black/50 from-sky-900 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-amber-400/20">
             <h3 className="text-xl font-bold text-amber-300 mb-3 flex items-center gap-2">
               <BookOpen size={22} />
               Tu journey hacia el futuro
             </h3>
-            <p className="text-white/80">
+            <p className="dark:text-white/80 text-black font-bold">
               Te invitamos a embarcarte en este viaje de autodescubrimiento con
               mente abierta y curiosidad. Comienza cuando estés listo/a y
               recuerda que estamos aquí para apoyarte.

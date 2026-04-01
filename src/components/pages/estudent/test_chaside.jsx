@@ -3,13 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { motion } from "framer-motion";
 import { posTests } from "../../../api/api_tests";
 import { questionsChaside } from "../questions/questions";
-import {
-  addStudentTest,
-  getStudentTests,
-  updateStudentTest,
-} from "../../../api/api_estudent_test";
-import { getStudents } from "../../../api/api_student";
-import { getUsers } from "../../../api/api_user";
+
 import { VerifyProgres } from "./progress";
 import { getStudentId } from "./studentId";
 import { Cambios } from "./verify";
@@ -31,7 +25,7 @@ export const Test_chaside = () => {
 
   const questions = questionsChaside;
 
-  // Crear objeto inicial con todas las preguntas como null
+ 
   const initialValues = {};
   questions.forEach((_, index) => {
     initialValues[`${index + 1}`] = null;
@@ -70,7 +64,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
     <div className="relative text-white overflow-hidden h-full">
       {/* Fondo pulsante */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -95,15 +89,15 @@ const handleSubmit = async (values, { setSubmitting }) => {
                 transition={{ duration: 0.8 }}
               >
                 {/* Barra de progreso */}
-                <div className="mt-6 bg-gray-700/40 rounded-full h-3 overflow-hidden">
+                <div className="mt-6 dark:bg-gray-700/40 bg-yellow-300 rounded-full h-3 overflow-hidden">
                   <motion.div
-                    className="bg-gradient-to-r from-cyan-400 to-green-400 h-3"
+                    className="bg-gradient-to-r dark:from-cyan-400 dark:to-green-400 bg-red-700 h-3"
                     initial={{ width: 0 }}
                     animate={{ width: `${(currentPage / totalPages) * 100}%` }}
                     transition={{ duration: 0.5 }}
                   ></motion.div>
                 </div>
-                <p className="mt-2 text-sm text-gray-400">
+                <p className="mt-2 text-sm dark:text-gray-400 text-black font-bold">
                   Página {currentPage} de {totalPages}
                 </p>
               </motion.div>
@@ -116,19 +110,19 @@ const handleSubmit = async (values, { setSubmitting }) => {
                   return (
                     <motion.div
                       key={questionId}
-                      className="p-5  bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl border border-cyan-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-400/40"
+                      className="p-5  bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-2xl border border-cyan-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-400/40"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.05 }}
                     >
-                      <p className="mb-4 text-lg font-medium text-cyan-300">
-                        <span className="text-green-400 font-bold">
+                      <p className="mb-4 text-lg font-medium dark:text-cyan-300 text-black ">
+                        <span className="dark:text-green-400 text-black font-bold ">
                           {questionId}
                         </span>{" "}
                         {question}
                       </p>
                       <div className="flex space-x-6">
-                        <label className="inline-flex items-center cursor-pointer">
+                        <label className="inline-flex items-center cursor-pointer ">
                           <Field
                             type="radio"
                             name={fieldName}
@@ -141,9 +135,9 @@ const handleSubmit = async (values, { setSubmitting }) => {
                               boxShadow: "0 0 15px rgba(20,184,166,0.5)",
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className={`px-4 py-2 rounded-lg bg-gray-700/50 peer-checked:bg-green-500/80 peer-checked:text-white text-green-400 font-semibold transition-all duration-300 ${
+                            className={`px-4 py-2 rounded-lg dark:bg-gray-700/50 text-black border-2  dark:peer-checked:bg-green-500/80 peer-checked:bg-lime-400/90  dark:peer-checked:text-white peer-checked:text-black dark:text-green-400 font-semibold transition-all duration-300 ${
                               values[fieldName] === "SI"
-                                ? "bg-green-500/80 text-white"
+                                ? "dark:bg-green-500/80 dark:text-white "
                                 : ""
                             }`}
                             onClick={() => setFieldValue(fieldName, "SI")}
@@ -164,7 +158,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                               boxShadow: "0 0 15px rgba(239,68,68,0.5)",
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className={`px-4 py-2 rounded-lg bg-gray-700/50 peer-checked:bg-red-500/80 peer-checked:text-white text-red-400 font-semibold transition-all duration-300 ${
+                            className={`px-4 py-2 rounded-lg dark:bg-gray-700/50 text-black border-2 dark:peer-checked:bg-red-500/80 dark:peer-checked:text-white peer-checked:bg-[color:yellow] peer-checked:text-black dark:text-red-400 font-semibold transition-all duration-300 ${
                               values[fieldName] === "NO"
                                 ? "bg-red-500/80 text-white"
                                 : ""
@@ -219,8 +213,8 @@ const handleSubmit = async (values, { setSubmitting }) => {
                   whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
                   className={`px-6 py-2 rounded-xl font-bold transition-all duration-300 ${
                     currentPage === 1
-                      ? "bg-gray-600/50 text-gray-400 cursor-not-allowed"
-                      : "bg-gradient-to-r from-cyan-500 to-green-500 hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg"
+                      ? "dark:bg-gray-600/50 dark:text-gray-400 cursor-not-allowed  opacity-0 "
+                      : " dark:from-cyan-500 dark:to-green-500 bg-gradient-to-br from-lime-800 to-lime-400  hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg"
                   }`}
                 >
                   Anterior
@@ -228,15 +222,15 @@ const handleSubmit = async (values, { setSubmitting }) => {
 
                 {currentPage === totalPages ? (
                   <button
-                    type="button" // Evita el submit automático
+                    type="button" 
                     onClick={async () => {
-                      setSubmitting(true); // activa "Enviando..."
-                      await handleSubmit(values, { setSubmitting }); // llama a tu función de envío
-                      setSubmitting(false); // desactiva "Enviando..."
+                      setSubmitting(true); 
+                      await handleSubmit(values, { setSubmitting }); 
+                      setSubmitting(false);
                       Cambios();
                     }}
                     disabled={isSubmitting}
-                    className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-green-400/40 ${
+                    className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-green-400/40 ${
                       isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >
@@ -251,7 +245,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                       boxShadow: "0 0 15px rgba(6,182,212,0.5)",
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg transition-all duration-300"
+                    className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r dark:from-cyan-500 dark:to-blue-600 from-lime-400 to-lime-800  hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg transition-all duration-300"
                   >
                     Siguiente
                   </motion.button>

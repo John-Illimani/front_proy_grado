@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import { Link, Outlet, replace, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -151,6 +153,7 @@ export const HomeOrientacion = () => {
   ];
 
   localStorage.getItem("colors");
+  const location = useLocation();
 
   return (
     <div className="relative min-h-screen h-screen flex text-white overflow-hidden">
@@ -175,7 +178,7 @@ export const HomeOrientacion = () => {
         <div
           className={`overflow-hidden h-full flex flex-col justify-between  ${isSidebarOpen ? "opacity-100" : "opacity-0"} transition`}
         >
-          {/* Logo y Unidad */}
+          {/* Logo */}
           <div>
             <div className="flex flex-col items-center gap-1 mb-5 mt-5">
               <motion.img
@@ -202,15 +205,22 @@ export const HomeOrientacion = () => {
               <h3 className="text-black text-sm font-bold mb-2 px-2 uppercase tracking-wide dark:text-white ">
                 Tests disponibles
               </h3>
+
               {tests.map((item, idx) =>
                 item.label === "Test de Aptitudes Diferenciales" ? (
                   <div key={idx}>
                     {/* Botón padre */}
                     <button
                       onClick={() => setOpenAptitudes(!openAptitudes)}
-                      className=" flex items-center justify-between gap-3 px-3 py-2 w-full text-left rounded-lg dark:text-gray-300 text-black font-bold hover:text-white dark:hover:text-black hover:bg-lime-400  transition-all"
+                      className={`flex items-center justify-between gap-3 px-3 py-2 w-full text-left rounded-lg font-bold transition-all 
+              ${
+                location.pathname.includes("/test_aptitudes")
+                  ? "bg-lime-400 text-black "
+                  : "dark:text-gray-300 text-black  dark:hover:text-black hover:bg-lime-400 "
+              }
+            `}
                     >
-                      <span className="flex items-center gap-2 dark:text-white text-black dark:hover:text-black">
+                      <span className="flex items-center gap-2 ">
                         {item.icon} {item.label}
                       </span>
                       <ChevronDown
@@ -231,28 +241,51 @@ export const HomeOrientacion = () => {
                           transition={{ duration: 0.3 }}
                           className="ml-6 mt-2 flex flex-col gap-1"
                         >
-                          {aptitudesSections.map((sub, sidx) => (
-                            <Link
-                              key={sidx}
-                              to={`/homeMarcelo/test_aptitudes${sub.link}`}
-                              className="flex items-center gap-2 px-3 py-1 text-black dark:text-gray-300 hover:text-black  text-sm dark:hover:text-black hover:bg-lime-300 rounded-lg transition-all"
-                            >
-                              {sub.icon} {sub.label}
-                            </Link>
-                          ))}
+                          {aptitudesSections.map((sub, sidx) => {
+                            const isActive =
+                              location.pathname ===
+                              `/homeMarcelo/test_aptitudes${sub.link}`;
+
+                            return (
+                              <Link
+                                key={sidx}
+                                to={`/homeMarcelo/test_aptitudes${sub.link}`}
+                                className={`flex items-center gap-2 px-3 py-1 text-sm rounded-lg transition-all
+                        ${
+                          isActive
+                            ? "bg-lime-300 text-black"
+                            : "text-black dark:text-gray-300 hover:text-black dark:hover:text-black hover:bg-lime-300"
+                        }
+                      `}
+                              >
+                                {sub.icon} {sub.label}
+                              </Link>
+                            );
+                          })}
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                 ) : (
-                  // Tests normales
-                  <Link
-                    key={idx}
-                    to={item.link}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-black hover:bg-lime-400 transition-all "
-                  >
-                    {item.icon} {item.label}
-                  </Link>
+                  (() => {
+                    const isActive = location.pathname === item.link;
+
+                    return (
+                      <Link
+                        key={idx}
+                        to={item.link}
+                        className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all
+                ${
+                  isActive
+                    ? "bg-lime-400 text-black"
+                    : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-black hover:bg-lime-400"
+                }
+              `}
+                      >
+                        {item.icon} {item.label}
+                      </Link>
+                    );
+                  })()
                 ),
               )}
             </nav>
@@ -263,17 +296,27 @@ export const HomeOrientacion = () => {
               </h3>
             </div>
 
-            {/* Resto de opciones */}
-            {material.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.link}
-                className="flex items-center gap-3 px-3 py-2 rounded-lg text-black font-bold dark:text-gray-300 dark:hover:text-black hover:bg-lime-400 transition-all"
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            ))}
+            {/* Material */}
+            {material.map((item, idx) => {
+              const isActive = location.pathname === item.link;
+
+              return (
+                <Link
+                  key={idx}
+                  to={item.link}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-bold transition-all
+          ${
+            isActive
+              ? "bg-lime-400 text-black"
+              : "text-black dark:text-gray-300 dark:hover:text-black hover:bg-lime-400"
+          }
+        `}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              );
+            })}
 
             <div className="border-t border-gray-700 my-4 ">
               <h3 className="text-sm uppercase mb-1 px-2 tracking-wide mt-6 dark:text-white text-black font-bold">
@@ -281,17 +324,27 @@ export const HomeOrientacion = () => {
               </h3>
             </div>
 
-            {/* Resto de opciones */}
-            {extras.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.link}
-                className="flex items-center gap-3 px-3 py-2 rounded-lg text-black font-bold dark:text-gray-300  hover:bg-lime-400 dark:hover:text-black transition-all"
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            ))}
+            {/* Extras */}
+            {extras.map((item, idx) => {
+              const isActive = location.pathname === item.link;
+
+              return (
+                <Link
+                  key={idx}
+                  to={item.link}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-bold transition-all
+          ${
+            isActive
+              ? "bg-lime-400 text-black"
+              : "text-black dark:text-gray-300 hover:bg-lime-400 dark:hover:text-black"
+          }
+        `}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           {logOutButton.map((btn, index) => (
