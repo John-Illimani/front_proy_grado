@@ -467,19 +467,19 @@ export const CareerResources = () => {
     return (
       <div className="relative text-white overflow-hidden h-screen">
         <motion.div
-          className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+          className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 dark:bg-black/60" />
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-cyan-400 mx-auto mb-4" />
-            <p className="text-xl text-cyan-300">Cargando recursos...</p>
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 dark:border-cyan-400 border-lime-600 mx-auto mb-4" />
+            <p className="text-xl dark:text-cyan-300 text-black font-bold">Cargando recursos...</p>
           </motion.div>
         </div>
       </div>
@@ -491,14 +491,14 @@ export const CareerResources = () => {
     return (
       <div className="relative text-white overflow-hidden h-screen">
         <motion.div
-          className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+          className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 dark:bg-black/60" />
         <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="bg-red-900/50 border border-red-500/30 rounded-2xl p-6 max-w-md">
-            <p className="text-red-300 font-semibold text-lg">⚠️ {error}</p>
+          <div className="dark:bg-red-900/50 bg-red-100 border dark:border-red-500/30 border-red-400 rounded-2xl p-6 max-w-md">
+            <p className="dark:text-red-300 text-red-700 font-semibold text-lg">⚠️ {error}</p>
           </div>
         </div>
       </div>
@@ -507,14 +507,14 @@ export const CareerResources = () => {
 
   /* ---- RENDER ---- */
   return (
-    <div className="relative text-white overflow-hidden min-h-screen">
+    <div className="relative dark:text-white text-black overflow-hidden min-h-screen">
       {/* Fondo animado */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 dark:bg-black/60" />
 
       {/* Contenido principal */}
       <div className="relative z-10 max-w-6xl mx-auto py-12 px-6 h-[100vh] overflow-y-auto scrollbar-hide">
@@ -526,10 +526,10 @@ export const CareerResources = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-green-400 to-emerald-400 bg-clip-text text-transparent mb-3">
+          <h1 className="from-black to-black text-4xl md:text-5xl font-bold bg-gradient-to-r dark:from-cyan-400 dark:via-green-400 dark:to-emerald-400 bg-clip-text text-transparent mb-3">
             Biblioteca de Recursos Personalizada
           </h1>
-          <p className="text-gray-300 text-lg mb-2">
+          <p className="dark:text-gray-300 text-black font-semibold text-lg mb-2">
             Recursos para tu desarrollo
           </p>
         </motion.div>
@@ -546,7 +546,7 @@ export const CareerResources = () => {
           >
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
               <span className="text-4xl">🎓</span>
-              <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="dark:bg-gradient-to-r dark:from-green-400 dark:to-emerald-400 bg-black  bg-clip-text text-transparent">
                 Recursos por carrera
               </span>
             </h2>
@@ -566,20 +566,20 @@ export const CareerResources = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl border border-green-500/30 shadow-lg overflow-hidden"
+                    className="bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-2xl border dark:border-green-500/30 border-green-400/60 shadow-lg overflow-hidden"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.005, boxShadow: "0 0 30px rgba(34,197,94,0.25)" }}
+                  
                   >
                     {/* Header tarjeta */}
-                    <div className="p-5 border-b border-green-500/20">
+                    <div className="p-5 border-b dark:border-green-500/20 border-green-300/50">
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-green-300">{c.carrera}</h3>
-                          <p className="text-sm text-gray-400 mt-1">{info.descripcion}</p>
+                          <h3 className="text-2xl font-bold dark:text-green-300 text-black">{c.carrera}</h3>
+                          <p className="text-sm dark:text-gray-400 text-gray-600 mt-1">{info.descripcion}</p>
                         </div>
-                        <span className="text-sm bg-green-500/20 text-green-300 px-3 py-1 rounded-full font-semibold border border-green-500/30 whitespace-nowrap ml-3">
+                        <span className="text-sm dark:bg-green-500/20 bg-green-100 dark:text-green-300 text-black px-3 py-1 rounded-full font-semibold border dark:border-green-500/30 border-green-400 whitespace-nowrap ml-3">
                           {c.probabilidad}
                         </span>
                       </div>
@@ -587,7 +587,7 @@ export const CareerResources = () => {
                       {/* Aptitudes top */}
                       <div className="flex flex-wrap gap-2 mb-3">
                         {topApt.map((a, idx) => (
-                          <span key={idx} className="bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 px-2 py-1 text-xs rounded-full">
+                          <span key={idx} className="dark:bg-cyan-500/10 bg-cyan-100 border dark:border-cyan-500/30 border-cyan-400/50 dark:text-cyan-300 text-cyan-700 px-2 py-1 text-xs rounded-full">
                             {a.aptitud} · {a.porcentaje}
                           </span>
                         ))}
@@ -596,7 +596,7 @@ export const CareerResources = () => {
                       {/* Materias */}
                       <div className="flex flex-wrap gap-2 mb-3">
                         {info.materias.map((m, idx) => (
-                          <span key={idx} className="bg-gray-700/50 text-gray-300 px-2 py-1 text-xs rounded">
+                          <span key={idx} className="dark:bg-gray-700/50 bg-gray-100 dark:text-gray-300 text-gray-700 px-2 py-1 text-xs rounded">
                             {m}
                           </span>
                         ))}
@@ -605,19 +605,19 @@ export const CareerResources = () => {
                       {/* Universidades */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {info.universidades.map((u, idx) => (
-                          <span key={idx} className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 px-2 py-1 text-xs rounded">
+                          <span key={idx} className="dark:bg-emerald-500/10 bg-emerald-50 border dark:border-emerald-500/30 border-emerald-400/50 dark:text-emerald-300 text-emerald-700 px-2 py-1 text-xs rounded">
                             🏛 {u}
                           </span>
                         ))}
                       </div>
 
                       <div className="flex items-center justify-between flex-wrap gap-2">
-                        <div className="flex gap-3 text-xs text-gray-500">
+                        <div className="flex gap-3 text-sm font-bold dark:text-gray-500 text-black">
                           <span>🔗 {recursosExtra.length} recursos</span>
                         </div>
                         <motion.button
                           onClick={() => toggleCard(cardId)}
-                          className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-1 transition-colors"
+                          className="dark:text-cyan-400 text-black font-bold dark:hover:text-cyan-300 hover:text-cyan-500 text-sm flex items-center gap-1 transition-colors"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -655,9 +655,9 @@ export const CareerResources = () => {
                               const isActive = currentTab === key;
                               const bg = isActive
                                 ? key === "info"
-                                  ? "bg-green-500 text-white shadow-lg"
-                                  : "bg-emerald-500 text-white shadow-lg"
-                                : "bg-gray-800/50 text-gray-400 hover:bg-gray-700/50";
+                                  ? "bg-[yellow] text-black shadow-lg"
+                                  : "bg-lime-400 text-black shadow-lg"
+                                : "dark:bg-gray-800/50 bg-gray-100 dark:text-gray-400 text-gray-600 dark:hover:bg-gray-700/50 hover:bg-gray-200";
                               return (
                                 <button
                                   key={key}
@@ -679,33 +679,33 @@ export const CareerResources = () => {
                               transition={{ duration: 0.3 }}
                             >
                               {/* Recomendación */}
-                              <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/30 border border-green-500/30 p-4 rounded-xl">
-                                <p className="text-sm text-green-200">🎯 {insights.recomendacion}</p>
+                              <div className="bg-gradient-to-r dark:from-green-900/40 dark:to-emerald-900/30 from-green-50 to-green-50 border dark:border-green-500/30 border-green-300 p-4 rounded-xl">
+                                <p className="text-sm dark:text-green-200 text-green-800">🎯 {insights.recomendacion}</p>
                               </div>
 
                               {/* Perfil */}
-                              <div className="bg-gray-800/40 border border-gray-700/50 p-4 rounded-xl">
-                                <h4 className="text-sm font-bold text-cyan-300 uppercase tracking-wider mb-2">
+                              <div className="dark:bg-gray-800/40 bg-gray-50 border dark:border-gray-700/50 border-gray-200 p-4 rounded-xl">
+                                <h4 className="text-sm font-bold dark:text-cyan-300 text-cyan-700 uppercase tracking-wider mb-2">
                                   👤 Perfil del estudiante ideal
                                 </h4>
-                                <p className="text-sm text-gray-300">{insights.perfil}</p>
+                                <p className="text-sm dark:text-gray-300 text-gray-700">{insights.perfil}</p>
                               </div>
 
                               {/* Campo laboral */}
-                              <div className="bg-gray-800/40 border border-gray-700/50 p-4 rounded-xl">
-                                <h4 className="text-sm font-bold text-cyan-300 uppercase tracking-wider mb-3">
+                              <div className="dark:bg-gray-800/40 bg-gray-50 border dark:border-gray-700/50 border-gray-200 p-4 rounded-xl">
+                                <h4 className="text-sm font-bold dark:text-cyan-300 text-cyan-700 uppercase tracking-wider mb-3">
                                   💼 Campo laboral
                                 </h4>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                                   {insights.campo.map((campo, i) => (
                                     <motion.div
                                       key={i}
-                                      className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-2 text-center"
+                                      className="dark:bg-cyan-500/10 bg-cyan-50 border dark:border-cyan-500/20 border-cyan-300/50 rounded-lg p-2 text-center"
                                       initial={{ opacity: 0, scale: 0.8 }}
                                       animate={{ opacity: 1, scale: 1 }}
                                       transition={{ delay: i * 0.06 }}
                                     >
-                                      <p className="text-xs text-cyan-300 font-medium">{campo}</p>
+                                      <p className="text-xs dark:text-cyan-300 text-cyan-700 font-medium">{campo}</p>
                                     </motion.div>
                                   ))}
                                 </div>
@@ -713,27 +713,27 @@ export const CareerResources = () => {
 
                               {/* Ventajas y riesgos */}
                               <div className="grid md:grid-cols-2 gap-4">
-                                <div className="bg-gray-800/40 border border-emerald-500/20 p-4 rounded-xl">
-                                  <h4 className="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-3">
+                                <div className="dark:bg-gray-800/40 bg-gray-50 border dark:border-emerald-500/20 border-emerald-300/50 p-4 rounded-xl">
+                                  <h4 className="text-sm font-bold dark:text-emerald-400 text-emerald-700 uppercase tracking-wider mb-3">
                                     ✅ Ventajas
                                   </h4>
                                   <ul className="space-y-1">
                                     {insights.ventajas.map((v, i) => (
-                                      <li key={i} className="text-xs text-gray-300 flex items-start gap-2">
-                                        <span className="text-emerald-400 mt-0.5">▸</span>
+                                      <li key={i} className="text-xs dark:text-gray-300 text-gray-700 flex items-start gap-2">
+                                        <span className="dark:text-emerald-400 text-emerald-600 mt-0.5">▸</span>
                                         {v}
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
-                                <div className="bg-gray-800/40 border border-red-500/20 p-4 rounded-xl">
-                                  <h4 className="text-sm font-bold text-red-400 uppercase tracking-wider mb-3">
+                                <div className="dark:bg-gray-800/40 bg-gray-50 border dark:border-red-500/20 border-red-300/50 p-4 rounded-xl">
+                                  <h4 className="text-sm font-bold dark:text-red-400 text-red-600 uppercase tracking-wider mb-3">
                                     ⚠️ Riesgos a considerar
                                   </h4>
                                   <ul className="space-y-1">
                                     {insights.riesgos.map((r, i) => (
-                                      <li key={i} className="text-xs text-gray-300 flex items-start gap-2">
-                                        <span className="text-red-400 mt-0.5">▸</span>
+                                      <li key={i} className="text-xs dark:text-gray-300 text-gray-700 flex items-start gap-2">
+                                        <span className="dark:text-red-400 text-red-500 mt-0.5">▸</span>
                                         {r}
                                       </li>
                                     ))}
@@ -742,8 +742,8 @@ export const CareerResources = () => {
                               </div>
 
                               {/* Advertencia inteligente */}
-                              <div className="bg-yellow-900/30 border border-yellow-500/30 p-3 rounded-xl">
-                                <p className="text-xs text-yellow-200">🤖 {insights.advertencia}</p>
+                              <div className="dark:bg-yellow-900/30 bg-yellow-50 border dark:border-yellow-500/30 border-yellow-300 p-3 rounded-xl">
+                                <p className="text-xs dark:text-yellow-200 text-yellow-800">🤖 {insights.advertencia}</p>
                               </div>
                             </motion.div>
                           )}
@@ -752,7 +752,7 @@ export const CareerResources = () => {
                           {currentTab === "recursos" && (
                             <div className="space-y-3">
                               {recursosExtra.length === 0 ? (
-                                <p className="text-sm text-gray-400 italic text-center py-6">No hay recursos extra para esta carrera aún.</p>
+                                <p className="text-sm dark:text-gray-400 text-gray-500 italic text-center py-6">No hay recursos extra para esta carrera aún.</p>
                               ) : (
                                 recursosExtra.map((r, i) => (
                                   <motion.a
@@ -760,7 +760,7 @@ export const CareerResources = () => {
                                     href={r.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block bg-gray-800/50 p-4 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all"
+                                    className="block dark:bg-gray-800/50 bg-gray-50 p-4 rounded-xl border dark:border-emerald-500/20 border-emerald-300/40 dark:hover:border-emerald-500/40 hover:border-emerald-400 transition-all"
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.3, delay: i * 0.05 }}
@@ -769,10 +769,10 @@ export const CareerResources = () => {
                                     <div className="flex items-center gap-3">
                                       <span className="text-3xl">{r.icono}</span>
                                       <div className="flex-1">
-                                        <h4 className="font-bold text-emerald-300 mb-1">{r.titulo}</h4>
-                                        <p className="text-xs text-gray-400">{r.descripcion}</p>
+                                        <h4 className="font-bold dark:text-emerald-300 text-emerald-700 mb-1">{r.titulo}</h4>
+                                        <p className="text-xs dark:text-gray-400 text-gray-500">{r.descripcion}</p>
                                       </div>
-                                      <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <svg className="w-5 h-5 dark:text-emerald-400 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                       </svg>
                                     </div>
@@ -802,7 +802,7 @@ export const CareerResources = () => {
           >
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
               <span className="text-4xl">🧠</span>
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400  bg-black bg-clip-text text-transparent">
                 Recursos para tus aptitudes
               </span>
             </h2>
@@ -817,26 +817,26 @@ export const CareerResources = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl border border-purple-500/30 shadow-lg overflow-hidden"
+                    className="bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-2xl border dark:border-purple-500/30 border-purple-400/50 shadow-lg overflow-hidden"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(168,85,247,0.3)" }}
+                    
                   >
-                    <div className="p-5 border-b border-purple-500/20">
+                    <div className="p-5 border-b dark:border-purple-500/20 border-purple-300/40">
                       <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-xl font-bold text-purple-300">{a.aptitud}</h3>
-                        <span className="text-sm bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-semibold border border-purple-500/30 ml-2">
+                        <h3 className="text-xl font-bold dark:text-purple-300 text-black">{a.aptitud}</h3>
+                        <span className="text-sm dark:bg-purple-500/20 bg-purple-100 dark:text-purple-300 text-black px-3 py-1 rounded-full font-semibold border dark:border-purple-500/30 border-purple-400 ml-2">
                           {a.porcentaje}
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="flex gap-2 text-xs text-gray-400">
+                        <div className="flex gap-2 text-sm font-bold dark:text-gray-400 text-black ">
                           <span>🔗 {recursosExtra.length}</span>
                         </div>
                         <motion.button
                           onClick={() => toggleCard(cardId)}
-                          className="text-pink-400 hover:text-pink-300 font-medium text-sm flex items-center gap-1 transition-colors"
+                          className="dark:text-pink-400 text-black  dark:hover:text-pink-300 hover:text-pink-500 font-bold text-sm flex items-center gap-1 transition-colors"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -872,7 +872,7 @@ export const CareerResources = () => {
                                   href={r.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="block bg-gray-800/50 p-3 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all"
+                                  className="block dark:bg-gray-800/50 bg-gray-50 p-3 rounded-xl border dark:border-emerald-500/20 border-emerald-300/40 dark:hover:border-emerald-500/40 hover:border-emerald-400 transition-all"
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
                                   whileHover={{ scale: 1.01 }}
@@ -880,8 +880,8 @@ export const CareerResources = () => {
                                   <div className="flex items-center gap-2">
                                     <span className="text-2xl">{r.icono}</span>
                                     <div className="flex-1">
-                                      <h4 className="font-bold text-emerald-300 text-sm">{r.titulo}</h4>
-                                      <p className="text-xs text-gray-400">{r.descripcion}</p>
+                                      <h4 className="font-bold dark:text-emerald-300 text-emerald-700 text-sm">{r.titulo}</h4>
+                                      <p className="text-xs dark:text-gray-400 text-gray-500">{r.descripcion}</p>
                                     </div>
                                   </div>
                                 </motion.a>
@@ -905,12 +905,12 @@ export const CareerResources = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
           >
-            <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-2xl p-12 border border-cyan-500/30">
-              <svg className="mx-auto h-16 w-16 text-cyan-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="dark:bg-gradient-to-r dark:from-gray-800/50 dark:to-gray-900/50 bg-white rounded-2xl p-12 border dark:border-cyan-500/30 border-cyan-400/50 shadow-lg">
+              <svg className="mx-auto h-16 w-16 dark:text-cyan-400 text-cyan-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              <p className="text-cyan-300 font-bold text-xl mb-2">Aún no tienes recursos disponibles</p>
-              <p className="text-gray-400">Completa los tests para obtener recomendaciones personalizadas</p>
+              <p className="dark:text-cyan-300 text-cyan-700 font-bold text-xl mb-2">Aún no tienes recursos disponibles</p>
+              <p className="dark:text-gray-400 text-gray-600">Completa los tests para obtener recomendaciones personalizadas</p>
             </div>
           </motion.div>
         )}

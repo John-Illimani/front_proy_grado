@@ -59,7 +59,7 @@ export const TestRazonamientoEspacial = () => {
     <div className="h-full flex justify-center relative overflow-hidden">
       {/* Fondo animado */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -75,7 +75,7 @@ export const TestRazonamientoEspacial = () => {
             <Form>
               {/* Descripción */}
               <motion.div
-                className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                className="mb-8 bg-gradient-to-r from-white to-white text-black dark:from-black/50 dark:to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
@@ -91,19 +91,19 @@ export const TestRazonamientoEspacial = () => {
 
               {/* Temporizador */}
               <motion.div className="flex justify-center mb-8">
-                <div className="text-white text-2xl font-bold bg-black/40 px-8 py-4 rounded-full border border-teal-400/50">
+                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
-              <div className="max-h-[800px] overflow-y-auto pr-2 scrollbar-hide">
+              <div className="max-h-[800px] overflow-y-auto px-6 scrollbar-hide">
                 {preguntas.map((pregunta) => (
                   <div
                     key={pregunta.id}
-                    className="mb-6 p-6 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                    className="mb-6 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                   >
-                    <p className="text-white font-semibold text-lg mb-4">
+                    <p className="dark:text-white text-black font-semibold text-lg mb-4">
                       {pregunta.id}.- {pregunta.texto}
                     </p>
 
@@ -123,10 +123,10 @@ export const TestRazonamientoEspacial = () => {
                       {pregunta.opciones.map((opcion, idx) => (
                         <label
                           key={idx}
-                          className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all ${
+                          className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all hover:bg-[color:yellow] ${
                             values[pregunta.id] === opcion
-                              ? "bg-teal-400/20 border-2 border-teal-400"
-                              : "bg-gray-800/50 border border-gray-600"
+                              ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 "
+                              : "dark:bg-gray-800/50 dark:border hover:border-teal-400/50 border-[5px]"
                           }`}
                           onClick={() => setFieldValue(pregunta.id, opcion)}
                         >
@@ -137,7 +137,7 @@ export const TestRazonamientoEspacial = () => {
                             checked={values[pregunta.id] === opcion}
                             className="mr-3 h-5 w-5 text-teal-400"
                           />
-                          <span className="text-white">
+                          <span className=" dark:text-white text-black font-bold">
                             {String.fromCharCode(97 + idx)}) {opcion}
                           </span>
                         </label>
@@ -197,10 +197,10 @@ export const TestRazonamientoEspacial = () => {
                   whileTap={{ scale: 0.95 }}
                   disabled={isSubmitting}
                   onClick={() => Cambios()}
-                  className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg border-2 ${
+                  className={`hover:scale-95 py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  duration-400  transition-all disabled:opacity-50 hover:shadow-2xl ${
                     isSubmitting
-                      ? "bg-gray-500 text-gray-200 border-gray-500 cursor-not-allowed"
-                      : "bg-teal-400 text-black border-teal-400"
+                      ? "dark:bg-gray-500 dark:text-gray-200 border-gray-500 cursor-not-allowed"
+                      : "dark:bg-teal-400 dark:text-blackborder-teal-400"
                   }`}
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}

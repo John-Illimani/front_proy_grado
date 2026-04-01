@@ -214,7 +214,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                     
                     onClick={() => Cambios()}
                     whileTap={{ scale: 0.95 }}
-                    className="hover:shadow-2xl py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  transition-all duration-300 disabled:opacity-50 "
+                    className=" hover:scale-95 hover:shadow-2xl py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  transition-all duration-300 disabled:opacity-50 "
                   >
                     {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                   </motion.button>

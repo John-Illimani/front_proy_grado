@@ -119,7 +119,7 @@ export const Test_colmil = () => {
     <div className="relative text-white overflow-hidden h-full">
       {/* Fondo */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -156,11 +156,11 @@ export const Test_colmil = () => {
                             setCurrentPage(1);
                           }}
                           className={`
-    px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-semibold transition-all duration-300
+    px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-bold transition-all duration-300 dark:border-none border-2 border-black shadow-lg dark:shadow-none
     ${
       currentSection === section
-        ? "bg-cyan-600 text-white shadow-lg"
-        : "bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 hover:scale-105 active:scale-95"
+        ? "dark:bg-cyan-600 dark:text-white shadow-lg bg-[#077d9b] text-white  "
+        : "dark:bg-gray-700/50 dark:text-gray-300 dark:hover:bg-gray-600/50 bg-white text-black hover:scale-105 active:scale-95"
     }
   `}
                         >
@@ -175,9 +175,9 @@ export const Test_colmil = () => {
                   </div>
 
                   {/* Barra de progreso */}
-                  <div className="mt-6 bg-gray-700/40 rounded-full h-3 overflow-hidden">
+                  <div className="mt-6 dark:bg-gray-700/40 bg-yellow-300 rounded-full h-3 overflow-hidden">
                     <motion.div
-                      className="bg-gradient-to-r from-cyan-400 to-green-400 h-3"
+                      className="bg-gradient-to-r dark:dark:from-cyan-400 dark:to-green-400 bg-red-700 h-3"
                       initial={{ width: 0 }}
                       animate={{
                         width: `${(currentPage / totalPages) * 100}%`,
@@ -185,7 +185,7 @@ export const Test_colmil = () => {
                       transition={{ duration: 0.5 }}
                     ></motion.div>
                   </div>
-                  <p className="mt-2 text-sm text-gray-400">
+                  <p className="mt-2 text-sm dark:text-gray-400 text-black font-bold">
                     Página {currentPage} de {totalPages} -{" "}
                     {currentSection === "ipde"
                       ? "Cuestionario IPDE"
@@ -196,7 +196,7 @@ export const Test_colmil = () => {
                 </motion.div>
 
                 {/* Preguntas */}
-                <div className="space-y-4 md:space-y-6 max-h-[45vh] overflow-y-auto pr-2 scrollbar-hide">
+                <div className="space-y-4 md:space-y-6 max-h-[45vh] overflow-y-auto px-2 scrollbar-hide">
                   {currentQuestions.map((question, index) => {
                     const sectionOffset =
                       currentSection === "ipde"
@@ -213,13 +213,13 @@ export const Test_colmil = () => {
                     return (
                       <motion.div
                         key={questionId}
-                        className="p-3 md:p-5  bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl border border-cyan-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-400/40"
+                        className="p-3 md:p-5  bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-2xl border border-cyan-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-400/40"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.05 }}
                       >
-                        <p className="mb-4 text-lg font-medium text-cyan-300">
-                          <span className="text-green-400 font-bold">
+                        <p className="mb-4 text-lg font-medium dark:text-cyan-300 text-black">
+                          <span className="dark:text-green-400 text-blue-600 font-bold">
                             {indexOfFirstQuestion + index + 1}.
                           </span>{" "}
                           {currentSection === "personality"
@@ -241,15 +241,11 @@ export const Test_colmil = () => {
                                     className="hidden peer"
                                   />
                                   <motion.span
-                                    whileHover={{
-                                      scale: 1.05,
-                                      boxShadow:
-                                        "0 0 15px rgba(20,184,166,0.5)",
-                                    }}
+                                  
                                     whileTap={{ scale: 0.95 }}
-                                    className={`px-4 py-2 rounded-lg bg-gray-700/50 peer-checked:bg-cyan-500/80 peer-checked:text-white text-cyan-400 font-semibold transition-all duration-300 ${
+                                    className={`dark:border-none border-2 peer-checked:bg-lime-400 border-black text-black px-4 py-2 rounded-lg dark:bg-gray-700/50 dark:peer-checked:bg-cyan-500/80 dark:peer-checked:text-white dark:text-cyan-400 font-semibold transition-all duration-300 ${
                                       values[fieldName] === option
-                                        ? "bg-cyan-500/80 text-white"
+                                        ? "dark:bg-cyan-500/80 dark:text-white"
                                         : ""
                                     }`}
                                     onClick={() =>
@@ -278,18 +274,18 @@ export const Test_colmil = () => {
                                     className="hidden peer"
                                   />
                                   <motion.span
-                                    whileHover={{
-                                      scale: 1.05,
-                                      boxShadow:
-                                        option === "SI"
-                                          ? "0 0 15px rgba(20,184,166,0.5)"
-                                          : "0 0 15px rgba(239,68,68,0.5)",
-                                    }}
+                                    // whileHover={{
+                                    //   scale: 1.05,
+                                    //   boxShadow:
+                                    //     option === "SI"
+                                    //       ? "0 0 15px rgba(20,184,166,0.5)"
+                                    //       : "0 0 15px rgba(239,68,68,0.5)",
+                                    // }}
                                     whileTap={{ scale: 0.95 }}
-                                    className={`text-sm md:text-base px-2 py-1 md:px-4 md:py-2 rounded-lg bg-gray-700/50 ${
+                                    className={`text-sm md:text-base px-2 py-1 md:px-4 md:py-2 rounded-lg dark:bg-gray-700/50 dark:border-none border-2 border-black ${
                                       option === "SI"
-                                        ? "peer-checked:bg-green-500/80 peer-checked:text-white text-green-400"
-                                        : "peer-checked:bg-red-500/80 peer-checked:text-white text-red-400"
+                                        ? "dark:peer-checked:bg-green-500/80 dark:peer-checked:text-white dark:text-green-400 text-black"
+                                        : "dark:peer-checked:bg-red-500/80 dark:peer-checked:text-white dark:text-red-400 text-black"
                                     } font-semibold transition-all duration-300 ${
                                       values[fieldName] ===
                                       (currentSection === "ipde"
@@ -298,8 +294,8 @@ export const Test_colmil = () => {
                                           : "F"
                                         : option)
                                         ? option === "SI"
-                                          ? "bg-green-500/80 text-white"
-                                          : "bg-red-500/80 text-white"
+                                          ? "dark:bg-green-500/80 dark:text-white bg-lime-400"
+                                          : "dark:bg-red-500/80 dark:text-white bg-lime-400"
                                         : ""
                                     }`}
                                     onClick={() =>
@@ -366,8 +362,8 @@ export const Test_colmil = () => {
                     whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
                     className={`px-6 py-2 rounded-xl font-bold transition-all duration-300 ${
                       currentPage === 1
-                        ? "bg-gray-600/50 text-gray-400 cursor-not-allowed"
-                        : "bg-gradient-to-r from-cyan-500 to-green-500 hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg"
+                        ? "opacity-0"
+                        : "bg-gradient-to-br dark:from-cyan-500 dark:to-green-500 from-lime-800 to-lime-400  hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg"
                     }`}
                   >
                     Anterior
@@ -377,7 +373,7 @@ export const Test_colmil = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-green-400/40 ${
+                      className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  dark:from-green-500 dark:to-emerald-600 text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-green-400/40 ${
                         isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                       onClick={() => Cambios()}
@@ -393,7 +389,7 @@ export const Test_colmil = () => {
                         boxShadow: "0 0 15px rgba(6,182,212,0.5)",
                       }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg transition-all duration-300"
+                      className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r dark:from-cyan-500 dark:to-blue-600 from-lime-400 to-lime-800 hover:opacity-90 hover:shadow-cyan-400/40 text-white shadow-lg transition-all duration-300"
                     >
                       Siguiente
                     </motion.button>

@@ -135,7 +135,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                               boxShadow: "0 0 15px rgba(20,184,166,0.5)",
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className={`px-4 py-2 rounded-lg dark:bg-gray-700/50 text-black border-2  dark:peer-checked:bg-green-500/80 peer-checked:bg-lime-400/90  dark:peer-checked:text-white peer-checked:text-black dark:text-green-400 font-semibold transition-all duration-300 ${
+                            className={` px-4 py-2 rounded-lg dark:shadow-none dark:bg-gray-700/50 text-black dark:border border-2  dark:peer-checked:bg-green-500/80 peer-checked:bg-lime-400/90  dark:peer-checked:text-white peer-checked:text-black dark:text-green-400 font-semibold transition-all duration-300 ${
                               values[fieldName] === "SI"
                                 ? "dark:bg-green-500/80 dark:text-white "
                                 : ""
@@ -158,7 +158,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                               boxShadow: "0 0 15px rgba(239,68,68,0.5)",
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className={`px-4 py-2 rounded-lg dark:bg-gray-700/50 text-black border-2 dark:peer-checked:bg-red-500/80 dark:peer-checked:text-white peer-checked:bg-[color:yellow] peer-checked:text-black dark:text-red-400 font-semibold transition-all duration-300 ${
+                            className={`dark:border px-4 py-2 rounded-lg dark:bg-gray-700/50 text-black border-2 dark:peer-checked:bg-red-500/80 dark:peer-checked:text-white peer-checked:bg-[color:yellow] peer-checked:text-black dark:text-red-400 font-semibold transition-all duration-300 ${
                               values[fieldName] === "NO"
                                 ? "bg-red-500/80 text-white"
                                 : ""

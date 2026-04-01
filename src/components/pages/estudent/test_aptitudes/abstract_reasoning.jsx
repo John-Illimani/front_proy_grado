@@ -167,7 +167,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                           <span className={` font-bold  ${
                             values[pregunta.id] === opcion
                               ? " text-white "
-                              : "text-black"
+                              : "text-black dark:text-white"
                           }`}>
                             {String.fromCharCode(97 + idx)}) {opcion}
                           </span>
@@ -228,10 +228,10 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                  
                   onClick={() => Cambios()}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-8 py-4 rounded-full font-bold text-lg shadow-lg border-2  text-white ${
+                  className={`hover:scale-95 px-8 py-4 rounded-full font-bold text-lg shadow-lg border-2  text-white ${
                     isSubmitting
-                      ? "bg-gray-500 text-gray-200 border-gray-500 cursor-not-allowed"
-                      : "dark:bg-teal-400 dark:text-black border-teal-400 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] hover:shadow-2xl transition-all duration-300"
+                      ? "dark:bg-gray-500 dark:text-gray-200 dark:border-gray-500 cursor-not-allowed"
+                      : "dark:from-teal-400 dark:to-teal-400 dark:text-black border-teal-400 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] hover:shadow-2xl transition-all duration-300"
                   }`}
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}

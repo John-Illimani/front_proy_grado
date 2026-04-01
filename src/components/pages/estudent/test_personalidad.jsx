@@ -69,7 +69,7 @@ export const Test_personalidad = () => {
     <div className="relative text-white min-h-screen overflow-hidden h-full">
       {/* Fondo pulsante */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center "
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa] "
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -88,9 +88,9 @@ export const Test_personalidad = () => {
                 transition={{ duration: 0.8 }}
               >
                 {/* Barra de progreso */}
-                <div className="mt-6 bg-gray-700/40 rounded-full h-3 overflow-hidden">
+                <div className="mt-6 dark:bg-gray-700/40 bg-yellow-300 rounded-full h-3 overflow-hidden">
                   <motion.div
-                    className="bg-gradient-to-r from-purple-400 to-pink-400 h-3"
+                    className="bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 from-red-700 to-red-700 h-3"
                     initial={{ width: 0 }}
                     animate={{
                       width: `${(currentPage / totalPages) * 100}%`,
@@ -98,7 +98,7 @@ export const Test_personalidad = () => {
                     transition={{ duration: 0.5 }}
                   ></motion.div>
                 </div>
-                <p className="mt-2 text-sm text-gray-400">
+                <p className="mt-2 text-sm dark:ext-gray-400 text-black font-bold ">
                   Página {currentPage} de {totalPages}
                 </p>
               </motion.div>
@@ -112,20 +112,20 @@ export const Test_personalidad = () => {
                   return (
                     <motion.div
                       key={questionId}
-                      className="p-5  bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl border border-purple-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-400/40"
+                      className="p-5  bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-2xl border border-purple-500/30 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-400/40"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.05 }}
                     >
-                      <p className="mb-4 text-lg font-medium text-purple-300">
-                        <span className="text-pink-400 font-bold">
+                      <p className="mb-4 text-lg font-medium dark:text-purple-300 text-black">
+                        <span className="dark:text-pink-400 text-blue-600 font-bold">
                           {questionId}.
                         </span>{" "}
                         {question}
                       </p>
 
                       <div className="flex flex-col sm:flex-row items-center justify-between">
-                        <span className="text-xs text-gray-400 mb-2 sm:mb-0">
+                        <span className=" dark:text-gray-400 text-black mb-2 sm:mb-0">
                           Muy en desacuerdo
                         </span>
                         <div className="flex space-x-2">
@@ -147,9 +147,9 @@ export const Test_personalidad = () => {
                                     "0 0 15px rgba(192, 132, 252, 0.5)",
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                className={`h-10 w-10 flex items-center justify-center rounded-full bg-gray-700/50 peer-checked:bg-purple-500/80 peer-checked:text-white text-purple-400 font-semibold transition-all duration-300 ${
+                                className={`h-10 w-10 flex items-center dark:border-none border-2 border-black text-black peer-checked:bg-lime-400 justify-center rounded-full dark:bg-gray-700/50 dark:peer-checked:bg-purple-500/80 dark:peer-checked:text-white dark:text-purple-400 font-semibold transition-all duration-300 ${
                                   values[fieldName] === String(value)
-                                    ? "bg-purple-500/80 text-white"
+                                    ? "dark:bg-purple-500/80 dark:text-white "
                                     : ""
                                 }`}
                                 onClick={() =>
@@ -161,7 +161,7 @@ export const Test_personalidad = () => {
                             </label>
                           ))}
                         </div>
-                        <span className="text-xs text-gray-400 mt-2 sm:mt-0">
+                        <span className=" dark:text-gray-400 text-black mt-2 sm:mt-0">
                           Muy de acuerdo
                         </span>
                       </div>
@@ -207,8 +207,8 @@ export const Test_personalidad = () => {
                   whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
                   className={`px-6 py-2 rounded-xl font-bold transition-all duration-300 ${
                     currentPage === 1
-                      ? "bg-gray-600/50 text-gray-400 cursor-not-allowed"
-                      : "bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 hover:shadow-purple-400/40 text-white shadow-lg"
+                      ? "opacity-0"
+                      : "bg-gradient-to-r dark:from-purple-500 dark:to-pink-500 from-lime-800 to-lime-400  hover:opacity-90 hover:shadow-purple-400/40 text-white shadow-lg "
                   }`}
                 >
                   Anterior
@@ -224,7 +224,7 @@ export const Test_personalidad = () => {
                       Cambios();
                     }}
                     disabled={isSubmitting}
-                    className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-pink-400/40 ${
+                    className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r dark:from-pink-500 dark:to-rose-600 from-[#053F5C] to-[#0c7fb8] text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-pink-400/40 ${
                       isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >
@@ -239,7 +239,7 @@ export const Test_personalidad = () => {
                       boxShadow: "0 0 15px rgba(139, 92, 246, 0.5)",
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-90 hover:shadow-purple-400/40 text-white shadow-lg transition-all duration-300"
+                    className="px-6 py-2 rounded-xl font-bold bg-gradient-to-r dark:from-purple-500 dark:to-indigo-600 from-lime-400 to-lime-800 hover:opacity-90 hover:shadow-purple-400/40 text-white shadow-lg transition-all duration-300"
                   >
                     Siguiente
                   </motion.button>

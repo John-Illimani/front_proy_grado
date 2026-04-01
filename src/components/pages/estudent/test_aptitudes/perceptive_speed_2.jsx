@@ -73,7 +73,7 @@ export const TestRapidezPerceptivaParte2 = () => {
         <Form>
           <div className="h-screen flex justify-center relative overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+              className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 15, repeat: Infinity }}
             />
@@ -87,28 +87,28 @@ export const TestRapidezPerceptivaParte2 = () => {
 
               {/* Instrucciones */}
               <motion.div
-                className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                className="mb-8 bg-gradient-to-r from-white to-white dark:from-black/50 dark: dark:to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h3 className="text-teal-400 font-bold text-xl mb-4">
+                <h3 className="dark:text-teal-400  text-black font-bold text-xl mb-4">
                   INSTRUCCIONES:
                 </h3>
-                <ul className="list-disc list-inside space-y-2">
+                <ul className="list-disc list-inside space-y-2 dark:text-teal-400  text-black">
                   <li>
                     Cada ejercicio muestra cinco grupos de letras y/o números.
                   </li>
                   <li>
                     Solo uno de los grupos está{" "}
-                    <span className="text-teal-300 font-semibold">
+                    <span className="dark:text-teal-300  text-black font-semibold">
                       subrayado
                     </span>
                     .
                   </li>
                   <li>
                     Debe seleccionar únicamente el grupo que sea{" "}
-                    <span className="text-teal-300 font-semibold">
+                    <span className="dark:text-teal-300  text-black font-semibold">
                       exactamente igual
                     </span>{" "}
                     al subrayado.
@@ -126,10 +126,10 @@ export const TestRapidezPerceptivaParte2 = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <div
-                  className={`text-white text-2xl font-bold px-8 py-4 rounded-full border ${
+                  className={`dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50  ${
                     timeLeft < 60
-                      ? "bg-red-600/40 border-red-400"
-                      : "bg-black/40 border-teal-400/50"
+                      ? "dark:bg-red-600/40 border-red-400"
+                      : "dark:bg-black/40 dark:border-teal-400/50"
                   }`}
                 >
                   Tiempo: {formatTime(timeLeft)}
@@ -146,27 +146,27 @@ export const TestRapidezPerceptivaParte2 = () => {
                 {preguntas.map((pregunta) => (
                   <motion.div
                     key={pregunta.id}
-                    className="p-4 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-2xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                    className="p-4 bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-2xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-teal-400 font-bold text-lg">
+                        <span className="dark:text-teal-400 text-black font-bold text-lg">
                           {pregunta.id}.
                         </span>
-                        <span className="text-gray-400 text-sm">
+                        <span className="dark:text-gray-400 text-black text-sm">
                           Grupo subrayado
                         </span>
                       </div>
 
-                      <div className="bg-gray-800/50 p-3 rounded-lg border border-gray-600 text-center font-mono">
+                      <div className="dark:text-white text-black text-xl dark:bg-gray-800/50 p-3 rounded-lg border border-gray-600 text-center font-bold">
                         {pregunta.opciones.map((opcion, index) => (
                           <span
                             key={index}
                             className={`mx-1 ${
                               opcion === pregunta.respuesta
-                                ? "underline decoration-teal-400 decoration-2 font-bold"
+                                ? "underline dark:decoration-teal-400 decoration-[5px] font-bold"
                                 : ""
                             }`}
                           >
@@ -187,12 +187,12 @@ export const TestRapidezPerceptivaParte2 = () => {
                         return (
                           <motion.div
                             key={index}
-                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all ${
-                              selected
-                                ? "bg-teal-400/20 border-2 border-teal-400"
-                                : "bg-gray-800/30 border border-gray-600"
+                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all text-black ${
+                               selected
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 bg-[yellow]"
+                                : "dark:bg-gray-800/30 dark:border border-[5px] dark:border-gray-600  "
                             }`}
-                            whileHover={{ scale: 1.05 }}
+                            
                             whileTap={{ scale: 0.95 }}
                             onClick={() => {
                               if (isCorrect) {
@@ -207,7 +207,7 @@ export const TestRapidezPerceptivaParte2 = () => {
                               }
                             }}
                           >
-                            <span className="text-white font-mono text-sm">
+                            <span className="dark:text-white  font-bold text-lg">
                               {String.fromCharCode(65 + index)}) {opcion}
                             </span>
                           </motion.div>
@@ -227,19 +227,15 @@ export const TestRapidezPerceptivaParte2 = () => {
               >
                 <motion.button
                   type="submit"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#14B8A6",
-                    color: "#000",
-                  }}
+                  
                   whileTap={{ scale: 0.95 }}
                   onClick={() => Cambios()}
-                  className="px-8 py-4 rounded-full bg-teal-400 text-black font-bold text-lg shadow-lg border-2 border-teal-400"
+                  className="hover:scale-95 px-8 py-4 rounded-full dark:from-teal-400 dark:to-teal-400 text-white dark:text-black font-bold text-lg shadow-lg border-2 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  duration-400  transition-all"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Enviando..." : "Finalizar Parte 2"}
                 </motion.button>
-                <p className="text-gray-400 text-sm mt-2">
+                <p className="dark:text-gray-400 text-black text-lg mt-2 font-bold">
                   {
                     Object.keys(values).filter((key) => values[key] !== null)
                       .length

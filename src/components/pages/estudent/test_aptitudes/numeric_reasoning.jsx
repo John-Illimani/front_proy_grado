@@ -118,8 +118,8 @@ export const TestRazonamientoNumerico = () => {
                           key={idx}
                           className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300  hover:bg-[color:yellow] dark:hover:bg-gray-600  ${
                             values[pregunta.id] === opcion
-                              ? "dark:bg-teal-400/20 border-2 dark:border-teal-400  "
-                              : "dark:bg-gray-800/50  dark:border-gray-600 hover:border-teal-400/50 border-[5px] "
+                              ? "dark:bg-teal-400/20  border-2 dark:border-teal-400  "
+                              : "dark:bg-gray-800/50  dark:border dark:border-gray-600 hover:border-teal-400/50 border-[5px] "
                           }`}
                           onClick={() => setFieldValue(pregunta.id, opcion)}
                         >
@@ -186,7 +186,7 @@ export const TestRazonamientoNumerico = () => {
                   whileTap={{ scale: 0.95 }}
                   disabled={isSubmitting}
                   onClick={() => Cambios()}
-                  className={`py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  duration-400  transition-all disabled:opacity-50 hover:shadow-2xl ${
+                  className={`hover:scale-95 py-2 px-4 md:px-8 md:py-4 rounded-full dark:from-teal-400 dark:to-teal-400  dark:text-black  font-bold text-base md:text-lg shadow-lg border-2  dark:border-teal-400 border-cyan-800 bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  duration-400  transition-all disabled:opacity-50 hover:shadow-2xl ${
                     isSubmitting
                       ? "dark:bg-gray-500 dark:text-gray-200 border-gray-500 cursor-not-allowed"
                       : "dark:bg-teal-400 dark:text-blackborder-teal-400"

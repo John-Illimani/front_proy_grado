@@ -72,7 +72,7 @@ export const TestOrtografia = () => {
     <div className="h-full flex items-center justify-center relative overflow-hidden">
       {/* Fondo animado */}
       <motion.div
-        className="absolute inset-0 bg-[url('/fondo_marcelo.jpg')] bg-cover bg-center"
+        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -94,7 +94,7 @@ export const TestOrtografia = () => {
 
               {/* Introducción */}
               <motion.div
-                className="mb-8 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 text-gray-200 leading-relaxed"
+                className="from-white to-white text-black mb-8 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -108,7 +108,7 @@ export const TestOrtografia = () => {
                   Presta atención a detalles como: haber vs a ver, sino vs si
                   no, uso de B/V, G/J, H, y las reglas de acentuación.
                 </p>
-                <p className="text-teal-300 font-semibold">
+                <p className="dark:text-teal-300 text-black font-semibold">
                   💡 Consejo: Lee cada opción cuidadosamente y considera el
                   contexto de la frase.
                 </p>
@@ -121,14 +121,14 @@ export const TestOrtografia = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="text-white text-2xl font-bold bg-black/40 px-8 py-4 rounded-full border border-teal-400/50">
+                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50 ">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[600px] overflow-y-auto pr-2 scrollbar-hide"
+                className="max-h-[600px] overflow-y-auto px-6 scrollbar-hide "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -142,12 +142,12 @@ export const TestOrtografia = () => {
                   return (
                     <motion.div
                       key={pregunta.id}
-                      className="mb-6 p-6 bg-gradient-to-r from-black/50 to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                      className="mb-6 p-6 bg-gradient-to-r from-white dark:from-black/50 dark:to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                       whileHover={{ scale: 1.01 }}
                       transition={{ duration: 0.3 }}
                     >
                       <div className="mb-4">
-                        <p className="text-white font-semibold text-lg mb-4">
+                        <p className="dark:text-white font-semibold  text-black text-lg mb-4">
                           {pregunta.id}. {pregunta.texto}
                         </p>
                       </div>
@@ -157,15 +157,12 @@ export const TestOrtografia = () => {
                         {pregunta.opciones.map((opcion, index) => (
                           <motion.label
                             key={index}
-                            className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all ${
+                            className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300  hover:bg-[color:yellow] dark:hover:bg-gray-600 ${
                               values[fieldName] === index
-                                ? "bg-teal-400/20 border-2 border-teal-400"
-                                : "bg-gray-800/50 border border-gray-600"
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400"
+                                : "dark:bg-gray-800/50  dark:border dark:border-gray-600 hover:border-teal-400/50 border-[5px] "
                             }`}
-                            whileHover={{
-                              scale: 1.02,
-                              backgroundColor: "rgba(20, 184, 166, 0.2)",
-                            }}
+                            
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setFieldValue(fieldName, index)}
                           >
@@ -176,7 +173,7 @@ export const TestOrtografia = () => {
                               checked={values[fieldName] === index}
                               className="hidden"
                             />
-                            <span className="text-white">
+                            <span className="dark:text-white text-black font-bold">
                               {String.fromCharCode(97 + index)}) {opcion}
                             </span>
                           </motion.label>
@@ -217,14 +214,10 @@ export const TestOrtografia = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#14B8A6",
-                    color: "#000",
-                  }}
+                  
                   onClick={() => Cambios()}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full bg-teal-400 text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="hover:scale-95 px-8 py-4 rounded-full dark:from-teal-400 dark:to-teal-400 dark:text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  duration-400  transition-all "
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                 </motion.button>

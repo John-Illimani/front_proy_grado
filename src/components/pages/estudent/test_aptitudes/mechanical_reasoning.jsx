@@ -154,8 +154,8 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                               key={index}
                               className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-40 text-center  min-w-6 ${
                                 isSelected
-                                  ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white"
-                                  : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px]  md:h-24 "
+                                  ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white transition-all duration-500"
+                                  : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px]  md:h-24  "
                               }`}
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
@@ -171,7 +171,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                               <span className={` font-bold mt-auto mb-auto  ${
                             values[pregunta.id] === opcion
                               ? " text-white "
-                              : "text-black"
+                              : "text-black dark:text-white"
                           }`}>
                                 {opcion}
                               </span>
@@ -241,7 +241,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                   
                   onClick={() => Cambios()}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full bg-teal-400 dark:text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] text-white hover:shadow-2xl transition-all duration-300"
+                  className=" hover:scale-95 px-8 py-4 rounded-full dark:from-teal-400 dark:to-teal-400 dark:text-black font-bold text-lg shadow-lg border-2 border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#053F5C] to-[#0c7fb8] text-white hover:shadow-2xl transition-all duration-300"
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                 </motion.button>
