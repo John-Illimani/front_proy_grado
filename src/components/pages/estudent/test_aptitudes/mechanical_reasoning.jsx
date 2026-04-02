@@ -128,7 +128,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                         </p>
 
                         {pregunta.imagen && (
-                          <div className="flex justify-center mb-4 md:p-4 dark:bg-gray-800/30 bg-[#99CDD8] rounded-2xl">
+                          <div className="flex justify-center mb-4 md:p-4  rounded-2xl">
                             <div className="text-center">
                               <div className=" p-4 rounded-xl inline-block ">
                                 <img
