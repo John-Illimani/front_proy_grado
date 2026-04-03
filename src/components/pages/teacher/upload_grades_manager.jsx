@@ -80,41 +80,61 @@ export const TeacherGradesManager = () => {
 
   // ─── Guardar nota manual ──────────────────────────────────────────────────────
   const handleSaveGrade = async (student, value) => {
-    if (!student || value === "" || isNaN(value)) return;
+  if (!student || value === "" || isNaN(value)) return;
 
-    setSavingId(student.id);
-    try {
-      const payload = {
+  setSavingId(student.id);
+
+  try {
+    const gradeExist = grades.find(
+      (g) =>
+        g.estudiante === student.id &&
+        g.materia === selectedCourse.id
+    );
+
+    let payload;
+
+    if (gradeExist) {
+      // ✅ Mantener notas anteriores
+      payload = {
         estudiante: student.id,
         materia: selectedCourse.id,
         profesor: profesorId,
-        notas1: 0,
-        notas2: 0,
-        notas3: 0,
+        notas1: gradeExist.notas1 ?? 0,
+        notas2: gradeExist.notas2 ?? 0,
+        notas3: gradeExist.notas3 ?? 0,
         [trimestre]: parseInt(value),
+      };
+
+      const res = await updateGrade(gradeExist.id, payload);
+
+      setGrades((prev) =>
+        prev.map((g) =>
+          g.id === gradeExist.id ? { ...g, ...res.data } : g
+        )
+      );
+
+    } else {
+      // ✅ Primera vez
+      payload = {
+        estudiante: student.id,
+        materia: selectedCourse.id,
+        profesor: profesorId,
+        notas1: trimestre === "notas1" ? parseInt(value) : 0,
+        notas2: trimestre === "notas2" ? parseInt(value) : 0,
+        notas3: trimestre === "notas3" ? parseInt(value) : 0,
       };
 
       const res = await addGrade(payload);
 
-      setGrades((prev) => {
-        const existe = prev.find(
-          (g) => g.estudiante === student.id && g.materia === selectedCourse.id
-        );
-        if (existe) {
-          return prev.map((g) =>
-            g.estudiante === student.id && g.materia === selectedCourse.id
-              ? { ...g, ...res.data }
-              : g
-          );
-        }
-        return [...prev, res.data];
-      });
-    } catch (err) {
-      console.error("❌ Error guardando nota:", err.response?.data || err);
-    } finally {
-      setSavingId(null);
+      setGrades((prev) => [...prev, res.data]);
     }
-  };
+
+  } catch (err) {
+    console.error("❌ Error guardando nota:", err.response?.data || err);
+  } finally {
+    setSavingId(null);
+  }
+};
 
 // ─── NORMALIZAR ─────────────────────────────
 const normalizar = (t) =>
