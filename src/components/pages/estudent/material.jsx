@@ -434,7 +434,7 @@ export const CareerResources = () => {
           setCareers(parsed);
         }
       } catch {
-        setError("Error al obtener las carreras.");
+        setError("Error al obtener las carreras, Por favor realiza los Test o pide a tu docente que suba tus notas al sistema.");
       }
     })();
   }, [studentId]);
@@ -466,11 +466,7 @@ export const CareerResources = () => {
   if (loading) {
     return (
       <div className="relative text-white overflow-hidden h-screen">
-        <motion.div
-          className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
+        
         <div className="absolute inset-0 dark:bg-black/60" />
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div
@@ -490,11 +486,7 @@ export const CareerResources = () => {
   if (error) {
     return (
       <div className="relative text-white overflow-hidden h-screen">
-        <motion.div
-          className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
+        
         <div className="absolute inset-0 dark:bg-black/60" />
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="dark:bg-red-900/50 bg-red-100 border dark:border-red-500/30 border-red-400 rounded-2xl p-6 max-w-md">
@@ -508,12 +500,8 @@ export const CareerResources = () => {
   /* ---- RENDER ---- */
   return (
     <div className="relative dark:text-white text-black overflow-hidden min-h-screen">
-      {/* Fondo animado */}
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
+     
+      
       <div className="absolute inset-0 dark:bg-black/60" />
 
       {/* Contenido principal */}

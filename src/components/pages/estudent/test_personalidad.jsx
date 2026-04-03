@@ -67,12 +67,7 @@ export const Test_personalidad = () => {
 
   return (
     <div className="relative text-white min-h-screen overflow-hidden h-full">
-      {/* Fondo pulsante */}
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa] "
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      />
+
       <div className="absolute inset-0"></div> {/* overlay oscuro */}
       <div className="relative z-10 max-w-5xl mx-auto pt-6 px-6">
         {/* Encabezado */}

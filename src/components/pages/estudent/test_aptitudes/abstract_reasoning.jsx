@@ -66,12 +66,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
 
   return (
     <div className="h-screen flex justify-center relative overflow-hidden">
-      {/* Fondo */}
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
+      
 
       {/* Contenedor principal */}
       <div className="relative z-10 w-full max-w-7xl px-6 py-10 h-full overflow-y-auto scrollbar-hide">

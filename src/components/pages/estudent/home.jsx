@@ -360,7 +360,7 @@ export const HomeOrientacion = () => {
         </div>
       </motion.aside>
 
-      <main className="relative flex-1 overflow-y-auto">
+      <main className="relative flex-1 overflow-y-auto  inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]">
         <ThemeSwitcher />
         <Outlet />
       </main>

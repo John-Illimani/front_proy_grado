@@ -18,8 +18,7 @@ import { Trash2, Edit3, X, FilePlus } from "lucide-react";
 import * as XLSX from "xlsx";
 import { deleteMajors, getMajors } from "../../../api/api_majors";
 import { deleteTest } from "../../../api/api_tests";
-
-
+import ModalResultado from "../../modal";
 
 export const StudentCRUD = () => {
   const [students, setStudents] = useState([]);
@@ -198,13 +197,21 @@ export const StudentCRUD = () => {
     }
   };
 
+  const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState({
+    titulo: "",
+    mensaje: "",
+    detalles: [],
+  });
+  
+
   const handleExcelUpload = (e) => {
     const file = e.target.files[0];
     if (!file || !selectedSectionId) {
       alert("Por favor seleccione un paralelo primero");
       return;
     }
-
+    let nuevos = 0;
     const reader = new FileReader();
     reader.onload = async (evt) => {
       try {
@@ -214,12 +221,11 @@ export const StudentCRUD = () => {
         const json = XLSX.utils.sheet_to_json(sheet);
 
         for (const row of json) {
+          nuevos++;
           const userPayload = {
             first_name: row.Nombre || row.nombre,
             last_name: row.Apellido || row.apellido,
             rol: "estudiante",
-            // Sugerencia: El backend debería generar el username,
-            // si no, asegúrate de enviarlo si es requerido.
           };
 
           // 🔥 CORRECCIÓN: Obtener el usuario recién creado del response
@@ -249,13 +255,22 @@ export const StudentCRUD = () => {
         }
 
         await fetchStudents();
-        alert("Estudiantes cargados exitosamente");
-      } catch (error) {
-        console.error("Error al cargar estudiantes:", error);
-        alert(
-          "Error al cargar: " +
-            (error.response?.data?.detail || "Verifica el formato del Excel"),
-        );
+        setModalData({
+          titulo: "Carga completada",
+          mensaje: `Se registraron ${nuevos} correctamente`,
+          detalles: [],
+        });
+
+        setOpenModal(true);
+      } catch (err) {
+        setModalData({
+          titulo:
+            err.response?.data?.detail || "Verifica el formato del Excel",
+          mensaje: "Error al cargar estudiantes",
+          detalles: [],
+        });
+
+        setOpenModal(true);
       }
     };
     reader.readAsBinaryString(file);
@@ -422,9 +437,7 @@ export const StudentCRUD = () => {
                   <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
                     Paralelo
                   </th>
-                  <th className="px-4 py-2 text-left dark:text-teal-400 uppercase">
-                    Email
-                  </th>
+                 
                   <th className="px-4 py-2 text-center dark:text-teal-400 uppercase">
                     Acciones
                   </th>
@@ -448,9 +461,7 @@ export const StudentCRUD = () => {
                     <td className="px-4 py-2 whitespace-nowrap">
                       {student.paralelo}
                     </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {student.email}
-                    </td>
+                    
                     <td className="px-4 py-2 whitespace-nowrap text-right flex gap-2 justify-center">
                       <button
                         onClick={() => setEditingStudent(student)}
@@ -535,6 +546,14 @@ export const StudentCRUD = () => {
           </motion.div>
         </div>
       )}
+
+      <ModalResultado
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        titulo={modalData.titulo}
+        mensaje={modalData.mensaje}
+        detalles={modalData.detalles}
+      />
     </div>
   );
 };

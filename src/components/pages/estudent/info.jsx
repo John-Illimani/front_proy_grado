@@ -21,13 +21,9 @@ export const WelcomInfo = () => {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   return (
     <div className=" relative flex-1 p-10 h-screen  overflow-hidden">
-      {/* Fondo animado */}
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
-      <div className="absolute inset-0 "></div>
+      
+      
+      
 
       <div className="relative z-10 overflow-y-auto h-full scrollbar-hide">
         {/* Bienvenida */}

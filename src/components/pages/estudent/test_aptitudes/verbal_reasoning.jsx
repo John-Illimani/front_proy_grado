@@ -67,12 +67,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
 
   return (
     <div className="min-h-screen flex justify-center relative overflow-hidden h-full ">
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center  bg-gradient-to-br from-[#b9edfa]"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
-      <div className="absolute inset-0 "></div>
+      
 
       <div className="relative z-10 w-full max-w-6xl px-5 py-5  ">
         <TestHeader

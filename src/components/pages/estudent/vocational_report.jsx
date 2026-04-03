@@ -561,11 +561,7 @@ function formatearNombre(nombre) {
       className="relative  w-full  px-2 md:px-6  overflow-hidden "
       ref={reportRef}
     >
-      <motion.div
-        className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 15, repeat: Infinity }}
-      />
+   
       <div className="absolute "></div>
 
       <div className="relative z-10 max-w-[90%] h-screen   mx-auto md:py-12  overflow-y-auto scrollbar-hide ">

@@ -118,7 +118,7 @@ export const TeacherGrades = () => {
             <p
               className={`${
                 !isSidebarOpen ? "opacity-0 hidden " : "opacity-100"
-              } transition-opacity duration-300 text-black font-bold`}
+              } transition-opacity duration-300 text-black font-bold dark:text-white`}
             >
               Cerrar Sesión
             </p>
@@ -126,7 +126,7 @@ export const TeacherGrades = () => {
         </div>
       </motion.aside>
 
-      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black from-orange-100 p-2 sm:p-4 md:p-6">
+      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black/90 from-orange-100 p-2 sm:p-4 md:p-6">
         <motion.div
           className="pl-10 md:pl-0 pt-3 sm:pt-4 md:pt-2"
           initial={{ opacity: 0, y: 20 }}

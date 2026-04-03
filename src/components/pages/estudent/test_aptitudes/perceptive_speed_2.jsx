@@ -72,12 +72,7 @@ export const TestRapidezPerceptivaParte2 = () => {
       {({ values, setFieldValue, isSubmitting, resetForm }) => (
         <Form>
           <div className="h-screen flex justify-center relative overflow-hidden">
-            <motion.div
-              className="absolute inset-0 dark:bg-[url('/fondo_marcelo.jpg')] dark:bg-cover dark:bg-center bg-gradient-to-br from-[#b9edfa]"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 15, repeat: Infinity }}
-            />
-            <div className="absolute inset-0"></div>
+            
 
             <div className="relative z-10 w-full max-w-6xl px-6 py-10 overflow-y-auto scrollbar-hide">
               <TestHeader
