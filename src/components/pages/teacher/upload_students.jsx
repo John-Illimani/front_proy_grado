@@ -19,6 +19,8 @@ import * as XLSX from "xlsx";
 import { deleteMajors, getMajors } from "../../../api/api_majors";
 import { deleteTest } from "../../../api/api_tests";
 
+
+
 export const StudentCRUD = () => {
   const [students, setStudents] = useState([]);
   const [sections, setSections] = useState([]);
@@ -39,7 +41,8 @@ export const StudentCRUD = () => {
         getSections(),
       ]);
 
-      const studentsData = studentsRes.data;
+      const studentsData = studentsRes.data.filter((st) => st.usuario != null);
+
       const usersData = usersRes.data.filter((u) => u.rol === "estudiante");
       const sectionsData = sectionsRes.data;
 
@@ -63,15 +66,15 @@ export const StudentCRUD = () => {
       setSections(sectionsData);
 
       if (sectionsData.length > 0) {
-                const firstSection = sectionsData[0];
-                
-                // Solo setea el ID y el nombre si *aún* no hay una sección seleccionada 
-                // (es decir, en el primer render/montaje).
-                if (!selectedSectionId) { 
-                    setSelectedSectionId(firstSection.id.toString());
-                    setSelectedParallel(firstSection.nombre);
-                }
-            }
+        const firstSection = sectionsData[0];
+
+        // Solo setea el ID y el nombre si *aún* no hay una sección seleccionada
+        // (es decir, en el primer render/montaje).
+        if (!selectedSectionId) {
+          setSelectedSectionId(firstSection.id.toString());
+          setSelectedParallel(firstSection.nombre);
+        }
+      }
     } catch (err) {
       console.error(err);
     }
@@ -83,7 +86,7 @@ export const StudentCRUD = () => {
 
   const filteredStudents = selectedSectionId
     ? students.filter(
-        (student) => student.paralelo_id === parseInt(selectedSectionId)
+        (student) => student.paralelo_id === parseInt(selectedSectionId),
       )
     : students;
 
@@ -124,19 +127,21 @@ export const StudentCRUD = () => {
           last_name: values.last_name,
           rol: "estudiante",
         };
-        await addUser(userPayload);
 
+        // 1. Crear el usuario y esperar la respuesta real
+        const userRes = await addUser(userPayload);
+        const newUserId = userRes.data.id;
+
+        // 2. Traer estudiantes para encontrar el registro vinculado
         const response = await getStudents();
-        const allStudents = response.data;
-        allStudents.sort((a, b) => a.id - b.id);
-        const lastElement = allStudents.at(-1);
+        const studentObj = response.data.find((st) => st.usuario === newUserId);
 
-        if (lastElement) {
+        if (studentObj) {
           const newPayload = {
-            usuario: lastElement.usuario_id,
+            usuario: newUserId,
             paralelo: parseInt(selectedSectionId),
           };
-          await updateStudent(lastElement.id, newPayload);
+          await updateStudent(studentObj.id, newPayload);
         }
       }
 
@@ -164,13 +169,24 @@ export const StudentCRUD = () => {
 
       const usuarioId = student.usuario_id;
 
-      await deleteUser(usuarioId);
+      console.log("el id del usuario es: ", usuarioId);
 
-      await deleteMajors(student.id);
+      const safeDelete = async (fn, id, label) => {
+        try {
+          await fn(id);
+        } catch (error) {
+          if (error.response?.status === 404) {
+            console.warn(`${label} no encontrado`);
+          } else {
+            console.error(`Error eliminando ${label}`, error);
+          }
+        }
+      };
 
-      await deleteTest(student.id);
-
-      await deleteStudent(student.id);
+      await safeDelete(deleteUser, usuarioId, "Usuario");
+      await safeDelete(deleteMajors, student.id, "Majors");
+      await safeDelete(deleteTest, student.id, "Test");
+      await safeDelete(deleteStudent, student.id, "Student");
 
       // Refrescar lista
       await fetchStudents();
@@ -194,40 +210,54 @@ export const StudentCRUD = () => {
       try {
         const data = evt.target.result;
         const workbook = XLSX.read(data, { type: "binary" });
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const json = XLSX.utils.sheet_to_json(sheet);
 
         for (const row of json) {
           const userPayload = {
-            first_name: row.Nombre,
-            last_name: row.Apellido,
+            first_name: row.Nombre || row.nombre,
+            last_name: row.Apellido || row.apellido,
             rol: "estudiante",
+            // Sugerencia: El backend debería generar el username,
+            // si no, asegúrate de enviarlo si es requerido.
           };
-          await addUser(userPayload);
 
-          const response = await getStudents();
-          const allStudents = response.data;
-          allStudents.sort((a, b) => a.id - b.id);
-          const lastElement = allStudents.at(-1);
+          // 🔥 CORRECCIÓN: Obtener el usuario recién creado del response
+          const userResponse = await addUser(userPayload);
+          const newUser = userResponse.data;
 
-          if (lastElement) {
+          // Buscamos el registro de "Student" que se crea automáticamente (si tu backend lo hace)
+          // o creamos la relación directamente.
+          const resStudents = await getStudents();
+          const studentRecord = resStudents.data.find(
+            (st) => st.usuario === newUser.id,
+          );
+
+          if (studentRecord) {
             const studentPayload = {
-              usuario: lastElement.usuario_id,
+              usuario: newUser.id,
               paralelo: parseInt(selectedSectionId),
             };
-            await updateStudent(lastElement.id, studentPayload);
+            await updateStudent(studentRecord.id, studentPayload);
+          } else {
+            // Si tu backend NO crea el registro Student automáticamente al crear un User:
+            await addStudent({
+              usuario: newUser.id,
+              paralelo: parseInt(selectedSectionId),
+            });
           }
         }
 
         await fetchStudents();
         alert("Estudiantes cargados exitosamente");
       } catch (error) {
-        console.error("Error al cargar estudiantes desde Excel:", error);
-        alert("Error al cargar estudiantes desde Excel");
+        console.error("Error al cargar estudiantes:", error);
+        alert(
+          "Error al cargar: " +
+            (error.response?.data?.detail || "Verifica el formato del Excel"),
+        );
       }
     };
-
     reader.readAsBinaryString(file);
   };
 
@@ -346,8 +376,8 @@ export const StudentCRUD = () => {
                         ? "Actualizando..."
                         : "Actualizar"
                       : isSubmitting
-                      ? "Registrando..."
-                      : "Registrar"}
+                        ? "Registrando..."
+                        : "Registrar"}
                   </button>
                   {editingStudent && (
                     <button
