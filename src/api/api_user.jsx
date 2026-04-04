@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8000/api/add_user/";
-// ❌ ELIMINAR ESTA LÍNEA: const accessToken = localStorage.getItem("access"); 
 
-// ✅ CORRECCIÓN: La función getHeaders debe leer el token de forma dinámica
+const API_URL_BULLK = "http://localhost:8000/api/add_user/bulk-create/";
+
 const getHeaders = () => {
     // Lee el token justo antes de que se use
     const accessToken = localStorage.getItem("access"); 
@@ -13,6 +13,12 @@ const getHeaders = () => {
         Authorization: `Bearer ${accessToken}`, 
         "Content-Type": "application/json",
     };
+};
+
+export const addStudentsBulk = async (data) => {
+  return await axios.post(API_URL_BULLK, data, {
+    headers: getHeaders(),
+  });
 };
 
 export const getUsers = async () => {

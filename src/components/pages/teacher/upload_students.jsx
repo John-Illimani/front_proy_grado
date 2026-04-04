@@ -6,6 +6,7 @@ import {
   addUser,
   updateUser,
   deleteUser,
+  addStudentsBulk,
 } from "../../../api/api_user";
 import {
   getStudents,
@@ -168,24 +169,8 @@ export const StudentCRUD = () => {
 
       const usuarioId = student.usuario_id;
 
-      console.log("el id del usuario es: ", usuarioId);
-
-      const safeDelete = async (fn, id, label) => {
-        try {
-          await fn(id);
-        } catch (error) {
-          if (error.response?.status === 404) {
-            console.warn(`${label} no encontrado`);
-          } else {
-            console.error(`Error eliminando ${label}`, error);
-          }
-        }
-      };
-
-      await safeDelete(deleteUser, usuarioId, "Usuario");
-      await safeDelete(deleteMajors, student.id, "Majors");
-      await safeDelete(deleteTest, student.id, "Test");
-      await safeDelete(deleteStudent, student.id, "Student");
+      await deleteUser(usuarioId);
+      
 
       // Refrescar lista
       await fetchStudents();
@@ -203,78 +188,124 @@ export const StudentCRUD = () => {
     mensaje: "",
     detalles: [],
   });
+
+    const handleExcelUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file || !selectedSectionId) {
+    alert("Por favor seleccione un paralelo primero");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (evt) => {
+    try {
+      const data = evt.target.result;
+      const workbook = XLSX.read(data, { type: "binary" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(sheet);
+
+      // Preparamos los datos tal como los espera el backend masivo
+      const payloadMasivo = json.map(row => ({
+        first_name: row.Nombre || row.nombre,
+        last_name: row.Apellido || row.apellido,
+        rol: "estudiante",
+        paralelo: parseInt(selectedSectionId)
+      }));
+
+      // Llamada al método que mencionaste (ahora enviando todo el array)
+      await addStudentsBulk(payloadMasivo);
+
+      await fetchStudents();
+      setModalData({
+        titulo: "Carga completada",
+        mensaje: `Se registraron ${json.length} estudiantes correctamente de golpe`,
+        detalles: [],
+      });
+      setOpenModal(true);
+
+    } catch (err) {
+      console.error(err);
+      setModalData({
+        titulo: "Error en carga masiva",
+        mensaje: err.response?.data?.error || "Verifica el formato o la conexión",
+        detalles: [],
+      });
+      setOpenModal(true);
+    }
+  };
+  reader.readAsBinaryString(file);
+};
   
 
-  const handleExcelUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file || !selectedSectionId) {
-      alert("Por favor seleccione un paralelo primero");
-      return;
-    }
-    let nuevos = 0;
-    const reader = new FileReader();
-    reader.onload = async (evt) => {
-      try {
-        const data = evt.target.result;
-        const workbook = XLSX.read(data, { type: "binary" });
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const json = XLSX.utils.sheet_to_json(sheet);
+  // const handleExcelUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file || !selectedSectionId) {
+  //     alert("Por favor seleccione un paralelo primero");
+  //     return;
+  //   }
+  //   let nuevos = 0;
+  //   const reader = new FileReader();
+  //   reader.onload = async (evt) => {
+  //     try {
+  //       const data = evt.target.result;
+  //       const workbook = XLSX.read(data, { type: "binary" });
+  //       const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  //       const json = XLSX.utils.sheet_to_json(sheet);
 
-        for (const row of json) {
-          nuevos++;
-          const userPayload = {
-            first_name: row.Nombre || row.nombre,
-            last_name: row.Apellido || row.apellido,
-            rol: "estudiante",
-          };
+  //       for (const row of json) {
+  //         nuevos++;
+  //         const userPayload = {
+  //           first_name: row.Nombre || row.nombre,
+  //           last_name: row.Apellido || row.apellido,
+  //           rol: "estudiante",
+  //         };
 
-          // 🔥 CORRECCIÓN: Obtener el usuario recién creado del response
-          const userResponse = await addUser(userPayload);
-          const newUser = userResponse.data;
+  //         // 🔥 CORRECCIÓN: Obtener el usuario recién creado del response
+  //         const userResponse = await addUser(userPayload);
+  //         const newUser = userResponse.data;
 
-          // Buscamos el registro de "Student" que se crea automáticamente (si tu backend lo hace)
-          // o creamos la relación directamente.
-          const resStudents = await getStudents();
-          const studentRecord = resStudents.data.find(
-            (st) => st.usuario === newUser.id,
-          );
+      
+  //         const resStudents = await getStudents();
+  //         const studentRecord = resStudents.data.find(
+  //           (st) => st.usuario === newUser.id,
+  //         );
 
-          if (studentRecord) {
-            const studentPayload = {
-              usuario: newUser.id,
-              paralelo: parseInt(selectedSectionId),
-            };
-            await updateStudent(studentRecord.id, studentPayload);
-          } else {
-            // Si tu backend NO crea el registro Student automáticamente al crear un User:
-            await addStudent({
-              usuario: newUser.id,
-              paralelo: parseInt(selectedSectionId),
-            });
-          }
-        }
+  //         if (studentRecord) {
+  //           const studentPayload = {
+  //             usuario: newUser.id,
+  //             paralelo: parseInt(selectedSectionId),
+  //           };
+  //           await updateStudent(studentRecord.id, studentPayload);
+  //         } else {
+  //           // Si tu backend NO crea el registro Student automáticamente al crear un User:
+  //           await addStudent({
+  //             usuario: newUser.id,
+  //             paralelo: parseInt(selectedSectionId),
+  //           });
+  //         }
+  //       }
 
-        await fetchStudents();
-        setModalData({
-          titulo: "Carga completada",
-          mensaje: `Se registraron ${nuevos} correctamente`,
-          detalles: [],
-        });
+  //       await fetchStudents();
+  //       setModalData({
+  //         titulo: "Carga completada",
+  //         mensaje: `Se registraron ${nuevos} correctamente`,
+  //         detalles: [],
+  //       });
 
-        setOpenModal(true);
-      } catch (err) {
-        setModalData({
-          titulo:
-            err.response?.data?.detail || "Verifica el formato del Excel",
-          mensaje: "Error al cargar estudiantes",
-          detalles: [],
-        });
+  //       setOpenModal(true);
+  //     } catch (err) {
+  //       setModalData({
+  //         titulo:
+  //           err.response?.data?.detail || "Verifica el formato del Excel",
+  //         mensaje: "Error al cargar estudiantes",
+  //         detalles: [],
+  //       });
 
-        setOpenModal(true);
-      }
-    };
-    reader.readAsBinaryString(file);
-  };
+  //       setOpenModal(true);
+  //     }
+  //   };
+  //   reader.readAsBinaryString(file);
+  // };
 
   const cancelEdit = () => {
     setEditingStudent(null);
