@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { postLogin } from "../../api/api_login";
 
 export const Login = ({
-  onLogin = (credentials) => console.log("login:", credentials),
+
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,8 +44,7 @@ export const Login = ({
         navigate("/admin");
       }
 
-      // Opcional: callback externo
-      onLogin({ access, refresh, rol, username });
+     
     } catch (err) {
       console.error("Error en login:", err);
       setError("Credenciales incorrectas. Intenta de nuevo.");
@@ -162,7 +161,7 @@ export const Login = ({
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Jorge Daniel Mayta Cori 🡆 jmayta"
+                placeholder="Usuario"
                 className="mt-2 w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-300 transition-all duration-300"
                 required
                 whileFocus={{ scale: 1.01 }}
@@ -177,7 +176,7 @@ export const Login = ({
                 type={showPass ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="jorge_mayta"
+                placeholder="*****************"
                 className="mt-2 w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-300 transition-all duration-300 pr-14"
                 required
                 whileFocus={{ scale: 1.01 }}

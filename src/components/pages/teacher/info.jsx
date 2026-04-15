@@ -46,7 +46,7 @@ export const TeacherWelcome = () => {
           Tu rol en la comunidad educativa
         </h2>
 
-        <div className="space-y-4 leading-relaxed text-lg text-black">
+        <div className="space-y-4 leading-relaxed text-lg text-black dark:text-white">
           <p>
             Como docente, tienes la responsabilidad de guiar y apoyar a tus
             estudiantes en su desarrollo académico y personal. Esta plataforma
