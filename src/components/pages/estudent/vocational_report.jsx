@@ -4,8 +4,8 @@ import { getStudentTests } from "../../../api/api_estudent_test";
 import { getMajors } from "../../../api/api_majors";
 import { getAptitudes } from "../../../api/api_aptitudes";
 
-import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import {
   ResponsiveContainer,
   LineChart,
@@ -16,6 +16,7 @@ import {
   Tooltip,
 } from "recharts";
 import { getStudentId } from "./studentId";
+import { getUsers } from "../../../api/api_user";
 
 const testsInfo = [
   {
@@ -102,15 +103,6 @@ const testsInfo = [
   },
 ];
 
-// Nuevas aptitudes con tests que contribuyen
-const aptitudesInfo = [
-  { id: 1, nombre: "Lógico-Matemática", tests: [1, 5, 6] },
-  { id: 2, nombre: "Verbal-Comunicativa", tests: [4, 3, 2] },
-  { id: 3, nombre: "Creativa", tests: [3, 8] },
-  { id: 4, nombre: "Mecánica", tests: [7, 6] },
-  { id: 5, nombre: "Rapidez y Precisión", tests: [9, 10] },
-];
-
 export const ReporteVocacional = () => {
   const [studentTests, setStudentTests] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -118,6 +110,7 @@ export const ReporteVocacional = () => {
   const reportRef = useRef(null);
   const [studentId, setStudentId] = useState(null);
   const [aptitudes, setAptitudes] = useState([]);
+  const [Usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -173,7 +166,7 @@ export const ReporteVocacional = () => {
           setAptitudes([]);
         }
       } catch (error) {
-        console.error("❌ Error al obtener datos:", error);
+        console.error("Error al obtener datos:", error);
       }
     };
 
@@ -182,11 +175,28 @@ export const ReporteVocacional = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const username = localStorage.getItem("username");
+
+
+  useEffect(() => {
+    async function Users() {
+      let respUsers = await getUsers();
+      setUsuarios(respUsers.data);
+    }
+    Users();
+  }, []);
+
+  const nombre = Usuarios.find((u) => u.username == username);
+
+
   const getPorcentaje = (testId) => {
     const studentTest = studentTests.find((t) => t.testvocational === testId);
     const info = testsInfo.find((t) => t.id === testId);
     if (!studentTest || !info) return 0;
-    return ((studentTest.completo / info.total_preguntas) * 100).toFixed(1);
+    let pct = ((studentTest.completo / info.total_preguntas) * 100).toFixed(1);
+    let restPct = pct > 100 ? (pct = 100) : pct < 0 ? (pct = 0) : pct;
+
+    return restPct;
   };
 
   const getMotivacion = (porcentaje) => {
@@ -225,30 +235,27 @@ export const ReporteVocacional = () => {
 
   const promedio = parseFloat(promedioTotal());
 
-function formatearNombre(nombre) {
-  const palabras = nombre.trim().split(/\s+/);
+  function formatearNombre(nombre) {
+    const palabras = nombre.trim().split(/\s+/);
 
-  // 🔥 Caso 1: Razonamiento → quitar "Razonamiento"
-  if (palabras[0].toLowerCase() === "razonamiento") {
-    return palabras[1]; // Verbal, Numérico, etc.
+    // 🔥 Caso 1: Razonamiento → quitar "Razonamiento"
+    if (palabras[0].toLowerCase() === "razonamiento") {
+      return palabras[1]; // Verbal, Numérico, etc.
+    }
+
+    // 🔥 Caso 2: Rapidez y exactitud preceptiva 1/2
+    if (palabras[0].toLowerCase() === "rapidez") {
+      return `Rapidez ${palabras[palabras.length - 1]}`; // Rapidez 1 o 2
+    }
+
+    // 🔥 Caso 3: Test Chaside, Test Colmil, etc.
+    if (palabras[0].toLowerCase() === "test") {
+      return palabras[1]; // Chaside, Colmil, etc.
+    }
+
+    // 🔥 Caso general (Ortografía, etc.)
+    return palabras[0];
   }
-
-  // 🔥 Caso 2: Rapidez y exactitud preceptiva 1/2
-  if (palabras[0].toLowerCase() === "rapidez") {
-    return `Rapidez ${palabras[palabras.length - 1]}`; // Rapidez 1 o 2
-  }
-
-  // 🔥 Caso 3: Test Chaside, Test Colmil, etc.
-  if (palabras[0].toLowerCase() === "test") {
-    return palabras[1]; // Chaside, Colmil, etc.
-  }
-
-  // 🔥 Caso general (Ortografía, etc.)
-  return palabras[0];
-}
-
- 
-  
 
   const lineData = testsInfo.map((test) => ({
     name: formatearNombre(test.nombre),
@@ -278,206 +285,128 @@ function formatearNombre(nombre) {
           ? "🔥 Estás a punto de lograrlo, sigue con fuerza."
           : "🏆 ¡Excelente! Completaste casi todos los tests.";
 
-  // Función para obtener porcentaje de cada aptitud
-  const getPorcentajeAptitud = (apt) => {
-    let total = 0;
-    let count = 0;
-    apt.tests.forEach((testId) => {
-      const pct = parseFloat(getPorcentaje(testId));
-      if (pct) {
-        total += pct;
-        count++;
-      }
-    });
-    return count > 0 ? (total / count).toFixed(1) : 0;
-  };
-
   // PDF en tamaño carta
-  const handleDownload = () => {
+  const handleDownload = async () => {
     const pdf = new jsPDF("p", "mm", "letter");
     const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
     const margin = 15;
 
-    // 🧹 Función para limpiar texto y quitar caracteres raros
+    // 👤 Nombre desde estado (seguro)
+    const studentName =
+      `${nombre?.first_name || ""} ${nombre?.last_name || ""}`.trim() ||
+      "Estudiante";
+
+    // 🧹 Limpiar texto
     const cleanText = (text) => {
       if (!text) return "";
       return text.replace(/[^\x20-\x7EáéíóúÁÉÍÓÚñÑüÜ.,:;¡!¿?()\-+\/ ]/g, "");
     };
 
-    // 🖋️ Función para dibujar texto centrado
-    const drawCenteredText = (
-      text,
-      y,
-      fontSize = 12,
-      fontStyle = "normal",
-      color = [0, 0, 0],
-    ) => {
-      const safeText = cleanText(text);
-      pdf.setFont("helvetica", fontStyle);
-      pdf.setFontSize(fontSize);
-      pdf.setTextColor(...color);
-      const textWidth = pdf.getTextWidth(safeText);
-      const x = (pageWidth - textWidth) / 2;
-      pdf.text(safeText, x, y);
-    };
+    let y = margin;
 
-    // 🎨 Fondo blanco
-    pdf.setFillColor(255, 255, 255);
-    pdf.rect(0, 0, pageWidth, pageHeight, "F");
+    // 🏫 ENCABEZADO
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.setTextColor(0, 102, 204);
+    pdf.text("REPORTE VOCACIONAL ESTUDIANTIL", pageWidth / 2, y, {
+      align: "center",
+    });
 
-    // 🏫 Encabezado
-    drawCenteredText(
-      "Colegio Marcelo Quiroga Santa Cruz",
-      margin,
-      16,
-      "bold",
-      [0, 102, 204],
-    );
+    y += 10;
 
-    let y = margin + 10;
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(`Nombre: ${cleanText(studentName)}`, margin, y);
+    y += 6;
+    pdf.text(`Fecha: ${cleanText(formattedDate)}`, margin, y);
 
-    // 🖼️ Logo como marca de agua
+    y += 10;
+
+    // 🧾 MENSAJE
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(11);
+    pdf.text(cleanText(globalMessage), margin, y, {
+      maxWidth: pageWidth - margin * 2,
+    });
+
+    y += 12;
+
+    // 📊 TABLA DE TESTS
+    const testsTable = testsInfo.map((test) => {
+      let pct = getPorcentaje(test.id);
+      pct = Math.max(0, Math.min(100, pct));
+
+      return [test.nombre, `${pct}%`];
+    });
+
+    autoTable(pdf, {
+      startY: y,
+      head: [["Test", "Resultado (%)"]],
+      body: testsTable,
+      theme: "grid",
+      headStyles: { fillColor: [0, 102, 204] },
+    });
+
+    y = pdf.lastAutoTable?.finalY + 10 || y + 10;
+
+    // 📊 TABLA DE APTITUDES
+    let aptitudesTable = [];
+
+    if (aptitudes.length > 0) {
+      aptitudesTable = aptitudes.map((apt) => {
+        let pct = parseFloat(apt.porcentaje.replace("%", "")) || 0;
+        pct = Math.max(0, Math.min(100, pct));
+
+        return [apt.aptitud, `${pct}%`];
+      });
+    } else {
+      aptitudesTable = [["Sin datos", "0%"]];
+    }
+
+    autoTable(pdf, {
+      startY: y,
+      head: [["Aptitud", "Porcentaje"]],
+      body: aptitudesTable,
+      theme: "grid",
+      headStyles: { fillColor: [255, 102, 0] },
+    });
+
+    y = pdf.lastAutoTable?.finalY + 10 || y + 10;
+
+    // 🎓 TABLA DE CARRERAS
+    let carrerasTable = [];
+
+    if (recommendedMajors.length > 0) {
+      carrerasTable = recommendedMajors.map((c) => [c.carrera, c.probabilidad]);
+    } else {
+      carrerasTable = [["Sin recomendaciones", "0%"]];
+    }
+
+    autoTable(pdf, {
+      startY: y,
+      head: [["Carrera", "Probabilidad"]],
+      body: carrerasTable,
+      theme: "grid",
+      headStyles: { fillColor: [0, 102, 204] },
+    });
+
+    // 🖼️ Marca de agua
     const img = new Image();
     img.src = "/logo.png";
     img.onload = () => {
-      const logoWidth = 120;
-      const logoHeight = (img.height / img.width) * logoWidth;
       pdf.setGState(new pdf.GState({ opacity: 0.05 }));
-      pdf.addImage(
-        img,
-        "PNG",
-        (pageWidth - logoWidth) / 2,
-        (pageHeight - logoHeight) / 2,
-        logoWidth,
-        logoHeight,
-      );
+      pdf.addImage(img, "PNG", 30, 80, 150, 150);
       pdf.setGState(new pdf.GState({ opacity: 1 }));
-
-      y += 10;
-
-      // Saludo y fecha
-      drawCenteredText(cleanText(greeting()), y, 14, "bold");
-      y += 7;
-      drawCenteredText(cleanText(formattedDate), y, 12);
-      y += 7;
-
-      //  Mensaje global
-      drawCenteredText(cleanText(globalMessage), y, 12, "normal", [50, 50, 50]);
-      y += 8;
-
-      // Línea separadora
-      pdf.setDrawColor(180, 180, 180);
-      pdf.setLineWidth(0.5);
-      pdf.line(margin, y, pageWidth - margin, y);
-      y += 8;
-
-      const colWidth = (pageWidth - 3 * margin) / 2;
-      const barHeight = 8;
-      const spacingY = 12;
-
-      // 📊 Tests
-      testsInfo.forEach((test, idx) => {
-        const col = idx % 2;
-        const row = Math.floor(idx / 2);
-        const x = margin + col * (colWidth + margin);
-        const pct = getPorcentaje(test.id);
-
-        // Fondo barra
-        pdf.setFillColor(220, 220, 220);
-        pdf.roundedRect(x, y + row * spacingY, colWidth, barHeight, 2, 2, "F");
-
-        // Barra progreso
-        pdf.setFillColor(59, 130, 246); // azul fijo
-        pdf.roundedRect(
-          x,
-          y + row * spacingY,
-          (pct / 100) * colWidth,
-          barHeight,
-          2,
-          2,
-          "F",
-        );
-
-        // Texto
-        const text = `${test.nombre} - ${pct}%`;
-        const textWidth = pdf.getTextWidth(cleanText(text));
-        const textX = x + (colWidth - textWidth) / 2;
-        pdf.text(cleanText(text), textX, y + row * spacingY + 6);
-      });
-
-      y += Math.ceil(testsInfo.length / 2) * spacingY + 8;
-
-      //  Aptitudes
-      drawCenteredText("Aptitudes", y, 12, "bold", [255, 102, 0]);
-      y += 6;
-
-      if (aptitudes.length > 0) {
-        aptitudes.forEach((apt, idx) => {
-          const col = idx % 2;
-          const row = Math.floor(idx / 2);
-          const x = margin + col * (colWidth + margin);
-
-          // Convertir porcentaje tipo "20.5%" a número
-          let pct = parseFloat(apt.porcentaje.replace("%", "")) || 0;
-
-          // 🔒 Evitar que se salga del rango visible
-          const barPct = Math.max(0, Math.min(pct, 100));
-
-          // 🎨 Color según si es negativo
-          const barColor =
-            parseFloat(apt.porcentaje) < 0 ? [255, 99, 71] : [234, 179, 8]; // rojo o ámbar
-          pdf.setFillColor(220, 220, 220);
-          pdf.roundedRect(
-            x,
-            y + row * spacingY,
-            colWidth,
-            barHeight,
-            2,
-            2,
-            "F",
-          );
-
-          pdf.setFillColor(...barColor);
-          pdf.roundedRect(
-            x,
-            y + row * spacingY,
-            (barPct / 100) * colWidth,
-            barHeight,
-            2,
-            2,
-            "F",
-          );
-
-          const text = `${apt.aptitud}  ${apt.porcentaje}`;
-          const textWidth = pdf.getTextWidth(cleanText(text));
-          const textX = x + (colWidth - textWidth) / 2;
-          pdf.text(cleanText(text), textX, y + row * spacingY + 6);
-        });
-      } else {
-        drawCenteredText("No hay aptitudes disponibles", y, 11);
-      }
-
-      y += Math.ceil(aptitudes.length / 2) * spacingY + 8;
-
-      // 🎓 Carreras recomendadas
-      drawCenteredText("Carreras Recomendadas", y, 12, "bold", [0, 102, 204]);
-      y += 8;
-
-      if (recommendedMajors.length > 0) {
-        recommendedMajors.forEach((carrera) => {
-          const text = `${carrera.carrera} - ${carrera.probabilidad}`;
-          drawCenteredText(cleanText(text), y, 11);
-          y += 6;
-        });
-      } else {
-        drawCenteredText("No hay carreras recomendadas disponibles", y, 11);
-        y += 6;
-      }
 
       pdf.save("Reporte_Vocacional.pdf");
     };
   };
+
+  function porcentajeAptitudes(apt) {
+    let pct = parseFloat(apt.porcentaje) || 0;
+    pct = Math.max(0, Math.min(100, pct));
+    return pct;
+  }
 
   const handleShare = () => {
     let resultsText = "📊 *Mi progreso en los tests vocacionales* 📊\n\n";
@@ -490,14 +419,14 @@ function formatearNombre(nombre) {
 
     resultsText += "\n⭐ *Mis aptitudes* ⭐\n";
 
-    // ✅ Aptitudes reales del backend
     if (aptitudes.length > 0) {
       aptitudes.forEach((apt) => {
         const emoji = "💡";
-        resultsText += `${emoji} *${apt.aptitud}*: ${apt.porcentaje}\n`;
+        let pct = porcentajeAptitudes(apt);
+        resultsText += `${emoji} *${apt.aptitud}*: ${pct}%\n`;
       });
     } else {
-      resultsText += "⚠️ No hay aptitudes disponibles.\n";
+      resultsText += " No hay aptitudes disponibles.\n";
     }
 
     // Agregar carreras recomendadas al texto para compartir
@@ -561,7 +490,6 @@ function formatearNombre(nombre) {
       className="relative  w-full  px-2 md:px-6  overflow-hidden "
       ref={reportRef}
     >
-   
       <div className="absolute "></div>
 
       <div className="relative z-10 max-w-[90%] h-screen   mx-auto md:py-12  overflow-y-auto scrollbar-hide ">
@@ -710,7 +638,7 @@ function formatearNombre(nombre) {
                       />
                     </div>
                     <p className="dark:text-cyan-300  font-bold">
-                      {apt.porcentaje}
+                      {porcentajeAptitudes(apt)}%
                     </p>
                   </div>
                 ))

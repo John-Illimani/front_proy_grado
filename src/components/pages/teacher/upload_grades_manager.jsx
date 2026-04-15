@@ -517,12 +517,12 @@ export const TeacherGradesManager = () => {
                         onSubmit={({ nota1 }) => handleSaveGrade(st.id, "notas1", nota1)}
                       >
                         {({ handleSubmit }) => (
-                          <Form className="flex items-center gap-1 justify-center" onSubmit={handleSubmit}>
+                          <Form className="flex items-center gap-4 justify-center" onSubmit={handleSubmit}>
                             <Field name="nota1" type="number" min="0" max="100" className="border p-1 rounded w-16 text-black text-xs" />
                             <motion.button type="submit" whileTap={{ scale: 0.9 }}
-                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas1`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500"}`}
+                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas1`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500 px-2 font-bold"}`}
                               disabled={savingIds[`${st.id}-notas1`]}>
-                              {savingIds[`${st.id}-notas1`] ? <CheckCircle2 size={14} /> : "G"}
+                              {savingIds[`${st.id}-notas1`] ? <CheckCircle2 size={14} /> : "Guardar"}
                             </motion.button>
                           </Form>
                         )}
@@ -537,12 +537,12 @@ export const TeacherGradesManager = () => {
                         onSubmit={({ nota2 }) => handleSaveGrade(st.id, "notas2", nota2)}
                       >
                         {({ handleSubmit }) => (
-                          <Form className="flex items-center gap-1 justify-center" onSubmit={handleSubmit}>
+                          <Form className="flex items-center gap-4 justify-center" onSubmit={handleSubmit}>
                             <Field name="nota2" type="number" min="0" max="100" className="border p-1 rounded w-16 text-black text-xs" />
                             <motion.button type="submit" whileTap={{ scale: 0.9 }}
-                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas2`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500"}`}
+                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas2`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500 px-2 font-bold"}`}
                               disabled={savingIds[`${st.id}-notas2`]}>
-                              {savingIds[`${st.id}-notas2`] ? <CheckCircle2 size={14} /> : "G"}
+                              {savingIds[`${st.id}-notas2`] ? <CheckCircle2 size={14} /> : "Guardar"}
                             </motion.button>
                           </Form>
                         )}
@@ -557,12 +557,12 @@ export const TeacherGradesManager = () => {
                         onSubmit={({ nota3 }) => handleSaveGrade(st.id, "notas3", nota3)}
                       >
                         {({ handleSubmit }) => (
-                          <Form className="flex items-center gap-1 justify-center" onSubmit={handleSubmit}>
+                          <Form className="flex items-center gap-4 justify-center" onSubmit={handleSubmit}>
                             <Field name="nota3" type="number" min="0" max="100" className="border p-1 rounded w-16 text-black text-xs" />
                             <motion.button type="submit" whileTap={{ scale: 0.9 }}
-                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas3`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500"}`}
+                              className={`p-1 rounded transition ${savingIds[`${st.id}-notas3`] ? "bg-green-500" : "dark:bg-teal-500 dark:hover:bg-teal-400 bg-lime-400 hover:bg-lime-500 px-2 font-bold"}`}
                               disabled={savingIds[`${st.id}-notas3`]}>
-                              {savingIds[`${st.id}-notas3`] ? <CheckCircle2 size={14} /> : "G"}
+                              {savingIds[`${st.id}-notas3`] ? <CheckCircle2 size={14} /> : "Guardar"}
                             </motion.button>
                           </Form>
                         )}

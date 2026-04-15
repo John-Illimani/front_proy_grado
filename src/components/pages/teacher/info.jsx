@@ -36,17 +36,17 @@ export const TeacherWelcome = () => {
 
       
       <motion.div
-        className="mb-10 bg-gradient-to-b dark:from-teal-900/30 dark:to-black/50 from-yellow-200 rounded-2xl p-8 shadow-lg border border-teal-500/20"
+        className="mb-10 bg-gradient-to-b dark:from-teal-900/30 dark:to-black/50 from-[#bbe71a] to-[#bbe71a] rounded-2xl p-8 shadow-lg border border-teal-500/20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h2 className="text-2xl font-semibold dark:text-teal-400 mb-6 text-center flex items-center justify-center gap-2">
+        <h2 className="text-2xl font-semibold dark:text-teal-400 mb-6 text-center flex items-center justify-center gap-2 ">
           <Users className="dark:text-teal-400 " size={24} />
           Tu rol en la comunidad educativa
         </h2>
 
-        <div className="space-y-4 leading-relaxed text-lg">
+        <div className="space-y-4 leading-relaxed text-lg text-black">
           <p>
             Como docente, tienes la responsabilidad de guiar y apoyar a tus
             estudiantes en su desarrollo académico y personal. Esta plataforma
@@ -132,7 +132,7 @@ export const TeacherWelcome = () => {
           ].map((item, idx) => (
             <motion.div
               key={idx}
-              className="bg-gradient-to-b dark:from-teal-900/30 dark:to-black/50 from-yellow-200 rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-teal-400/20 flex flex-col items-center text-center"
+              className="bg-gradient-to-b dark:from-teal-900/30 dark:to-black/50 from-[#bbe71a] to-[#bbe71a] rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-teal-400/20 flex flex-col items-center text-center"
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <div className="mb-4 p-3 dark:bg-teal-400/10 rounded-full bg-yellow-100">
@@ -149,7 +149,6 @@ export const TeacherWelcome = () => {
         </div>
       </motion.div>
 
-      {/* CTA final */}
       <motion.div
         className="mt-12 text-center"
         initial={{ opacity: 0, y: 20 }}

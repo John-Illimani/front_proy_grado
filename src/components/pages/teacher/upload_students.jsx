@@ -356,7 +356,7 @@ export const StudentCRUD = () => {
           </select>
         </div>
 
-        <label className="flex items-center gap-2 px-4 py-3 dark:bg-teal-500 rounded-xl cursor-pointer dark:hover:bg-teal-400 text-white bg-green-800 hover:bg-green-500 font-bold transition">
+        <label className="flex items-center gap-2 px-4 py-3 dark:bg-teal-500 rounded-xl cursor-pointer dark:hover:bg-teal-400 text-white bg-green-800 hover:bg-green-500 font-bold duration-300 transition">
           <FilePlus size={20} /> Cargar Excel
           <input
             type="file"

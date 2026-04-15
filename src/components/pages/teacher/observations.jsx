@@ -111,25 +111,25 @@ export const ObservationsManager = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-6 bg-gradient-to-br dark:from-gray-800/50 dark:to-black/60  from-yellow-200 rounded-2xl border border-teal-400/20 shadow-lg hover:shadow-teal-500/30 transition-all"
+            className="p-6 bg-gradient-to-br dark:from-gray-800/50 dark:to-black/60  from-[#09b309] to-green-500 rounded-2xl border border-teal-400/20 shadow-lg hover:shadow-teal-500/30 transition-all"
           >
-            <h2 className="text-xl font-bold dark:text-teal-300 mb-2 flex items-center gap-2">
+            <h2 className="text-xl font-bold dark:text-teal-300 mb-2 flex items-center gap-2 ">
               <GraduationCap /> {est.nombre}
             </h2>
-            <p className="text-sm dark:text-gray-400 mb-2">
+            <p className="text-sm dark:text-gray-400 mb-2 dark:font-normal font-bold">
               Paralelo: {est.paralelo}
             </p>
 
             {est.aptitudes.length > 0 ? (
               <>
-                <h3 className="text-lg  dark:text-amber-400 text-blue-500 font-bold flex items-center gap-2">
+                <h3 className="text-lg  dark:text-amber-400 text-[yellow] font-bold flex items-center gap-2">
                   <Star /> Aptitud Dominante:
                   <span className="dark:text-white text-black">
                     {" "}
                     {est.aptitudDominante?.aptitud || "No definida"}
                   </span>
                 </h3>
-                <p className="text-sm dark:text-gray-400 mb-3">
+                <p className="text-sm dark:text-gray-400 mb-3 dark:font-normal font-bold">
                   Nivel:{" "}
                   <span className="dark:text-teal-300 font-semibold">
                     {est.aptitudDominante?.porcentaje || "0%"}
@@ -145,7 +145,7 @@ export const ObservationsManager = () => {
 
                     return (
                       <div key={idx}>
-                        <div className="flex justify-between text-xs dark:text-gray-300 mb-1">
+                        <div className="flex justify-between text-xs dark:text-gray-300 mb-1 dark:font-normal font-bold">
                           <span>{apt.aptitud}</span>
                           <span>{apt.porcentaje}</span>
                         </div>

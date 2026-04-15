@@ -581,14 +581,14 @@ const generarPDF = () => {
             {viewMode === "estudiantes" ? (
               <button
                 onClick={generarPDF}
-                className="flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-cyan-500 hover:to-teal-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:-translate-y-1"
+                className="flex items-center gap-2 bg-gradient-to-r dark:from-teal-500 dark:to-cyan-600 dark:hover:from-cyan-500 dark:hover:to-teal-600  text-white px-6 py-3 from-green-800 to-green-800  hover:from-green-500 hover:to-green-500  duration-300 rounded-xl font-semibold shadow-lg dark:hover:shadow-cyan-500/50 transition-all transform hover:-translate-y-1"
               >
                 <FileDown /> Generar PDF Estudiantes
               </button>
             ) : (
               <button
                 onClick={generarPDFDocentes}
-                className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-orange-500 hover:to-amber-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-amber-500/50 transition-all transform hover:-translate-y-1"
+                className="flex items-center gap-2 bg-gradient-to-r from-green-800 to-green-800  hover:from-green-500 hover:to-green-500  dark:from-amber-500 dark:to-orange-600 dark:hover:from-orange-500 dark:hover:to-amber-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg dark:hover:shadow-amber-500/50 transition-all transform hover:-translate-y-1"
               >
                 <FileDown /> Generar PDF Docentes
               </button>
@@ -599,15 +599,15 @@ const generarPDF = () => {
         {/* Vista Condicional */}
         {viewMode === "docentes" ? (
           <motion.div
-            className="bg-white/70 dark:bg-black/40 p-6 rounded-2xl border border-teal-500/20 shadow-lg"
+            className="bg-white/70 dark:bg-black/40 p-6  border border-teal-500/20 shadow-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-black mb-4 flex items-center gap-2">
               <Users /> Lista de Docentes
             </h2>
-            <table className="w-full border border-gray-600 rounded-xl overflow-hidden text-sm">
+            <table className="w-full dark:border dark:border-gray-600  overflow-hidden text-sm">
               <thead className="dark:bg-teal-600 dark:text-white bg-orange-200">
                 <tr>
                   <th className="py-2 px-4 text-left">#</th>
