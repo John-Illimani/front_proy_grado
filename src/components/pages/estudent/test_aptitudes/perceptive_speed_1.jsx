@@ -179,10 +179,10 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
                         return (
                           <motion.div
                             key={index}
-                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all text-black ${
+                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all  ${
                               selected
-                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 bg-[yellow]"
-                                : "dark:bg-gray-800/30 dark:border border-[5px] dark:border-gray-600  "
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C]"
+                                : "dark:bg-gray-800/30 dark:border border-[3px] border-gray-600  text-black "
                             }`}
                             
                             whileTap={{ scale: 0.95 }}

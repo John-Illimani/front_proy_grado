@@ -111,10 +111,10 @@ export const TestRazonamientoNumerico = () => {
                       {pregunta.opciones.map((opcion, idx) => (
                         <label
                           key={idx}
-                          className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300  hover:bg-[color:yellow] dark:hover:bg-gray-600  ${
+                          className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300   dark:hover:bg-gray-600  ${
                             values[pregunta.id] === opcion
-                              ? "dark:bg-teal-400/20  border-2 dark:border-teal-400  "
-                              : "dark:bg-gray-800/50  dark:border dark:border-gray-600 hover:border-teal-400/50 border-[5px] "
+                              ? "dark:bg-teal-400/20  border-2 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C]  "
+                              : "dark:bg-gray-800/50  dark:border  border-[3px] dark:border-gray-600 border-gray-600 hover:border-teal-400/50 text-black"
                           }`}
                           onClick={() => setFieldValue(pregunta.id, opcion)}
                         >
@@ -123,9 +123,9 @@ export const TestRazonamientoNumerico = () => {
                             name={pregunta.id}
                             value={opcion}
                             checked={values[pregunta.id] === opcion}
-                            className="mr-3 h-5 w-5 text-teal-400"
+                            className="mr-3 h-5 w-5 "
                           />
-                          <span className="dark:text-white text-black font-bold">
+                          <span className="dark:text-white font-bold">
                             {String.fromCharCode(97 + idx)}) {opcion}
                           </span>
                         </label>

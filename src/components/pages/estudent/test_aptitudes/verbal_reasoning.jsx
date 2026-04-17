@@ -168,14 +168,14 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                       <p className="dark:text-white text-black font-semibold text-base md:text-lg mb-4">
                         {pregunta.id}.- {pregunta.texto}
                       </p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
                         {pregunta.opciones.map((opcion, index) => (
                           <motion.label
                             key={index}
-                            className={`flex items-center p-4 rounded-2xl cursor-pointer duration-300 transition-all hover:bg-[color:yellow] dark:hover:bg-gray-600 ${
+                            className={`flex items-center p-4 rounded-2xl cursor-pointer duration-300 transition-all  dark:hover:bg-gray-600  ${
                               values[fieldName] === opcion
-                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 "
-                                : "dark:bg-gray-800/50 border-[5px] dark:border-gray-600  "
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400  border-[#053F5C] shadow-xl bg-[#053F5C]  "
+                                : "dark:bg-gray-800/50 border-[3px] dark:border-gray-600 border-gray-600 hover:border-teal-400/50 text-black "
                             }`}
                             
                             
@@ -184,9 +184,9 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                               type="radio"
                               name={fieldName}
                               value={opcion}
-                              className="mr-3 h-5 w-5 dark:text-teal-400 text-black"
+                              className="mr-3 h-5 w-5 dark:text-teal-400 "
                             />
-                            <span className="dark:text-white text-black font-bold">
+                            <span className="dark:text-white  font-bold">
                               {String.fromCharCode(97 + index)}) {opcion}
                             </span>
                           </motion.label>

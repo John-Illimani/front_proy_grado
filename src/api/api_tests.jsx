@@ -37,9 +37,9 @@ async function sendData(newAnswersPayload, testName) {
         throw new Error("No se pudo obtener la ID del estudiante.");
     }
 
-    const access = localStorage.getItem("access");
+  
     const headers = {
-        Authorization: `Bearer ${access}`,
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
         "Content-Type": "application/json",
     };
 
@@ -301,9 +301,8 @@ export const posTests = async (
 
 const API_URL_DELETE = "http://localhost:8000/api/delete_response/";
 
-const accessToken = localStorage.getItem("access");
 const getHeaders = () => ({
-  Authorization: `Bearer ${accessToken}`,
+  Authorization: `Bearer ${localStorage.getItem("access")}`, 
   "Content-Type": "application/json",
 });
 

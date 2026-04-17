@@ -1,13 +1,10 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8000/api/predict/";
-const accessToken = localStorage.getItem("access"); // ¡Asegúrate que este token sea válido!
-
 const getHeaders = () => ({
-  Authorization: `Bearer ${accessToken}`,
+  Authorization: `Bearer ${localStorage.getItem("access")}`, // ✅ dinámico
   "Content-Type": "application/json",
 });
-
 export const sendIdStudent = async (id) => {
   try {
     const response = await axios.post(

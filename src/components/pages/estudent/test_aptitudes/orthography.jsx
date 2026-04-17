@@ -151,10 +151,10 @@ export const TestOrtografia = () => {
                         {pregunta.opciones.map((opcion, index) => (
                           <motion.label
                             key={index}
-                            className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300  hover:bg-[color:yellow] dark:hover:bg-gray-600 ${
+                            className={`flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-300   dark:hover:bg-gray-600 ${
                               values[fieldName] === index
-                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400"
-                                : "dark:bg-gray-800/50  dark:border dark:border-gray-600 hover:border-teal-400/50 border-[5px] "
+                                ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] "
+                                : "dark:bg-gray-800/50  dark:border dark:border-gray-600 hover:border-teal-400/50 border-gray-600 border-[3px] text-black"
                             }`}
                             
                             whileTap={{ scale: 0.98 }}
@@ -167,7 +167,7 @@ export const TestOrtografia = () => {
                               checked={values[fieldName] === index}
                               className="hidden"
                             />
-                            <span className="dark:text-white text-black font-bold">
+                            <span className="dark:text-white  font-bold">
                               {String.fromCharCode(97 + index)}) {opcion}
                             </span>
                           </motion.label>

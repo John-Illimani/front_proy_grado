@@ -129,7 +129,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
 
                     {/* Imagen */}
                     {pregunta.imagen && (
-                      <div className="flex justify-center mb-4 p-4 dark:bg-gray-800/30  bg-[#99CDD8] rounded-2xl">
+                      <div className="flex justify-center mb-4 p-4 rounded-2xl">
                         <img
                           src={pregunta.imagen}
                           alt={`Patrón ${pregunta.id}`}
