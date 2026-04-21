@@ -193,7 +193,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
 
               {/* Botones */}
 
-              <div className="flex justify-between mt-8">
+              <div className="flex justify-between mt-8 px-2 lg:px-0">
                 <motion.button
                   type="button"
                   onClick={() =>{

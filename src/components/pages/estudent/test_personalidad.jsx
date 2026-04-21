@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { motion } from "framer-motion";
 import { questionsPersonality } from "../questions/questions.js";
@@ -65,11 +65,12 @@ export const Test_personalidad = () => {
     );
   };
 
+  const newScroll = useRef(null);
   return (
-    <div className="relative text-white min-h-screen overflow-hidden h-full">
+    <div ref={newScroll} className="relative text-white min-h-screen overflow-hidden h-full overflow-y-auto scrollbar-hide">
 
-      <div className="absolute inset-0"></div> {/* overlay oscuro */}
-      <div className="relative z-10 max-w-5xl mx-auto pt-6 px-6">
+      <div className="absolute inset-0"></div> 
+      <div className="relative z-10 max-w-5xl mx-auto pt-6 lg:px-6  ">
         {/* Encabezado */}
         <TestHeader title={"Test de Personalidad"} description={description()} />
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ export const Test_personalidad = () => {
             <Form>
               {/* Encabezado */}
               <motion.div
-                className="text-center mb-5"
+                className="text-center mb-5 px-8"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -99,7 +100,7 @@ export const Test_personalidad = () => {
               </motion.div>
 
               {/* Preguntas */}
-              <div className="space-y-4 md:space-y-6 overflow-y-auto max-h-[55vh] scrollbar-hide">
+              <div className="space-y-4 md:space-y-6 px-2">
                 {currentQuestions.map((question, index) => {
                   const questionId = indexOfFirstQuestion + index + 1;
                   const fieldName = `${questionId}`;
@@ -186,10 +187,13 @@ export const Test_personalidad = () => {
               )}
 
               {/* Botones */}
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 px-2 lg:px-0">
                 <motion.button
                   type="button"
-                  onClick={prevPage}
+                  onClick={()=>{
+                    prevPage();
+                    newScroll.current?.scrollTo({top:0,behavior:"smooth"});
+                  }}
                   disabled={currentPage === 1}
                   whileHover={
                     currentPage !== 1
@@ -228,7 +232,10 @@ export const Test_personalidad = () => {
                 ) : (
                   <motion.button
                     type="button"
-                    onClick={nextPage}
+                    onClick={()=>{
+                      nextPage();
+                      newScroll.current?.scrollTo({top:0,behavior:"smooth"});
+                    }}
                     whileHover={{
                       scale: 1.05,
                       boxShadow: "0 0 15px rgba(139, 92, 246, 0.5)",

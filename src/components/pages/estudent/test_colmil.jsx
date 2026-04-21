@@ -341,7 +341,7 @@ export const Test_colmil = () => {
                 )}
 
                 {/* Botones */}
-                <div className="flex justify-between my-4">
+                <div className="flex justify-between my-4 lg:px-0 px-2">
                   <motion.button
                     type="button"
                     onClick={()=>{
