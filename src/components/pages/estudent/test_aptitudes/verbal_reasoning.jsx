@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { motion } from "framer-motion";
 import { preguntasSeccionA, preguntasSeccionB } from "../../questions/questions";
@@ -65,11 +65,13 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
     setShowModal(true);
   };
 
+  const scrollRef = useRef(null);
+
   return (
-    <div className="min-h-screen flex justify-center relative overflow-hidden h-full ">
+    <div className="min-h-screen flex justify-center relative  overflow-hidden h-full ">
       
 
-      <div className="relative z-10 w-full max-w-6xl px-5 py-5  ">
+      <div ref={scrollRef}  className="relative z-10 w-full max-w-6xl px-5 py-5 overflow-y-auto scrollbar-hide ">
         <TestHeader
           title={"TEST DE RAZONAMIENTO VERBAL"}
           description={"ULA-UNET Aprende Matemática-Física-Química-Lógica…"}
@@ -80,22 +82,29 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
             <Form>
               {/* Contenedor fijo de sección y temporizador arriba */}
               <motion.div
-                className="  sticky top-5 z-20 dark:from-black/40 dark:to-black/40 backdrop-blur-md rounded-3xl p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-teal-400/50  bg-gradient-to-r from-white to-white"
+                className=" sticky top-5 z-20 dark:from-black/40 dark:to-black/40 backdrop-blur-md rounded-3xl p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-teal-400/50  bg-gradient-to-r from-white to-white"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
+                
                 <div className="flex gap-4">
                   <motion.button
                     type="button"
                     
                     whileTap={{ scale: 0.95 }}
-                    className={`px-3 py-1.5 md:px-6 md:py-3  font-bold rounded-full border    shadow-md  duration-500 dark:hover:bg-gray-600  ${
+                    className={`px-3 py-1.5 md:px-6 md:py-3  text-sm lg:text-lg font-bold rounded-full border    shadow-md  duration-500 dark:hover:bg-gray-600  ${
                       currentSection === "A"
                         ? " dark:bg-teal-400 text-black dark:border-teal-400 border-2 border-red-950 "
                         : "bg-transparent text-whiteborder-teal-400 dark:text-white text-black "
                     }`}
-                    onClick={() => setCurrentSection("A")}
+                    onClick={() => {
+                      setCurrentSection("A");
+                      scrollRef.current?.scrollTo({top:0,behavior:"smooth"});
+
+                    }                     
+                    }
+                    
                   >
                     Sección A (4 min)
                   </motion.button>
@@ -103,18 +112,21 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                     type="button"
                     
                     whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-3 rounded-full border font-bold shadow-md  duration-500  dark:hover:bg-gray-600  ${
+                    className={`px-6 py-3 rounded-full border font-bold shadow-md  duration-500 text-sm lg:text-lg dark:hover:bg-gray-600  ${
                       currentSection === "B"
                         ? "dark:bg-teal-400 text-black dark:border-teal-400 border-2 border-red-950 "
                         : "bg-transparent dark:text-white dark:border-teal-400 text-black "
                     }`}
-                    onClick={() => setCurrentSection("B")}
+                    onClick={() => {
+                       setCurrentSection("B");
+                       scrollRef.current?.scrollTo({top:0,behavior:"smooth"});
+                    }}
                   >
                     Sección B (5 min)
                   </motion.button>
                 </div>
 
-                <div className="dark:text-white  text-black text-lg md:text-xl font-bold px-6 py-3 rounded-full border-2 dark:border-teal-400/50 border-red-800 ">
+                <div className="text-white dark:bg-black bg-[#0b75aa]   text-sm lg:text-lg md:text-xl font-bold px-6 py-3 rounded-full border-2 dark:border-teal-400/50 border-red-800 ">
                   Tiempo:{" "}
                   {currentSection === "A"
                     ? formatTime(timeLeftA)
@@ -123,7 +135,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
               </motion.div>
 
               {/* Contenedor preguntas */}
-              <div className="max-h-[65vh] overflow-y-auto  scrollbar-default px-6 ">
+              <div className=" px-6 ">
                 {/* Introducción */}
                 <motion.div
                   className="mb-8 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl p-6 shadow-2xl backdrop-blur-md border border-teal-400/30 dark:text-gray-200 text-black leading-relaxed"
@@ -197,7 +209,8 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                 })}
 
                 {/* Botón enviar */}
-                <motion.div
+                {currentSection === "B" && (
+                  <motion.div
                   className="text-center mt-5 mb-10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -214,6 +227,7 @@ export const TestRazonamientoVerbal = ({ nombre = "JOHN" }) => {
                     {isSubmitting ? "Enviando..." : "Enviar Respuestas"}
                   </motion.button>
                 </motion.div>
+                )}
               </div>
 
               {/* Modal de envío correcto */}

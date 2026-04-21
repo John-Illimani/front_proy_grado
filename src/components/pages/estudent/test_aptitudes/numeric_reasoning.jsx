@@ -91,14 +91,14 @@ export const TestRazonamientoNumerico = () => {
               </motion.div>
 
               {/* TEMPORIZADOR */}
-              <motion.div className="flex justify-center mb-8">
-                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50 ">
+              <motion.div className="flex justify-center mb-8 sticky top-5 dark:z-30 ">
+                <div className="dark:text-white  text-lg lg:text-2xl font-bold dark:bg-black bg-[#0b75aa]   px-8 py-4 rounded-full border-2 border-black text-white shadow-xl dark:border-teal-400/50 ">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* PREGUNTAS */}
-              <div className="max-h-[500px] overflow-y-auto  scrollbar-hide px-6">
+              <div className=" px-6">
                 {preguntas.map((pregunta) => (
                   <div
                     key={pregunta.id}

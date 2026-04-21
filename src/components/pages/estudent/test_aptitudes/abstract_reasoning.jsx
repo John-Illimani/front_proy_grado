@@ -69,7 +69,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
       
 
       {/* Contenedor principal */}
-      <div className="relative z-10 w-full max-w-7xl px-6 py-10 h-full overflow-y-auto scrollbar-hide">
+      <div className="relative z-10 w-full max-w-7xl lg:px-6 py-10 h-full overflow-y-auto scrollbar-hide">
         {/* Encabezado */}
         <TestHeader
           title={"TEST DE RAZONAMIENTO ABSTRACTO"}
@@ -102,25 +102,25 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
 
               {/* Temporizador */}
               <motion.div
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-8 sticky top-5 z-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
+                <div className="text-white text-lg lg:text-2xl font-bold dark:bg-black bg-[#0b75aa]  px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50  shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[700px] overflow-y-auto px-6 scrollbar-hide"
+                className="lg:px-6  px-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
                 {preguntas.map((pregunta) => (
                   <motion.div
                     key={pregunta.id}
-                    className="mb-8 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30 from-white to-white"
+                    className="mb-8 lg:p-6 p-3 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30 from-white to-white"
                     whileHover={{ scale: 1.01 }}
                   >
                     <p className="dark:text-white text-black font-semibold text-lg mb-3">
@@ -129,7 +129,7 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
 
                     {/* Imagen */}
                     {pregunta.imagen && (
-                      <div className="flex justify-center mb-4 p-4 rounded-2xl">
+                      <div className="flex justify-center mb-4  ">
                         <img
                           src={pregunta.imagen}
                           alt={`Patrón ${pregunta.id}`}
@@ -139,11 +139,11 @@ export const TestRazonamientoAbstracto = ({ nombre = "JOHN" }) => {
                     )}
 
                     {/* Opciones */}
-                    <div className="flex flex-wrap items-center justify-center gap-6">
+                    <div className="grid grid-cols-2  lg:flex lg:flex-wrap items-center justify-center gap-6">
                       {pregunta.opciones.map((opcion, idx) => (
                         <motion.label
                           key={idx}
-                          className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-32  ${
+                          className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 lg:w-32    ${
                             values[pregunta.id] === opcion
                               ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white "
                               : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px] "

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { motion } from "framer-motion";
 
@@ -115,12 +115,12 @@ export const Test_colmil = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
+  const newScroll = useRef(null);
   return (
-    <div className="relative text-white overflow-hidden h-full">
-      {/* Fondo */}
+    <div ref={newScroll} className="relative text-white overflow-hidden h-full  overflow-y-auto scrollbar-hide">
+  
 
-
-      <div className="relative z-10 max-w-5xl mx-auto pt-6 px-6 ">
+      <div className="relative z-10 max-w-5xl mx-auto pt-6 lg:px-6 ">
         {/* Encabezado */}
         <TestHeader
           title={"TEST - COLMIL"}
@@ -134,13 +134,13 @@ export const Test_colmil = () => {
               <Form>
                 {/* Encabezado */}
                 <motion.div
-                  className="text-center mb-5"
+                  className="text-center mb-5 px-8 lg:p-0 "
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                 >
                   {/* Selector de sección */}
-                  <div className="flex justify-center gap-4 mt-6">
+                  <div className="flex justify-center lg:gap-4 gap-1 mt-6 px-14 lg:p-0">
                     {["ipde", "psychotechnical", "personality"].map(
                       (section) => (
                         <button
@@ -191,7 +191,7 @@ export const Test_colmil = () => {
                 </motion.div>
 
                 {/* Preguntas */}
-                <div className="space-y-4 md:space-y-6 max-h-[45vh] overflow-y-auto px-2 scrollbar-hide">
+                <div className="space-y-4 md:space-y-6   px-2 ">
                   {currentQuestions.map((question, index) => {
                     const sectionOffset =
                       currentSection === "ipde"
@@ -344,7 +344,10 @@ export const Test_colmil = () => {
                 <div className="flex justify-between my-4">
                   <motion.button
                     type="button"
-                    onClick={prevPage}
+                    onClick={()=>{
+                      prevPage();
+                      newScroll.current?.scrollTo({top:0,behavior:"smooth"})
+                    }}
                     disabled={currentPage === 1}
                     whileHover={
                       currentPage !== 1
@@ -378,7 +381,11 @@ export const Test_colmil = () => {
                   ) : (
                     <motion.button
                       type="button"
-                      onClick={nextPage}
+                      onClick={()=>{
+                        nextPage();
+                        newScroll.current?.scrollTo({top:0, behavior:"smooth"})
+
+                      }}
                       whileHover={{
                         scale: 1.05,
                         boxShadow: "0 0 15px rgba(6,182,212,0.5)",

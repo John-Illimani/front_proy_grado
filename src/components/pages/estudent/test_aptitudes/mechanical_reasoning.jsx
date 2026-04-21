@@ -57,7 +57,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
       
 
       {/* Contenido */}
-      <div className="relative z-10 w-full max-w-7xl px-6 py-10 overflow-y-auto scrollbar-hide">
+      <div className="relative z-10 w-full lg:max-w-7xl  lg:px-6 py-10 overflow-y-auto scrollbar-hide">
         <TestHeader
           title={"TEST DE RAZONAMIENTO MECÁNICO"}
           description={"Ejercicios de Principios Mecánicos y Física Aplicada"}
@@ -91,19 +91,19 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
 
               {/* Temporizador */}
               <motion.div
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-8 sticky top-5 z-20  "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
+                <div className="text-white bg-[#0b75aa]  text-2xl font-bold dark:bg-black px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50  shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[700px] overflow-y-auto px-6 scrollbar-hide"
+                className=" lg:px-6  px-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -113,7 +113,7 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                   return (
                     <motion.div
                       key={pregunta.id}
-                      className="mb-8 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                      className="mb-8 lg:p-6 p-3 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                       whileHover={{ scale: 1.01 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -123,13 +123,13 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                         </p>
 
                         {pregunta.imagen && (
-                          <div className="flex justify-center mb-4 md:p-4  rounded-2xl">
+                          <div className="flex justify-center mb-4   rounded-2xl  ">
                             <div className="text-center">
-                              <div className=" p-4 rounded-xl inline-block ">
+                              <div className="  rounded-xl inline-block ">
                                 <img
                                   src={pregunta.imagen}
                                   alt={`Ejercicio mecánico ${pregunta.id}`}
-                                  className="max-w-full  h-[25rem] mx-auto"
+                                  className="max-w-full  h-[25rem] mx-auto rounded-xl"
                                 />
                               </div>
                               <p className="dark:text-gray-400 text-black font-bold text-lg mt-2">
@@ -141,13 +141,13 @@ export const TestRazonamientoMecanico = ({ nombre = "JOHN" }) => {
                       </div>
 
                       {/* Opciones */}
-                      <div className="flex flex-wrap items-center justify-center gap-x-8 ">
+                      <div className=" grid grid-cols-2  lg:flex justify-items-center lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-8 ">
                         {pregunta.opciones.map((opcion, index) => {
                           const isSelected = values[fieldName] === opcion;
                           return (
                             <motion.label
                               key={index}
-                              className={`flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-40 text-center  min-w-6 ${
+                              className={` flex flex-col items-center p-3 rounded-2xl cursor-pointer transition-all border-2 w-40 text-center  lg:min-w-6 ${
                                 isSelected
                                   ? "dark:bg-teal-400/20 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] text-white transition-all duration-500"
                                   : "dark:bg-gray-800/50 border-gray-600 hover:border-teal-400/50 border-[3px]  md:h-24  "

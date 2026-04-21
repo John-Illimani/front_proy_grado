@@ -73,7 +73,7 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
             
             <div className="absolute inset-0"></div>
 
-            <div className="relative z-10 w-full max-w-6xl px-6 py-10 overflow-y-auto scrollbar-hide">
+            <div className="relative z-10 w-full max-w-6xl lg:px-6 py-10 overflow-y-auto scrollbar-hide">
               <TestHeader
                 title="TEST DE RAPIDEZ Y EXACTITUD PERCEPTIVA"
                 description="Parte I - Comparación de Grupos de Letras y Números"
@@ -113,13 +113,13 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
               </motion.div>
 
               <motion.div
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-8 sticky top-5 z-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <div
-                  className={`dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50 ${
+                  className={`text-white text-2xl font-bold dark:bg-black bg-[#0b75aa] px-8 py-4 rounded-full border-2 border-black  shadow-xl dark:border-teal-400/50 ${
                     timeLeft < 60
                       ? "dark:bg-red-600/40 border-red-400"
                       : "dark:bg-black/40 dark:border-teal-400/50"
@@ -130,7 +130,7 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
               </motion.div>
 
               <motion.div
-                className="max-h-[500px] overflow-y-auto pr-2 grid grid-cols-1 md:grid-cols-2 gap-4 scrollbar-hide"
+                className=" px-2 grid grid-cols-1 md:grid-cols-2 gap-4 "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -138,7 +138,7 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
                 {preguntas.map((pregunta) => (
                   <motion.div
                     key={pregunta.id}
-                    className="p-4 bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-2xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                    className=" p-4 bg-gradient-to-r from-white to-white dark:from-black/50 dark:to-gray-900/50 rounded-2xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -168,7 +168,7 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className=" grid grid-cols-2 gap-1  ">
                       {pregunta.opciones.map((opcion, index) => {
                         const isCorrect = opcion === pregunta.respuesta;
                         const selected =
@@ -199,7 +199,7 @@ export const TestRapidezPerceptivaParte1 = ({ nombre = "JOHN" }) => {
                               }
                             }}
                           >
-                            <span className="dark:text-white  font-bold text-lg">
+                            <span className="dark:text-white  font-bold text-lg mx-auto">
                               {String.fromCharCode(65 + index)}) {opcion}
                             </span>
                           </motion.div>

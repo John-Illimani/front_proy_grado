@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { motion } from "framer-motion";
 import { posTests } from "../../../api/api_tests";
@@ -60,11 +60,13 @@ const handleSubmit = async (values, { setSubmitting }) => {
     indexOfLastQuestion
   );
 
+  const scrollRef = useRef(null);
+
   return (
     <div className="relative text-white overflow-hidden h-full">
      
 
-      <div className="relative z-10 max-w-5xl h-full mx-auto py-12 px-6 overflow-y-auto scrollbar-hide">
+      <div ref={scrollRef}  className="relative z-10 max-w-5xl h-full mx-auto py-12 lg:px-6 overflow-y-auto scrollbar-hide">
         {/* Encabezado */}
         <TestHeader
           title={"Test de Orientación Vocacional (CHASIDE)"}
@@ -96,7 +98,7 @@ const handleSubmit = async (values, { setSubmitting }) => {
                 </p>
               </motion.div>
               {/* Preguntas */}
-              <div className="space-y-6">
+              <div   className="space-y-6 px-2 lg:p-0">
                 {currentQuestions.map((question, index) => {
                   const questionId = indexOfFirstQuestion + index + 1;
                   const fieldName = `${questionId}`;
@@ -194,7 +196,10 @@ const handleSubmit = async (values, { setSubmitting }) => {
               <div className="flex justify-between mt-8">
                 <motion.button
                   type="button"
-                  onClick={prevPage}
+                  onClick={() =>{
+                    prevPage();
+                     scrollRef.current?.scrollTo({top:0,behavior:"smooth"});
+                  }}
                   disabled={currentPage === 1}
                   whileHover={
                     currentPage !== 1
@@ -222,7 +227,9 @@ const handleSubmit = async (values, { setSubmitting }) => {
                       await handleSubmit(values, { setSubmitting }); 
                       setSubmitting(false);
                       Cambios();
+                      
                     }}
+
                     disabled={isSubmitting}
                     className={`px-6 py-2 rounded-xl font-bold bg-gradient-to-r from-[#053F5C] to-[#0c7fb8]  text-white shadow-lg transition-all duration-300 hover:opacity-90 hover:shadow-green-400/40 ${
                       isSubmitting ? "opacity-50 cursor-not-allowed" : ""
@@ -233,7 +240,13 @@ const handleSubmit = async (values, { setSubmitting }) => {
                 ) : (
                   <motion.button
                     type="button"
-                    onClick={nextPage}
+                    onClick={()=>{
+                      nextPage();
+                      scrollRef.current?.scrollTo({top:0,behavior:"smooth"});
+                    }
+
+
+                    }
                     whileHover={{
                       scale: 1.05,
                       boxShadow: "0 0 15px rgba(6,182,212,0.5)",

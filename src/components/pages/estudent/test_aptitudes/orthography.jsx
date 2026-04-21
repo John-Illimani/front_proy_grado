@@ -72,7 +72,7 @@ export const TestOrtografia = () => {
     <div className="h-full flex items-center justify-center relative overflow-hidden">
       
 
-      <div className="relative z-10 w-full max-w-6xl px-6 py-10 h-full overflow-y-auto scrollbar-hide ">
+      <div className="relative z-10 w-full max-w-6xl lg:px-6 py-10 h-full overflow-y-auto scrollbar-hide ">
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -110,19 +110,19 @@ export const TestOrtografia = () => {
 
               {/* Temporizador */}
               <motion.div
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-8 sticky top-5 z-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50 ">
+                <div className="bg-[#0b75aa]  text-white text-2xl font-bold dark:bg-black px-8 py-4 rounded-full border-2 border-black  shadow-xl dark:border-teal-400/50 ">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[600px] overflow-y-auto px-6 scrollbar-hide "
+                className="lg:px-6  px-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}

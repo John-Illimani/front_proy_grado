@@ -59,7 +59,7 @@ export const TestRazonamientoEspacial = () => {
     <div className="h-full flex justify-center relative overflow-hidden">
      
 
-      <div className="relative z-10 w-full max-w-6xl px-6 py-10 overflow-y-auto scrollbar-hide">
+      <div className="relative z-10 w-full max-w-6xl lg:px-6 py-10 overflow-y-auto scrollbar-hide">
         <TestHeader
           title={"TEST DE RAZONAMIENTO ESPACIAL"}
           description={"Instrumento adaptado del 'Spatial Reasoning Instrument' (SRI)"}
@@ -85,18 +85,18 @@ export const TestRazonamientoEspacial = () => {
               </motion.div>
 
               {/* Temporizador */}
-              <motion.div className="flex justify-center mb-8">
-                <div className="dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50 text-black shadow-xl">
+              <motion.div className="flex justify-center mb-8 sticky top-5 z-20  ">
+                <div className="text-white text-2xl font-bold dark:bg-black bg-[#0b75aa]  px-8 py-4 rounded-full border-2 border-black dark:border-teal-400/50  shadow-xl">
                   Tiempo: {formatTime(timeLeft)}
                 </div>
               </motion.div>
 
               {/* Preguntas */}
-              <div className="max-h-[800px] overflow-y-auto px-6 scrollbar-hide">
+              <div className=" lg:px-6  px-2 ">
                 {preguntas.map((pregunta) => (
                   <div
                     key={pregunta.id}
-                    className="mb-6 p-6 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
+                    className="mb-6 lg:p-6 p-3 bg-gradient-to-r dark:from-black/50 dark:to-gray-900/50 from-white to-white rounded-3xl shadow-2xl backdrop-blur-md border border-teal-400/30"
                   >
                     <p className="dark:text-white text-black font-semibold text-lg mb-4">
                       {pregunta.id}.- {pregunta.texto}

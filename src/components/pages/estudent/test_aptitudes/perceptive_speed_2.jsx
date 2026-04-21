@@ -74,7 +74,7 @@ export const TestRapidezPerceptivaParte2 = () => {
           <div className="h-screen flex justify-center relative overflow-hidden">
             
 
-            <div className="relative z-10 w-full max-w-6xl px-6 py-10 overflow-y-auto scrollbar-hide">
+            <div className="relative z-10 w-full max-w-6xl lg:px-6 py-10 overflow-y-auto scrollbar-hide">
               <TestHeader
                 title="TEST DE RAPIDEZ Y EXACTITUD PERCEPTIVA"
                 description="Parte II - Comparación de Grupos de Letras y Números"
@@ -115,13 +115,13 @@ export const TestRapidezPerceptivaParte2 = () => {
 
               {/* Temporizador */}
               <motion.div
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-8 sticky top-5 z-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <div
-                  className={`dark:text-white text-2xl font-bold dark:bg-black/40 px-8 py-4 rounded-full border-2 border-black text-black shadow-xl dark:border-teal-400/50  ${
+                  className={`text-white text-2xl font-bold dark:bg-black bg-[#0b75aa]  px-8 py-4 rounded-full border-2 border-black  shadow-xl dark:border-teal-400/50  ${
                     timeLeft < 60
                       ? "dark:bg-red-600/40 border-red-400"
                       : "dark:bg-black/40 dark:border-teal-400/50"
@@ -133,7 +133,7 @@ export const TestRapidezPerceptivaParte2 = () => {
 
               {/* Preguntas */}
               <motion.div
-                className="max-h-[500px] overflow-y-auto pr-2 grid grid-cols-1 md:grid-cols-2 gap-4 scrollbar-hide"
+                className="  grid grid-cols-1 md:grid-cols-2 gap-4 px-2 "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -171,7 +171,7 @@ export const TestRapidezPerceptivaParte2 = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className=" grid grid-cols-2 gap-1  ">
                       {pregunta.opciones.map((opcion, index) => {
                         const isCorrect = opcion === pregunta.respuesta;
                         const selected =
@@ -182,7 +182,7 @@ export const TestRapidezPerceptivaParte2 = () => {
                         return (
                           <motion.div
                             key={index}
-                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all  ${
+                            className={`flex items-center p-2 rounded-xl cursor-pointer transition-all h-full   ${
                                selected
                                 ? "dark:bg-teal-400/20 border-2 dark:border-teal-400 border-[#053F5C] shadow-xl bg-[#053F5C] "
                                 : "dark:bg-gray-800/30 dark:border border-[3px] border-gray-600 text-black "
@@ -202,7 +202,7 @@ export const TestRapidezPerceptivaParte2 = () => {
                               }
                             }}
                           >
-                            <span className="dark:text-white  font-bold text-lg">
+                            <span className="dark:text-white  font-bold text-lg  mx-auto ">
                               {String.fromCharCode(65 + index)}) {opcion}
                             </span>
                           </motion.div>
