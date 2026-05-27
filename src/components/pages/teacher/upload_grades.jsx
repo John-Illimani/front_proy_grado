@@ -126,7 +126,7 @@ export const TeacherGrades = () => {
         </div>
       </motion.aside>
 
-      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black/90 from-orange-100 p-2 sm:p-4 md:p-6">
+      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-teal-950 dark:to-cyan-900 from-orange-100 p-2 sm:p-4 md:p-6">
         <motion.div
           className="pl-10 md:pl-0 pt-3 sm:pt-4 md:pt-2"
           initial={{ opacity: 0, y: 20 }}

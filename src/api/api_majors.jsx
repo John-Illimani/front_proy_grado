@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // Assuming your endpoint for Majors is /api/majors/
-const API_URL = "http://localhost:8000/api/majors/";
-const API_URL_DELETE = "http://localhost:8000/api/delete_majors/";
+const API_URL = "http://108.181.172.191:10041/api/majors/";
+const API_URL_DELETE = "http://108.181.172.191:10041/api/delete_majors/";
 // ❌ ELIMINAR: const accessToken = localStorage.getItem("access");
 
 // ✅ CORRECCIÓN: Leer el token dinámicamente DENTRO de la función

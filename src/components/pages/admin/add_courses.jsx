@@ -117,15 +117,23 @@ export const CourseCRUD = () => {
 
   // 🧩 Obtener nombre del profesor
   const getTeacherName = (teacherId) => {
-    const teacher = teachers.find((t) => t.id === teacherId);
-    if (!teacher) return "Desconocido";
-    const user = users.find((u) => u.id === teacher.usuario);
-    if (!user) return "Sin usuario";
-    const first = user.first_name?.trim() || "";
-    const last = user.last_name?.trim() || "";
-    if (first && last) return `${first} ${last}`;
-    return user.username || `Profesor #${teacher.id}`;
-  };
+  const teacher = teachers.find((t) => t.id === teacherId);
+
+  // profesor eliminado
+  if (!teacher) return "Profesor eliminado";
+
+  const user = users.find((u) => u.id === teacher.usuario);
+
+  // usuario eliminado
+  if (!user) return "Usuario eliminado";
+
+  const first = user.first_name?.trim() || "";
+  const last = user.last_name?.trim() || "";
+
+  const fullName = `${first} ${last}`.trim();
+
+  return fullName || user.username || "Sin nombre";
+};
 
   return (
     <div className="relative z-10 flex-1 overflow-y-auto text-gray-700 dark:text-white p-4 md:p-8 scrollbar-hide h-[95vh] ">
@@ -208,19 +216,21 @@ export const CourseCRUD = () => {
                     className="px-4 py-2 rounded-xl border border-teal-400/50 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-teal-400 outline-none"
                   >
                     <option value="">Seleccionar profesor</option>
-                    {teachers.map((t) => {
-                      const user = users.find((u) => u.id === t.usuario);
-                      const fullName = `${user?.first_name || ""} ${
-                        user?.last_name || ""
-                      }`
-                        .trim()
-                        .replace(/\s+/g, " ");
-                      return (
-                        <option key={t.id} value={t.id}>
-                          {fullName || user?.username || `Profesor #${t.id}`}
-                        </option>
-                      );
-                    })}
+                   {teachers
+  .filter((t) => users.some((u) => u.id === t.usuario))
+  .map((t) => {
+    const user = users.find((u) => u.id === t.usuario);
+
+    const fullName = `${user?.first_name || ""} ${user?.last_name || ""}`
+      .trim()
+      .replace(/\s+/g, " ");
+
+    return (
+      <option key={t.id} value={t.id}>
+        {fullName || user?.username || "Sin nombre"}
+      </option>
+    );
+  })}
                   </Field>
                 </>
               )}

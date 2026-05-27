@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/add_student/";
+const API_URL = "http://108.181.172.191:10041/api/add_student/";
 
 // ❌ ELIMINA: const accessToken = localStorage.getItem("access"); 
 // ✅ CORRECCIÓN: Leer el token justo antes de cada petición.

@@ -5,14 +5,12 @@ import {  FiUserPlus, FiLogOut, FiFileText, FiBook } from "react-icons/fi";
 import { ThemeSwitcher } from "../../themeSwitcher";
 import { ArrowRightIcon, BuildingIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
-
 export const AdminPanel = () => {
-  // Datos de ejemplo
+  
   const [profesores, setProfesores] = useState([
     { id: 1, nombre: "Juan", apellido: "Perez", email: "jperez@colegio.edu" },
     { id: 2, nombre: "Ana", apellido: "Lopez", email: "alopez@colegio.edu" },
   ]);
-
   const [formProfesor, setFormProfesor] = useState({ nombre: "", apellido: "", email: "" });
   const [nuevoAdmin, setNuevoAdmin] = useState({ username: "", email: "", password: "" });
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -43,7 +41,6 @@ export const AdminPanel = () => {
     // Redirigir al login si usas react-router
   };
 
-  // Menú principal con links directos
   const menuItems = [
     {
       id: "nuevoAdmin",
@@ -148,7 +145,7 @@ export const AdminPanel = () => {
       </motion.aside>
 
       
-      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-gray-900 dark:to-black  from-orange-100 sm:p-4 md:px-6">
+      <main className="relative flex-1 overflow-x-hidden overflow-y-auto bg-gradient-to-br dark:from-teal-950 dark:to-cyan-900 from-orange-100 sm:p-4 md:px-6">
         <motion.div
           className="pl-10 md:pl-0 pt-3 sm:pt-4 md:pt-2"
           initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getStudentId } from "../components/pages/estudent/studentId";
 
-const API_URL = "http://localhost:8000/api/option_response/";
+const API_URL = "http://108.181.172.191:10041/api/option_response/";
 
 const testRanges = {
   chaside: { startId: 1, endId: 98 },
@@ -108,7 +108,7 @@ async function sendData(newAnswersPayload, testName) {
         // 2. Actualización Masiva (PATCH)
         if (toUpdate.length > 0) {
             console.log(`🔄 Actualizando ${toUpdate.length} respuestas existentes`);
-            const updateUrl = `http://localhost:8000/api/update/`; 
+            const updateUrl = `http://108.181.172.191:10041/api/update/`; 
             const chunkSize = 200;
             for (let i = 0; i < toUpdate.length; i += chunkSize) {
                 const chunk = toUpdate.slice(i, i + chunkSize);
@@ -299,7 +299,7 @@ export const posTests = async (
   }
 };
 
-const API_URL_DELETE = "http://localhost:8000/api/delete_response/";
+const API_URL_DELETE = "http://108.181.172.191:10041/api/delete_response/";
 
 const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem("access")}`, 

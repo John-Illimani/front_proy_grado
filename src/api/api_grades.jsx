@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/add_grades/";
+const API_URL = "http://108.181.172.191:10041/api/add_grades/";
 // ❌ ELIMINAR: const accessToken = localStorage.getItem("access");
 
 // ✅ CORRECCIÓN: Leer el token dinámicamente cada vez que se llama

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/add_user/";
+const API_URL = "http://108.181.172.191:10041/api/add_user/";
 
-const API_URL_BULLK = "http://localhost:8000/api/add_user/bulk-create/";
+const API_URL_BULLK = "http://108.181.172.191:10041/api/add_user/bulk-create/";
 
 const getHeaders = () => {
     // Lee el token justo antes de que se use

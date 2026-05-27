@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/add_section/";
+const API_URL = "http://108.181.172.191:10041/api/add_section/";
 // ❌ ELIMINAR: const accessToken = localStorage.getItem("access");
 
 // ✅ CORRECCIÓN: Leer el token dinámicamente DENTRO de la función

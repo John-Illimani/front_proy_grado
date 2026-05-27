@@ -41,6 +41,7 @@ const testsInfo = [
   { id: 8, nombre: "Ortografía", total_preguntas: 26, icon: "✍️" },
   { id: 9, nombre: "Rapidez y Exactitud 1", total_preguntas: 100, icon: "⏱️" },
   { id: 10, nombre: "Rapidez y Exactitud 2", total_preguntas: 100, icon: "⏱️" },
+  { id: 11, nombre: "Razonamiento Espacial", total_preguntas: 30, icon: "🧠" },
 ];
 
 const aptitudesInfo = [
@@ -190,14 +191,19 @@ export const ReporteGeneralVocacional = () => {
 
   // --- Funciones ---
   const getPorcentaje = (studentId, testId) => {
-    const st = studentTests.find(
-      (t) => t.estudiante === studentId && t.testvocational === testId
-    );
-    const info = testsInfo.find((t) => t.id === testId);
-    return st && info
-      ? ((st.completo / info.total_preguntas) * 100).toFixed(1)
-      : 0;
-  };
+  const st = studentTests.find(
+    (t) => t.estudiante === studentId && t.testvocational === testId
+  );
+
+  const info = testsInfo.find((t) => t.id === testId);
+
+  if (!st || !info) return 0;
+
+  const porcentaje = (st.completo / info.total_preguntas) * 100;
+
+  // 🔹 Limitar máximo a 100%
+  return Math.min(porcentaje, 100).toFixed(1);
+};
 
   const getPorcentajeAptitud = (studentId, apt) => {
     let total = 0,
@@ -213,282 +219,935 @@ export const ReporteGeneralVocacional = () => {
   };
 
 
-  const generarPDFDocentes = () => {
-  const pdf = new jsPDF("p", "mm", "a4");
+const generarPDFDocentes = () => {
+  const pdf = new jsPDF("l", "mm", "a4");
+
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
+  const logo = "/logo.png";
 
-  const logo = "/logo.png"; // Ruta del logo institucional
+  // ─────────────────────────────────────────────
+  // Fondo institucional
+  // ─────────────────────────────────────────────
+  const addBackground = () => {
+    // Fondo claro
+    pdf.setFillColor(248, 250, 252);
+    pdf.rect(0, 0, pageWidth, pageHeight, "F");
 
-  // --- Fondo institucional ---
-  pdf.setFillColor(232, 245, 253); // celeste claro
-  pdf.rect(0, 0, pageWidth, pageHeight, "F");
+    // Barra superior
+    pdf.setFillColor(10, 36, 99);
+    pdf.rect(0, 0, pageWidth, 18, "F");
 
-  // --- Encabezado institucional ---
-  pdf.addImage(logo, "PNG", 15, 10, 30, 30);
-  pdf.setFontSize(20);
-  pdf.setTextColor("#0d47a1");
-  pdf.text("Colegio Marcelo Quiroga Santa Cruz", pageWidth / 2, 25, {
-    align: "center",
-  });
+    // Barra inferior
+    pdf.setFillColor(10, 36, 99);
+    pdf.rect(0, pageHeight - 10, pageWidth, 10, "F");
 
-  pdf.setFontSize(14);
-  pdf.setTextColor("#000");
-  pdf.text("Reporte General de Docentes", pageWidth / 2, 33, {
-    align: "center",
-  });
+    // Marca de agua
+    try {
+      pdf.saveGraphicsState();
+      pdf.setGState(new pdf.GState({ opacity: 0.05 }));
+      pdf.addImage(
+        logo,
+        "PNG",
+        pageWidth / 2 - 35,
+        pageHeight / 2 - 35,
+        70,
+        70
+      );
+      pdf.restoreGraphicsState();
+    } catch (e) {}
 
-  pdf.setFontSize(11);
-  pdf.setTextColor("#444");
-  pdf.text(`Fecha: ${new Date().toLocaleDateString()}`, pageWidth - 20, 33, {
-    align: "right",
-  });
+    // Línea dorada
+    pdf.setDrawColor(212, 175, 55);
+    pdf.setLineWidth(1);
+    pdf.line(0, 18, pageWidth, 18);
+  };
 
-  // --- Línea divisoria ---
-  pdf.setDrawColor(13, 71, 161);
+  // ─────────────────────────────────────────────
+  // Encabezado
+  // ─────────────────────────────────────────────
+  const addHeader = (pageNum) => {
+    addBackground();
+
+    try {
+      pdf.addImage(logo, "PNG", 8, 2, 12, 12);
+    } catch (e) {}
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(14);
+    pdf.setTextColor(255, 255, 255);
+
+    pdf.text(
+      "COLEGIO MARCELO QUIROGA SANTA CRUZ",
+      pageWidth / 2,
+      8,
+      { align: "center" }
+    );
+
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(9);
+
+    pdf.text(
+      "Sistema de Orientación Vocacional — Reporte General de Docentes",
+      pageWidth / 2,
+      14,
+      { align: "center" }
+    );
+
+    pdf.setFontSize(8);
+    pdf.setTextColor(220, 230, 255);
+
+    pdf.text(
+      `Fecha: ${new Date().toLocaleDateString("es-BO")}`,
+      pageWidth - 10,
+      8,
+      { align: "right" }
+    );
+
+    pdf.text(`Página ${pageNum}`, pageWidth - 10, 14, {
+      align: "right",
+    });
+  };
+
+  // ─────────────────────────────────────────────
+  // Pie de página
+  // ─────────────────────────────────────────────
+  const addFooter = () => {
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(8);
+    pdf.setTextColor(255, 255, 255);
+
+    pdf.text(
+      "Sistema Vocacional — Colegio Marcelo Quiroga Santa Cruz | Documento generado automáticamente",
+      pageWidth / 2,
+      pageHeight - 4,
+      { align: "center" }
+    );
+  };
+
+  // ─────────────────────────────────────────────
+  // PORTADA
+  // ─────────────────────────────────────────────
+  addBackground();
+
+  try {
+    pdf.addImage(logo, "PNG", pageWidth / 2 - 25, 25, 50, 50);
+  } catch (e) {}
+
+  // Caja título
+  pdf.setFillColor(10, 36, 99);
+  pdf.roundedRect(40, 85, pageWidth - 80, 30, 4, 4, "F");
+
+  pdf.setDrawColor(212, 175, 55);
   pdf.setLineWidth(0.8);
-  pdf.line(15, 38, pageWidth - 15, 38);
+  pdf.roundedRect(40, 85, pageWidth - 80, 30, 4, 4, "D");
 
-  let y = 50;
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(22);
+  pdf.setTextColor(255, 255, 255);
 
-  // --- Título de sección ---
-  pdf.setFontSize(13);
-  pdf.setTextColor("#1565c0");
-  pdf.text("Listado de Docentes Registrados", 20, y);
-  y += 8;
-
-  teachers.forEach((doc, i) => {
-    // --- Caja individual del docente ---
-    pdf.setDrawColor(21, 101, 192);
-    pdf.setFillColor(255, 255, 255);
-    pdf.roundedRect(15, y, pageWidth - 30, 20, 3, 3, "FD");
-
-    // --- Contenido del docente ---
-    pdf.setFontSize(11);
-    pdf.setTextColor("#0d47a1");
-    pdf.text(`${i + 1}. ${doc.first_name} ${doc.last_name}`, 20, y + 7);
-
-    pdf.setFontSize(10);
-    pdf.setTextColor("#000");
-    pdf.text(`Usuario: ${doc.username}`, 20, y + 14);
-
-    pdf.setFontSize(10);
-    pdf.setTextColor("#ff8f00");
-    
-
-    y += 25;
-
-    
-    if (y > 260) {
-      pdf.addPage();
-
-      
-      pdf.setFillColor(232, 245, 253);
-      pdf.rect(0, 0, pageWidth, pageHeight, "F");
-
-      // Título repetido
-      pdf.addImage(logo, "PNG", 15, 10, 30, 30);
-      pdf.setFontSize(14);
-      pdf.setTextColor("#0d47a1");
-      pdf.text("Reporte General de Docentes", pageWidth / 2, 25, {
-        align: "center",
-      });
-
-      pdf.setDrawColor(13, 71, 161);
-      pdf.setLineWidth(0.8);
-      pdf.line(15, 38, pageWidth - 15, 38);
-
-      y = 50;
-    }
+  pdf.text("REPORTE GENERAL DE DOCENTES", pageWidth / 2, 102, {
+    align: "center",
   });
 
-  // --- Pie de página institucional ---
-  pdf.setFontSize(10);
-  pdf.setTextColor("#777");
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(11);
+  pdf.setTextColor(212, 175, 55);
+
   pdf.text(
-    "Sistema Vocacional - Colegio Marcelo Quiroga Santa Cruz",
+    "Listado Institucional de Docentes Registrados",
     pageWidth / 2,
-    pageHeight - 10,
+    111,
     { align: "center" }
   );
 
-  pdf.save("Reporte_Docentes.pdf");
+  // Caja información
+  pdf.setFillColor(255, 255, 255);
+  pdf.setDrawColor(180, 195, 220);
+
+  pdf.roundedRect(70, 128, pageWidth - 140, 45, 3, 3, "FD");
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(10);
+  pdf.setTextColor(30, 58, 120);
+
+  pdf.text("Información del Reporte", pageWidth / 2, 138, {
+    align: "center",
+  });
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(9.5);
+  pdf.setTextColor(50, 50, 80);
+
+  pdf.text("Total de docentes:", 90, 150);
+
+  pdf.setFont("helvetica", "bold");
+  pdf.text(`${teachers.length}`, 145, 150);
+
+  pdf.setFont("helvetica", "normal");
+  pdf.text("Fecha de generación:", 90, 160);
+
+  pdf.setFont("helvetica", "bold");
+  pdf.text(new Date().toLocaleString("es-BO"), 145, 160);
+
+  addFooter();
+
+  // ─────────────────────────────────────────────
+  // TABLA DOCENTES
+  // ─────────────────────────────────────────────
+  pdf.addPage("a4", "l");
+
+  let page = 2;
+
+  addHeader(page);
+
+  let y = 32;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(11);
+  pdf.setTextColor(10, 36, 99);
+
+  pdf.text("▸ Listado General de Docentes", 10, y);
+
+  y += 8;
+
+  // Columnas
+  const colWidths = [15, 80, 60, 70, 40];
+  const colX = [];
+
+  let x = 10;
+
+  colWidths.forEach((w) => {
+    colX.push(x);
+    x += w;
+  });
+
+  const tableWidth = colWidths.reduce((a, b) => a + b, 0);
+
+  // Header tabla
+  pdf.setFillColor(10, 36, 99);
+  pdf.rect(10, y, tableWidth, 10, "F");
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(8);
+  pdf.setTextColor(255, 255, 255);
+
+  const headers = [
+    "#",
+    "Nombre Completo",
+    "Usuario",
+    "Estado",
+    "Rol",
+  ];
+
+  headers.forEach((h, i) => {
+    pdf.text(h, colX[i] + colWidths[i] / 2, y + 6, {
+      align: "center",
+    });
+  });
+
+  y += 10;
+
+  // ─────────────────────────────────────────────
+  // Filas docentes
+  // ─────────────────────────────────────────────
+  teachers.forEach((doc, idx) => {
+    if (y + 10 > pageHeight - 18) {
+      addFooter();
+
+      page++;
+      pdf.addPage("a4", "l");
+      addHeader(page);
+
+      y = 35;
+
+      pdf.setFillColor(10, 36, 99);
+      pdf.rect(10, y, tableWidth, 10, "F");
+
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(8);
+      pdf.setTextColor(255, 255, 255);
+
+      headers.forEach((h, i) => {
+        pdf.text(h, colX[i] + colWidths[i] / 2, y + 6, {
+          align: "center",
+        });
+      });
+
+      y += 10;
+    }
+
+    // Fondo alternado
+    if (idx % 2 === 0) {
+      pdf.setFillColor(235, 242, 255);
+    } else {
+      pdf.setFillColor(255, 255, 255);
+    }
+
+    pdf.rect(10, y, tableWidth, 9, "F");
+
+    // Línea izquierda azul
+    pdf.setFillColor(10, 36, 99);
+    pdf.rect(10, y, 2, 9, "F");
+
+    // Texto
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(8);
+    pdf.setTextColor(40, 40, 60);
+
+    const nombreCompleto =
+      `${doc.first_name || ""} ${doc.last_name || ""}`
+        .trim()
+        .replace(/\s+/g, " ") || "Sin nombre";
+
+    // #
+    pdf.text(`${idx + 1}`, colX[0] + colWidths[0] / 2, y + 5.8, {
+      align: "center",
+    });
+
+    // Nombre
+    pdf.setFont("helvetica", "bold");
+
+    pdf.text(nombreCompleto, colX[1] + 2, y + 5.8, {
+      maxWidth: colWidths[1] - 4,
+    });
+
+    // Usuario
+    pdf.setFont("helvetica", "normal");
+
+    pdf.text(doc.username || "-", colX[2] + colWidths[2] / 2, y + 5.8, {
+      align: "center",
+    });
+
+    // Estado
+    pdf.setFont("helvetica", "bold");
+
+    pdf.setTextColor(22, 163, 74);
+
+    pdf.text("ACTIVO", colX[3] + colWidths[3] / 2, y + 5.8, {
+      align: "center",
+    });
+
+    // Rol
+    pdf.setTextColor(10, 36, 99);
+
+    pdf.text("DOCENTE", colX[4] + colWidths[4] / 2, y + 5.8, {
+      align: "center",
+    });
+
+    // Línea inferior
+    pdf.setDrawColor(200, 210, 235);
+    pdf.setLineWidth(0.2);
+
+    pdf.line(10, y + 9, 10 + tableWidth, y + 9);
+
+    y += 9;
+  });
+
+  addFooter();
+
+  pdf.save("Reporte_General_Docentes.pdf");
 };
 
 
 const generarPDF = () => {
-  const pdf = new jsPDF("p", "mm", "a4");
+  const pdf = new jsPDF("landscape", "mm", "a4");
+
   const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const logo = "/logo.png";
 
-  const logo = "/logo.png"; // ruta del logo
+  // 🔹 Limpiar caracteres raros
+  const cleanText = (text) => {
+    return String(text || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\x20-\x7E]/g, "");
+  };
 
-  filteredData.forEach((student, index) => {
-    if (index > 0) pdf.addPage(); // nueva página por estudiante
+  // 🔹 Fondo institucional
+  const addBackground = () => {
+    pdf.setFillColor(248, 250, 252);
+    pdf.rect(0, 0, pageWidth, pageHeight, "F");
 
-    let startY = 40;
+    // Header
+    pdf.setFillColor(10, 36, 99);
+    pdf.rect(0, 0, pageWidth, 18, "F");
 
-    // --- Encabezado ---
-    pdf.addImage(logo, "PNG", 15, 10, 30, 30);
-    pdf.setFontSize(20);
-    pdf.setTextColor("#0d47a1");
-    pdf.text("Colegio Marcelo Quiroga Santa Cruz", pageWidth / 2, 25, {
-      align: "center",
-    });
+    // Footer
+    pdf.setFillColor(10, 36, 99);
+    pdf.rect(0, pageHeight - 10, pageWidth, 10, "F");
 
-    pdf.setFontSize(14);
-    pdf.setTextColor("#000");
-    pdf.text("Reporte Vocacional Estudiantil", pageWidth / 2, 33, {
-      align: "center",
-    });
+    // Marca de agua
+    try {
+      pdf.saveGraphicsState();
 
-    pdf.setFontSize(11);
-    pdf.text(`Fecha: ${new Date().toLocaleDateString()}`, pageWidth - 20, 33, {
-      align: "right",
-    });
-
-    // --- Caja del estudiante ---
-    const boxHeight =
-      30 +
-      testsInfo.length * 10 +
-      (student.carrerasRecomendadas.length > 0
-        ? student.carrerasRecomendadas.length * 8 + 15
-        : 0);
-    pdf.setDrawColor(21, 101, 192);
-    pdf.setFillColor(232, 245, 253);
-    pdf.roundedRect(15, startY, pageWidth - 30, boxHeight, 5, 5, "FD");
-
-    // --- Información básica ---
-    pdf.setFontSize(12);
-    pdf.setTextColor("#1565c0");
-    pdf.text(`Estudiante: ${student.nombre}`, 20, startY + 10);
-    pdf.setTextColor("#000");
-    pdf.text(`Paralelo: ${student.paralelo}`, 20, startY + 18);
-    pdf.text(`Promedio: ${student.promedio}%`, 80, startY + 18);
-    pdf.text(`Tests realizados: ${student.cantidadTests}`, 140, startY + 18);
-
-    let yOffset = startY + 28;
-
-    // --- Resultados por Tests ---
-    testsInfo.forEach((t) => {
-      const pct = parseFloat(getPorcentaje(student.id, t.id));
-      const testName = t.nombre
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-
-      pdf.setFontSize(10);
-      pdf.setTextColor("#000");
-      pdf.text(testName, 20, yOffset);
-
-      const barraAlto = 4;
-      const barraX = 70;
-      const anchoMax = pageWidth - barraX - 40; // 🔹 reducido para evitar desbordes
-      const barWidth = anchoMax * (Math.min(pct, 100) / 100);
-
-      pdf.setFillColor(21, 101, 192); // azul
-      pdf.roundedRect(barraX, yOffset - barraAlto / 2, barWidth, barraAlto, 2, 2, "F");
-
-      pdf.setDrawColor(0);
-      pdf.roundedRect(barraX, yOffset - barraAlto / 2, anchoMax, barraAlto, 2, 2);
-
-      pdf.setFontSize(9);
-      pdf.text(`${pct}%`, barraX + anchoMax + 5, yOffset, { align: "left" });
-
-      yOffset += 8;
-    });
-
-    // --- Separador y subtítulo de Aptitudes Reales ---
-    yOffset += 4;
-    pdf.setDrawColor(200);
-    pdf.setLineWidth(0.3);
-    pdf.line(20, yOffset, pageWidth - 20, yOffset);
-    yOffset += 6;
-
-    pdf.setFontSize(12);
-    pdf.setTextColor("#d97706"); // ámbar
-    pdf.text("Aptitudes del Estudiante", 20, yOffset);
-    yOffset += 6;
-
-    // Buscar las aptitudes reales
-    const aptitudesEst = aptitudes.find(
-      (a) =>
-        parseInt(a.estudiante_id || a.estudiante?.id || a.estudiante) ===
-        student.id
-    );
-
-    if (
-      aptitudesEst &&
-      Array.isArray(aptitudesEst.aptitudes) &&
-      aptitudesEst.aptitudes.length > 0
-    ) {
-      // Ordenar por porcentaje descendente
-      const sortedAptitudes = [...aptitudesEst.aptitudes].sort(
-        (a, b) =>
-          parseFloat(b.porcentaje.replace("%", "")) -
-          parseFloat(a.porcentaje.replace("%", ""))
+      pdf.setGState(
+        new pdf.GState({
+          opacity: 0.05,
+        })
       );
 
-      sortedAptitudes.forEach((apt) => {
-        const pct = parseFloat(apt.porcentaje.replace("%", "")) || 0;
-        const barPct = Math.min(Math.abs(pct), 100);
-        const barraAlto = 4;
-        const barraX = 70;
-        const anchoMax = pageWidth - barraX - 40; // 🔹 reducido también aquí
-        const barWidth = anchoMax * (barPct / 100);
+      pdf.addImage(
+        logo,
+        "PNG",
+        pageWidth / 2 - 45,
+        pageHeight / 2 - 45,
+        90,
+        90
+      );
 
-        pdf.setFontSize(10);
-        pdf.setTextColor("#000");
-        pdf.text(`${apt.aptitud}`, 20, yOffset);
+      pdf.restoreGraphicsState();
+    } catch (e) {}
 
-        // Fondo gris
-        pdf.setFillColor(240);
-        pdf.rect(barraX, yOffset - barraAlto / 2, anchoMax, barraAlto, "F");
+    // Línea dorada
+    pdf.setDrawColor(212, 175, 55);
+    pdf.setLineWidth(1);
+    pdf.line(0, 18, pageWidth, 18);
+  };
 
-        // 🔸 Si el valor es positivo, colorear; si es negativo, dejar sin color
-        if (pct > 0) {
-          pdf.setFillColor(234, 179, 8); // dorado
-          pdf.rect(barraX, yOffset - barraAlto / 2, barWidth, barraAlto, "F");
-        }
+  // 🔹 Header
+  const addHeader = (pageNum) => {
+    addBackground();
 
-        // Texto de porcentaje
-        pdf.setFontSize(9);
-        pdf.text(`${apt.porcentaje}`, barraX + anchoMax + 5, yOffset, {
-          align: "left",
-        });
+    try {
+      pdf.addImage(logo, "PNG", 8, 2.5, 12, 12);
+    } catch (e) {}
 
-        yOffset += 8;
-      });
-    } else {
-      pdf.setFontSize(10);
-      pdf.setTextColor("#999");
-      pdf.text("No hay aptitudes reales registradas para este estudiante.", 20, yOffset);
-      yOffset += 8;
+    pdf.setTextColor(255, 255, 255);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(13);
+
+    pdf.text(
+      cleanText("COLEGIO MARCELO QUIROGA SANTA CRUZ"),
+      pageWidth / 2,
+      8,
+      {
+        align: "center",
+      }
+    );
+
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(8.5);
+
+    pdf.text(
+      cleanText("Sistema de Orientacion Vocacional"),
+      pageWidth / 2,
+      13.5,
+      {
+        align: "center",
+      }
+    );
+
+    pdf.setFontSize(7.5);
+    pdf.setTextColor(210, 225, 255);
+
+    pdf.text(
+      `Fecha: ${new Date().toLocaleDateString("es-BO")}`,
+      pageWidth - 10,
+      7,
+      {
+        align: "right",
+      }
+    );
+
+    pdf.text(`Pagina ${pageNum}`, pageWidth - 10, 12.5, {
+      align: "right",
+    });
+  };
+
+  // 🔹 Footer
+  const addFooter = () => {
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(7.5);
+
+    pdf.text(
+      cleanText(
+        "Sistema Vocacional - Colegio Marcelo Quiroga Santa Cruz"
+      ),
+      pageWidth / 2,
+      pageHeight - 4,
+      {
+        align: "center",
+      }
+    );
+  };
+
+  // =========================================================
+  // PORTADA
+  // =========================================================
+
+  addBackground();
+
+  try {
+    pdf.addImage(logo, "PNG", pageWidth / 2 - 22, 30, 44, 44);
+  } catch (e) {}
+
+  // Caja principal
+  pdf.setFillColor(10, 36, 99);
+
+  pdf.roundedRect(
+    pageWidth / 2 - 85,
+    88,
+    170,
+    28,
+    4,
+    4,
+    "F"
+  );
+
+  pdf.setDrawColor(212, 175, 55);
+  pdf.setLineWidth(0.8);
+
+  pdf.roundedRect(
+    pageWidth / 2 - 85,
+    88,
+    170,
+    28,
+    4,
+    4,
+    "D"
+  );
+
+  pdf.setTextColor(255, 255, 255);
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(22);
+
+  pdf.text(
+    cleanText("REPORTE GENERAL VOCACIONAL"),
+    pageWidth / 2,
+    104,
+    {
+      align: "center",
     }
+  );
 
-    // --- Carreras Recomendadas ---
-    if (student.carrerasRecomendadas.length > 0) {
-      yOffset += 4;
-      pdf.setDrawColor(200);
-      pdf.setLineWidth(0.3);
-      pdf.line(20, yOffset, pageWidth - 20, yOffset);
-      yOffset += 6;
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(11);
 
-      pdf.setFontSize(12);
-      pdf.setTextColor("#0d47a1");
-      pdf.text("Carreras Recomendadas", 20, yOffset);
-      yOffset += 6;
+  pdf.setTextColor(212, 175, 55);
 
-      student.carrerasRecomendadas.forEach((carrera) => {
-        pdf.setFontSize(10);
-        pdf.setTextColor("#000");
-        pdf.text(`• ${carrera.carrera} - ${carrera.probabilidad}`, 25, yOffset);
-        yOffset += 8;
-      });
+  pdf.text(
+    cleanText("Resultados Consolidados de Estudiantes"),
+    pageWidth / 2,
+    112,
+    {
+      align: "center",
     }
+  );
+
+  // Caja información
+  pdf.setFillColor(255, 255, 255);
+
+  pdf.roundedRect(
+    pageWidth / 2 - 70,
+    128,
+    140,
+    42,
+    3,
+    3,
+    "FD"
+  );
+
+  pdf.setDrawColor(180, 195, 220);
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor(10, 36, 99);
+  pdf.setFontSize(10);
+
+  pdf.text(
+    cleanText("Informacion General del Reporte"),
+    pageWidth / 2,
+    138,
+    {
+      align: "center",
+    }
+  );
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setTextColor(50);
+
+  const paralelo =
+    selectedSection?.nombre || "Todos los paralelos";
+
+  pdf.text(
+    `Paralelo seleccionado: ${cleanText(paralelo)}`,
+    pageWidth / 2,
+    148,
+    {
+      align: "center",
+    }
+  );
+
+  pdf.text(
+    `Total de estudiantes: ${filteredData.length}`,
+    pageWidth / 2,
+    156,
+    {
+      align: "center",
+    }
+  );
+
+  pdf.text(
+    `Fecha de generacion: ${new Date().toLocaleString("es-BO")}`,
+    pageWidth / 2,
+    164,
+    {
+      align: "center",
+    }
+  );
+
+  addFooter();
+
+  // =========================================================
+  // TABLA GENERAL
+  // =========================================================
+
+  const headers = [
+    "#",
+    "Estudiante",
+    "Paralelo",
+    
+    "Tests",
+    ...testsInfo.map((t) =>
+      cleanText(
+        t.nombre
+          .replace(/^Razonamiento\s+/i, "R. ")
+          .replace(/^Rapidez y Exactitud/i, "R. Exact.")
+      )
+    ),
+  ];
+
+  const widths = [
+    8,
+    42,
+    24,
+    20,
+    18,
+    ...testsInfo.map(() => 15),
+  ];
+
+  const colX = [];
+
+  let currentX = 8;
+
+  widths.forEach((w) => {
+    colX.push(currentX);
+    currentX += w;
   });
 
-  pdf.save("Reporte_Vocacional_PorEstudiante.pdf");
-};
+  const tableWidth = widths.reduce((a, b) => a + b, 0);
 
+  let page = 2;
+  let y = 0;
+
+  const startTablePage = () => {
+    pdf.addPage("a4", "landscape");
+
+    addHeader(page);
+
+    y = 28;
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor(10, 36, 99);
+    pdf.setFontSize(10);
+
+    pdf.text(
+      cleanText(
+        "Resultados Generales por Estudiante"
+      ),
+      pageWidth / 2,
+      y,
+      {
+        align: "center",
+      }
+    );
+
+    y += 8;
+
+    // Header tabla
+    pdf.setFillColor(10, 36, 99);
+
+    pdf.rect(
+      (pageWidth - tableWidth) / 2,
+      y,
+      tableWidth,
+      10,
+      "F"
+    );
+
+    pdf.setTextColor(255, 255, 255);
+
+    pdf.setFontSize(6.5);
+
+    headers.forEach((h, i) => {
+      pdf.text(
+        h,
+        (pageWidth - tableWidth) / 2 +
+          colX[i] -
+          8 +
+          widths[i] / 2,
+        y + 6,
+        {
+          align: "center",
+          maxWidth: widths[i] - 1,
+        }
+      );
+    });
+
+    y += 10;
+  };
+
+  startTablePage();
+
+  // =========================================================
+  // FILAS
+  // =========================================================
+
+  filteredData.forEach((student, idx) => {
+    const rowHeight = 8;
+
+    if (y + rowHeight > pageHeight - 18) {
+      addFooter();
+
+      page++;
+
+      startTablePage();
+    }
+
+    // Fondo alternado
+    if (idx % 2 === 0) {
+      pdf.setFillColor(238, 244, 255);
+    } else {
+      pdf.setFillColor(255, 255, 255);
+    }
+
+    pdf.rect(
+      (pageWidth - tableWidth) / 2,
+      y,
+      tableWidth,
+      rowHeight,
+      "F"
+    );
+
+    pdf.setDrawColor(215, 225, 240);
+    pdf.setLineWidth(0.2);
+
+    pdf.rect(
+      (pageWidth - tableWidth) / 2,
+      y,
+      tableWidth,
+      rowHeight
+    );
+
+    pdf.setFont("helvetica", "normal");
+    pdf.setTextColor(35, 35, 55);
+    pdf.setFontSize(6.5);
+
+    const rowData = [
+      idx + 1,
+      cleanText(student.nombre),
+      cleanText(student.paralelo),
+      
+      `${student.cantidadTests}/${testsInfo.length}`,
+      ...testsInfo.map(
+        (t) => `${getPorcentaje(student.id, t.id)}%`
+      ),
+    ];
+
+    rowData.forEach((cell, i) => {
+      pdf.text(
+        String(cell),
+        (pageWidth - tableWidth) / 2 +
+          colX[i] -
+          8 +
+          widths[i] / 2,
+        y + 5.3,
+        {
+          align: "center",
+          maxWidth: widths[i] - 1,
+        }
+      );
+    });
+
+    y += rowHeight;
+  });
+
+  // =========================================================
+  // TABLA CARRERAS
+  // =========================================================
+
+  addFooter();
+
+  page++;
+
+  pdf.addPage("a4", "landscape");
+
+  addHeader(page);
+
+  y = 30;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor(10, 36, 99);
+  pdf.setFontSize(11);
+
+  pdf.text(
+    cleanText("Carreras Recomendadas"),
+    pageWidth / 2,
+    y,
+    {
+      align: "center",
+    }
+  );
+
+  y += 8;
+
+  const recHeaders = [
+    "#",
+    "Estudiante",
+    "Paralelo",
+    "Carreras Recomendadas",
+  ];
+
+  const recWidths = [10, 55, 30, 150];
+
+  const recX = [];
+
+  let rx = 0;
+
+  recWidths.forEach((w) => {
+    recX.push(rx);
+    rx += w;
+  });
+
+  const recTableWidth = recWidths.reduce((a, b) => a + b, 0);
+
+  // Header carreras
+  pdf.setFillColor(10, 36, 99);
+
+  pdf.rect(
+    (pageWidth - recTableWidth) / 2,
+    y,
+    recTableWidth,
+    10,
+    "F"
+  );
+
+  pdf.setTextColor(255, 255, 255);
+
+  pdf.setFontSize(8);
+
+  recHeaders.forEach((h, i) => {
+    pdf.text(
+      cleanText(h),
+      (pageWidth - recTableWidth) / 2 +
+        recX[i] +
+        recWidths[i] / 2,
+      y + 6,
+      {
+        align: "center",
+      }
+    );
+  });
+
+  y += 10;
+
+  filteredData.forEach((student, idx) => {
+    if (!student.carrerasRecomendadas?.length) return;
+
+    const carrerasText = cleanText(
+      student.carrerasRecomendadas
+        .map(
+          (c) =>
+            `${c.carrera} (${c.probabilidad})`
+        )
+        .join("  •  ")
+    );
+
+    const lines = pdf.splitTextToSize(
+      carrerasText,
+      recWidths[3] - 4
+    );
+
+    const rowHeight = Math.max(10, lines.length * 5 + 3);
+
+    if (y + rowHeight > pageHeight - 18) {
+      addFooter();
+
+      page++;
+
+      pdf.addPage("a4", "landscape");
+
+      addHeader(page);
+
+      y = 35;
+    }
+
+    if (idx % 2 === 0) {
+      pdf.setFillColor(238, 244, 255);
+    } else {
+      pdf.setFillColor(255, 255, 255);
+    }
+
+    pdf.rect(
+      (pageWidth - recTableWidth) / 2,
+      y,
+      recTableWidth,
+      rowHeight,
+      "F"
+    );
+
+    pdf.setDrawColor(215, 225, 240);
+
+    pdf.rect(
+      (pageWidth - recTableWidth) / 2,
+      y,
+      recTableWidth,
+      rowHeight
+    );
+
+    pdf.setTextColor(35, 35, 55);
+    pdf.setFontSize(7);
+
+    const row = [
+      idx + 1,
+      cleanText(student.nombre),
+      cleanText(student.paralelo),
+    ];
+
+    row.forEach((cell, i) => {
+      pdf.text(
+        String(cell),
+        (pageWidth - recTableWidth) / 2 +
+          recX[i] +
+          recWidths[i] / 2,
+        y + 6,
+        {
+          align: "center",
+          maxWidth: recWidths[i] - 2,
+        }
+      );
+    });
+
+    lines.forEach((line, li) => {
+      pdf.text(
+        line,
+        (pageWidth - recTableWidth) / 2 +
+          recX[3] +
+          2,
+        y + 6 + li * 5
+      );
+    });
+
+    y += rowHeight;
+  });
+
+  addFooter();
+
+  pdf.save("Reporte_Vocacional_General.pdf");
+};
 
 
 
@@ -604,7 +1263,7 @@ const generarPDF = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="text-2xl font-bold text-black mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold dark:text-white text-black mb-4 flex items-center gap-2">
               <Users /> Lista de Docentes
             </h2>
             <table className="w-full dark:border dark:border-gray-600  overflow-hidden text-sm">

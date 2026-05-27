@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // Assuming your endpoint for StudentTest is /api/student_tests/
-const API_URL = "http://localhost:8000/api/add_student_test/"; // <-- Check if this URL base is correct
-const API_URL_DELETE = "http://localhost:8000/api/delete/"; // <-- Check if this URL base is correct
+const API_URL = "http://108.181.172.191:10041/api/add_student_test/"; // <-- Check if this URL base is correct
+const API_URL_DELETE = "http://108.181.172.191:10041/api/delete/"; // <-- Check if this URL base is correct
 
 const getHeaders = () => {
     // Lee el valor más reciente de localStorage en cada llamada

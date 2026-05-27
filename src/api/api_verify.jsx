@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/predict/";
+const API_URL = "http://108.181.172.191:10041/api/predict/";
 const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem("access")}`, // ✅ dinámico
   "Content-Type": "application/json",
