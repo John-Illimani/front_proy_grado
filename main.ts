@@ -1,11 +1,10 @@
-// main.ts
-import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
+import { serveDir } from "jsr:@std/http/file-server";
 
 Deno.serve((req) => {
   return serveDir(req, {
-    fsRoot: "dist", // carpeta generada por el build de React
-    urlRoot: "",
+    fsRoot: "dist",
     showDirListing: false,
     enableCors: true,
+    quiet: true,
   });
 });
